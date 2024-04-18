@@ -1,0 +1,269 @@
+.homeCities-cards-container {
+  border-radius: 100px;
+  background-attachment: fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  .homeCities-Card:nth-child(1),
+  .homeCities-Card:nth-child(4) {
+    width: 63%;
+  }
+  .homeCities-Card:nth-child(2),
+  .homeCities-Card:nth-child(3) {
+    width: 32%;
+  }
+  .homeCities-Card {
+    border: 2px solid #c18847;
+    border-radius: 11px;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: 0.3s all ease-in-out;
+    overflow: hidden;
+    .homeCities-Card-img {
+      width: 100%;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      z-index: -1;
+      left: 0;
+      right: 0;
+      background-position: 40%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      transition: transform 0.35s ease-out;
+    }
+    h4 {
+      color: #fff;
+      position: relative;
+      letter-spacing: 1.2px;
+    }
+  }
+  .homeCities-Card::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    content: "";
+    background-color: #101f4e;
+    opacity: 0.4;
+    z-index: 0;
+    transition: 0.3s ease-out;
+  }
+  .homeCities-Card:hover {
+    opacity: 0.8;
+    background-color: #84dbee;
+    transform: scale(101%);
+  }
+
+  .homeCities-content {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    text-align: start;
+  }
+
+  .serviceLabel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #c18847;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .service-icon {
+      filter: invert(1);
+    }
+  }
+
+  .homeCities-title {
+    margin: 0;
+  }
+}
+
+@media (min-width: 1000px) {
+  .homeCities {
+    .homeCities-section-header {
+      padding: 10px 15px;
+      font-size: 40px;
+    }
+
+    .homeCities-section-subheader {
+      padding: 10px 15px;
+      font-size: 20px;
+    }
+
+    .homeCities-cards-container {
+      margin-bottom: 80px;
+      gap: 40px;
+    }
+
+    .serviceLabel {
+      margin-right: 20px;
+      height: 55px;
+      margin-top: -30px;
+      width: 55px;
+      padding: 30px;
+    }
+
+    .homeCities-title {
+      font-size: 28px;
+    }
+
+    .homeCities-Card {
+      width: 24%;
+      padding: 30px 20px;
+    }
+  }
+}
+
+@media (min-width: 850px) and (max-width: 1000px) {
+  .homeCities {
+    .homeCities-section-header {
+      padding: 8px 15px;
+      font-size: 30px;
+    }
+
+    .homeCities-section-subheader {
+      padding: 10px 15px;
+      font-size: 20px;
+    }
+
+    .homeCities-cards-container {
+      margin-bottom: 80px;
+      gap: 30px;
+    }
+
+    .homeCities-title {
+      font-size: 30px;
+    }
+
+    .serviceLabel {
+      margin-right: 30px;
+      height: 50px;
+      margin-top: -35px;
+      width: 50px;
+      padding: 30px;
+    }
+
+    .homeCities-Card {
+      width: 48%;
+      padding: 30px 20px;
+    }
+  }
+}
+
+@media (min-width: 700px) and (max-width: 850px) {
+  .homeCities {
+    .homeCities-section-header {
+      padding: 8px 15px;
+      font-size: 30px;
+    }
+
+    .homeCities-section-subheader {
+      padding: 10px 12px;
+      font-size: 18px;
+    }
+
+    .homeCities-cards-container {
+      margin-bottom: 50px;
+      gap: 40px;
+    }
+
+    .homeCities-title {
+      font-size: 25px;
+    }
+
+    .serviceLabel {
+      margin-right: 20px;
+      height: 50px;
+      margin-top: -30px;
+      width: 50px;
+      padding: 30px;
+    }
+  }
+
+  .homeCities-cards-container {
+    flex-wrap: wrap;
+    padding: 40px 0;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 0;
+
+    .homeCities-Card {
+      width: 46%;
+      padding: 25px 20px;
+    }
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .homeCities {
+    .homeCities-section-header {
+      padding: 8px 15px;
+      font-size: 30px;
+    }
+
+    .homeCities-section-subheader {
+      padding: 10px 12px;
+      font-size: 18px;
+    }
+
+    .homeCities-cards-container {
+      margin-bottom: 50px;
+      padding: 35px 0;
+      gap: 40px;
+    }
+
+    .homeCities-title {
+      font-size: 25px;
+    }
+
+    .serviceLabel {
+      margin-right: 20px;
+      height: 50px;
+      margin-top: -30px;
+      width: 50px;
+      padding: 30px;
+    }
+  }
+
+  .homeCities-cards-container {
+    flex-direction: column;
+    padding: 40px 0;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    border-radius: 0;
+
+    .homeCities-Card {
+      width: 90%;
+      padding: 25px 20px;
+    }
+  }
+}
+
+.homeCities {
+  .homeCities-section-header {
+    border-radius: 8px;
+    margin: auto;
+    text-align: start;
+    color: var(--sections-header);
+  }
+
+  .homeCities-section-subheader {
+    margin: auto;
+    text-align: start;
+    color: var(--sections-header);
+  }
+}

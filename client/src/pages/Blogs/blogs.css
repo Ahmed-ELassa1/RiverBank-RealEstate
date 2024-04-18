@@ -1,0 +1,53 @@
+.blogs {
+  .cityLabel {
+    margin-bottom: 40px;
+  }
+
+  .blog {
+    background-image: url("../../assets/blogs.avif");
+    height: 70vh;
+
+    h2 {
+      width: 100%;
+      background-color: #0000003b;
+      color: white;
+    }
+  }
+
+  .content-cards {
+    .blogs-card {
+      box-shadow: 0 -1px 19px 0 rgba(7, 152, 255, 0.09);
+      border-color: transparent;
+      border-radius: 25px;
+      transition: 0.5s all ease-in-out;
+    }
+
+    .blogs-card:hover {
+      border-color: transparent;
+      color: var(--sec);
+      border-bottom: 3px solid var(--sec);
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .BlogsSection {
+    .cityLabel {
+      margin: auto;
+      width: 100%;
+      font-size: 20px;
+      margin-bottom: 40px;
+    }
+  }
+}
+@media screen and (max-width: 425px) {
+  .BlogsSection {
+    .cityLabel {
+      font-size: 16px;
+    }
+
+    .swiper {
+      width: 100%;
+    }
+  }
+}

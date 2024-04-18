@@ -1,0 +1,19 @@
+{
+    "home":"الرئيسية",
+    "cities":"المدن",
+    "developers":"المطورون",
+    "projects":"المشاريع",
+    "properties":"الوحدات",
+    "blogs":"المدونات",
+    "contactUs":"للتواصل ",
+    "login":"تسجيل الدخول",
+    "input.findByProject":"ابحث عن مشروع",
+    "input.findByCity":"كل المدن",
+    "btn.search":"ابحث",
+    "home.mainHeader":"دليلك في إختيار العقار المناسب لك يشرف علي الموقع مجموعة من الإستشاريين العقاريين المتخصصين في مجال العقارات خبرة تفوق العشرون عاما",
+    "home.section.populerCities":"أشهر المدن داخل مصر",
+    "home.section.populerCities.subText":"أبحث عن أفضل المشروعات في مدن مصر",
+    "home.section.residentialProjects":"مشروعات سكنية",
+    "home.section.residentialProjects.subText":"أبحث عن أفضل المشروعات في مدن مصر",
+    "button.seeAll":"عرض الكل"
+}

@@ -1,0 +1,119 @@
+.dev {
+  background-image: url("/src/assets/developers.avif");
+  background-position: center;
+
+  h2 {
+    background: #00000047;
+    width: 100%;
+  }
+}
+
+.dev-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: space-between;
+  padding-top: 0;
+
+  .developer-card {
+    position: relative;
+
+    .dev-img {
+      max-width: 100%;
+      object-fit: cover;
+      transition: all 0.4s ease-in-out;
+      width: 100%;
+      border: 3px solid var(--sec);
+      opacity: 0.8;
+
+      img {
+        height: 240px;
+      }
+
+      .ant-card-cover {
+        padding: 10px;
+      }
+    }
+
+    .ant-card-body {
+      font-size: 16px;
+      letter-spacing: 1.1px;
+      font-weight: 500;
+      background-color: var(--sec);
+      padding: 14px 0;
+      text-align: center;
+      text-transform: capitalize;
+      border-radius: 0;
+
+      .ant-card-meta-title {
+        color: #fff;
+      }
+    }
+
+    .explore-btn {
+      width: 100%;
+      padding: 10px;
+      background-color: var(--sec);
+      color: #fff;
+      outline: 0;
+      border: 0;
+      font-size: 17px;
+      text-transform: capitalize;
+      font-weight: 600;
+      cursor: pointer;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      opacity: 0.5;
+      transition: all 0.4s ease-in-out;
+    }
+  }
+
+  .developer-card:hover .explore-btn {
+    opacity: 1;
+  }
+
+  .developer-card:hover .dev-img {
+    /* transform: scale(1.01); */
+    opacity: 1;
+  }
+
+  .developer-card:hover {
+    /* border: 1px solid #eee; */
+    /* border- */
+  }
+}
+
+@media (min-width: 1100px) {
+  .dev-container {
+    .developer-card {
+      width: 22%;
+    }
+  }
+}
+
+@media (min-width: 800px) and (max-width: 1100px) {
+  .dev-container {
+    .developer-card {
+      width: 30%;
+    }
+  }
+}
+
+@media (min-width: 600px) and (max-width: 800px) {
+  .dev-container {
+    .developer-card {
+      width: 47%;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .dev-container {
+    justify-content: center;
+
+    .developer-card {
+      width: 97%;
+    }
+  }
+}

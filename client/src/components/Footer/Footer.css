@@ -1,0 +1,195 @@
+.footer {
+  /* padding: 80px 0; */
+  background-color: #fff;
+  padding-top: 80px;
+  padding-bottom: 25px;
+  box-sizing: border-box;
+  position: relative;
+
+  .skewFooter {
+    fill: #f7f4f1;
+
+    svg {
+      position: absolute;
+      top: 0px;
+      z-index: 0;
+    }
+  }
+
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    /* background-color: #fff; */
+    position: relative;
+    z-index: 1;
+
+    .footer-logo {
+      width: 30%;
+
+      .ft-logo {
+        img {
+          max-width: 100%;
+          object-fit: cover;
+        }
+      }
+
+      p {
+        color: #625c5c;
+        font-size: 17px;
+        width: 80%;
+      }
+    }
+
+    .links {
+      width: 20%;
+
+      ul {
+        padding-left: 0;
+      }
+
+      li {
+        a {
+          color: #222;
+        }
+      }
+
+      a:hover {
+        color: var(--sec);
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .footer {
+    .ft-logo {
+      width: 130px;
+    }
+
+    li {
+      font-size: 18px;
+      line-height: 2;
+    }
+
+    h5 {
+      font-size: 22px;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+
+    .footer-content {
+      .links,
+      .footer-logo {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 900px) {
+  .footer {
+    .ft-logo {
+      width: 100px;
+    }
+
+    h5 {
+      font-size: 20px;
+      margin-top: 0;
+      margin-bottom: 16px;
+    }
+
+    li {
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .container {
+      margin: auto 40px;
+    }
+
+    .footer-content {
+      .links,
+      .footer-logo {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (min-width: 500px) and (max-width: 768px) {
+  .footer {
+    h5 {
+      font-size: 18px;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    li {
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    .footer-content {
+      gap: 20px;
+      flex-wrap: wrap;
+      padding: 0 40px;
+
+      .ft-logo {
+        width: 100px;
+        text-align: center;
+      }
+
+      .footer-logo {
+        width: 47%;
+        margin: 0;
+      }
+
+      .links {
+        width: 47%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .footer {
+    h5 {
+      font-size: 18px;
+      margin-top: 0;
+      margin-bottom: 15px;
+    }
+
+    li {
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    .footer-content {
+      gap: 20px;
+      flex-wrap: wrap;
+      padding: 0 30px;
+
+      .ft-logo {
+        width: 100px;
+      }
+
+      .footer-logo {
+        width: 47%;
+      }
+
+      .links {
+        width: 47%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .footer {
+    .footer-content {
+      .links {
+        width: 100%;
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+.structure {
+  padding: 0;
+
+  .idea-right.strc {
+    left: 0;
+    right: unset;
+  }
+
+  .structureContent {
+    justify-content: end;
+  }
+}
+@media screen and (max-width: 768px) {
+  .structure {
+    padding-bottom: 40px;
+  }
+}

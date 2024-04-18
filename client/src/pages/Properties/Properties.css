@@ -1,0 +1,231 @@
+.properties {
+  .props {
+    background-image: url("/src/assets/props.avif");
+    height: 70vh;
+
+    h2 {
+      width: 100%;
+      background-color: #0000003b;
+      color: white;
+    }
+  }
+
+  .props-search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid white;
+    padding-bottom: 20px;
+
+    .search-field {
+      width: 60%;
+    }
+
+    @media screen and (max-width: 425px) {
+      .search-field {
+        width: 100%;
+      }
+    }
+
+    .ant-input {
+      padding: 14px;
+    }
+
+    .ant-input:hover,
+    .ant-input:focus,
+    .ant-input:focus-within {
+      border-color: var(--sec);
+      box-shadow: none;
+    }
+
+    .ant-input-group-addon {
+      background-color: var(--sec);
+      overflow: hidden;
+      padding: 0 7px !important;
+      transition: all 0.4s;
+
+      .ant-btn {
+        display: flex;
+        align-items: center;
+        transition: all 0.4s;
+      }
+
+      .ant-btn:hover {
+        background-color: #78530a;
+      }
+    }
+
+    .ant-input-search-button {
+      /* padding: 18px 31px !important; */
+      background-color: var(--sec);
+      border: 0;
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+    }
+
+    .ant-input-group-addon:hover {
+      background-color: #78530a;
+    }
+
+    .anticon.anticon-search svg {
+      color: white;
+    }
+
+    .props-btns {
+      display: flex;
+      gap: 10px;
+
+      .subscribe-btn {
+        padding: 18px 50px;
+        background-color: white;
+        color: var(--main);
+        border-color: var(--sec);
+        font-size: 15px;
+        font-weight: 500;
+      }
+
+      .subscribe-btn:hover {
+        background-color: #eee;
+      }
+    }
+  }
+
+  .props-content {
+    padding: 10px 0;
+
+    .content-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .title {
+        font-size: 22px;
+
+        .props-count {
+          color: var(--main);
+        }
+      }
+
+      .ant-dropdown-trigger {
+        background-color: var(--sec);
+        padding: 10px;
+        color: white;
+        cursor: pointer;
+      }
+    }
+
+    @media screen and (max-width: 425px) {
+      .content-head {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .ant-dropdown-trigger {
+        text-align: center;
+        width: 100%;
+      }
+    }
+  }
+
+  .content-cards {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+
+    .props-card {
+      border-bottom: 3px solid white;
+      /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
+      overflow: hidden;
+      margin-top: 20px;
+
+      background: #fff;
+      transition: all 0.2s ease-in-out 0s;
+      border-radius: 25px;
+      padding: 5px;
+    }
+
+    .props-card:hover {
+      border-color: var(--sec);
+    }
+  }
+}
+
+@media (min-width: 1100px) {
+  .properties {
+    .heading {
+      padding-top: 60px;
+      margin: 20px 0 40px;
+      font-size: 24px;
+      text-transform: capitalize;
+    }
+
+    .content-cards {
+      .props-card {
+        width: 31%;
+      }
+    }
+  }
+}
+
+@media (min-width: 800px) and (max-width: 1100px) {
+  .properties {
+    .heading {
+      padding-top: 60px;
+      margin: 20px 0 30px;
+      font-size: 24px;
+      text-transform: capitalize;
+    }
+
+    .content-cards {
+      .props-card {
+        width: 30%;
+      }
+    }
+  }
+}
+
+@media (min-width: 600px) and (max-width: 800px) {
+  .properties {
+    .heading {
+      padding-top: 50px;
+      margin: 20px 0 30px;
+      font-size: 24px;
+      text-transform: capitalize;
+    }
+
+    .content-cards {
+      .props-card {
+        width: 47%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .properties {
+    .heading {
+      padding-top: 40px;
+      margin: 20px 0 30px;
+      font-size: 22px;
+      text-transform: capitalize;
+    }
+
+    .content-cards {
+      justify-content: center;
+
+      .props-card {
+        width: 97%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .properties {
+    .heading {
+      padding-top: 20px;
+      font-size: 17px;
+    }
+  }
+}

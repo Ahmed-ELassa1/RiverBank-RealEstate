@@ -1,0 +1,136 @@
+.propCard {
+  color: #000000ad;
+  /* font-family: cursive; */
+
+  .propImg {
+    height: 250px;
+  }
+
+  .propImg img {
+    transition: all 0.7s ease-in-out;
+    border-radius: 15px;
+    width: 100%;
+    height: 250px;
+  }
+
+  .propImg:hover img {
+    transform: scale(1.05);
+    /* filter: saturate(0.5); */
+  }
+
+  .resContent {
+    padding: 20px;
+    background-color: white;
+
+    .name {
+      margin-bottom: 20px;
+      color: var(--sec);
+      text-transform: uppercase;
+    }
+
+    .card-price {
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+
+      .price-details {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        color: black;
+        width: 100%;
+
+        .details-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: baseline;
+
+          p {
+            font-weight: bold;
+            font-size: 16px;
+            margin: 2px 0;
+          }
+        }
+
+        /* .price {
+          font-weight: bold;
+          font-size: 20px;
+        } */
+      }
+
+      .price-details:first-child {
+        border-right: 1px solid #eee;
+      }
+
+      .price-details:nth-child(2) {
+        padding-left: 10px;
+      }
+    }
+
+    .card-details {
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .card-details>div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      >p {
+        margin: 10px 0;
+      }
+
+      >span {
+        font-weight: 500;
+      }
+    }
+
+    .card-desc {
+      font-size: 14px;
+      letter-spacing: -0.9px;
+    }
+
+    .card-btns {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      .whats-btn {
+        background-color: #43a941;
+        color: white;
+        border: 0;
+        outline: 0;
+        padding: 10px;
+        border-radius: 20%;
+        cursor: pointer;
+        font-size: 22px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    .subscribe-btn {
+      width: 100%;
+      border-radius: 8px;
+      background-color: #ab8a4d;
+    }
+
+
+
+    .more {
+      text-align: center;
+      padding: 10px 0;
+
+      a {
+        color: var(--main);
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

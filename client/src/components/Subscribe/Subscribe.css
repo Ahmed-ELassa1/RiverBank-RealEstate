@@ -1,0 +1,116 @@
+.subscribe {
+  /* border: 1px solid #eee; */
+
+  background-color: var(--main);
+  color: #fff;
+  /* border-radius: 41% 59% 27% 73% / 76% 0% 100% 24%; */
+  /* margin: auto 170px; */
+  padding: 45px 0;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: start;
+    gap: 60px;
+  }
+
+  .subscription-image-container {
+    display: flex;
+
+    img {
+      width: 50%;
+    }
+  }
+
+  .subscribe-content {
+    /* width: 60%; */
+    /* padding: 0 200px; */
+    /* margin: auto; */
+
+    .sub-title {
+      font-size: 30px;
+      margin-bottom: 20px;
+      margin-top: 0px;
+    }
+
+    @media screen and (max-width: 425px) {
+      .sub-title {
+        font-size: 22px;
+      }
+    }
+
+    .sub-description {
+      margin-bottom: 20px;
+      font-size: 18px;
+      color: #fff;
+      /* width: 55%; */
+    }
+
+    @media screen and (max-width: 425px) {
+      .sub-description {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .subscription-contactus-btn {
+    background-color: var(--sec);
+    cursor: pointer;
+    font-size: 14px;
+    color: #fff;
+    font-weight: 500;
+    text-wrap: nowrap;
+    text-transform: capitalize;
+    padding: 12px 20px;
+    border: 1px solid var(--sec);
+    border-radius: 6px;
+    transition: all 0.4s;
+    min-width: 100px;
+  }
+
+  .subscription-contactus-btn:hover {
+    background-color: #835909;
+  }
+
+  .subscription-below-section {
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+    gap: 30px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .subscribe {
+    padding: 40px 0;
+    flex-direction: column;
+    gap: 30px;
+    border-radius: 0;
+
+    .subscribe-content {
+      width: 100%;
+      padding: 0px;
+    }
+  }
+}
+@media screen and (max-width: 425px) {
+  .subscribe {
+    padding: 40px 0;
+    flex-direction: column;
+    gap: 30px;
+    border-radius: 0;
+
+    .subscribe-content {
+      width: 100%;
+      padding: 0 10px;
+    }
+
+    .subscription-below-section {
+      flex-direction: column;
+    }
+    .subscription-contactus-btn {
+      width: 100%;
+    }
+  }
+}

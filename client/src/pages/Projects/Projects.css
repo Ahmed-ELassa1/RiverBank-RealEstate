@@ -1,0 +1,78 @@
+.projectBg {
+  background-image: url("../../assets/projects.avif");
+  filter: unset;
+
+  h2 {
+    background: #00000047;
+    width: 100%;
+  }
+}
+
+.proje-container .developer-card:hover {
+  /* transform: scale(102%); */
+}
+
+.projectLink {
+  position: absolute;
+  bottom: 7px;
+  left: 0;
+  padding: 10px;
+  background-color: #7a7a7a59;
+  width: 100%;
+  text-align: center;
+
+  .project-card-title {
+    color: #a57d32;
+    font-weight: 600;
+    font-size: 19px;
+    text-transform: capitalize;
+    margin-bottom: 8px;
+  }
+
+  p {
+    color: #fff;
+    margin: 0;
+    font-weight: 500;
+    font-size: 16px;
+
+    span {
+      font-weight: 500;
+      color: var(--sec);
+      text-decoration: underline;
+    }
+  }
+}
+
+@media (min-width: 1100px) {
+  .proje-container {
+    .developer-card {
+      width: 23%;
+    }
+  }
+}
+
+@media (min-width: 800px) and (max-width: 1100px) {
+  .proje-container {
+    .developer-card {
+      width: 30%;
+    }
+  }
+}
+
+@media (min-width: 600px) and (max-width: 800px) {
+  .proje-container {
+    .developer-card {
+      width: 47%;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .proje-container {
+    justify-content: center;
+
+    .developer-card {
+      width: 97%;
+    }
+  }
+}
