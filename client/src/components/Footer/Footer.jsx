@@ -3,76 +3,97 @@ import "./Footer.css";
 import Logo from "../../assets/logo-01.png";
 import { Link } from "react-router-dom";
 import FooterSkewed from "./FooterSkewed";
+import ContactUs from "../../pages/ContactUs/ContactUs";
+import { useTranslation } from "react-i18next";
+import {
+  FacebookFilled,
+  MailFilled,
+  PhoneFilled,
+  PushpinOutlined,
+  TwitterOutlined,
+  WhatsAppOutlined,
+  YoutubeOutlined,
+} from "@ant-design/icons";
 
 const Footer = () => {
+  const { t } = useTranslation();
   return (
-    <footer className="footer">
-      <FooterSkewed />
+    <footer id="footer" className="footer">
+      {/* <FooterSkewed /> */}
 
       <div className="footer-content container">
-        <div className="footer-logo">
-          <div className="ft-logo">
-            <img src={Logo} alt="riverBank" />
-          </div>
-          {/* <p>
-            Interse is ipsum dolor sit amet, consectet adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore
-          </p> */}
-        </div>
         <div className="links">
-          <h5>Other Pages</h5>
+          <h5>{t("بيانات التواصل")}</h5>
           <ul>
             <li>
-              <Link>About us</Link>
+              <PushpinOutlined />
+              14
+              <span>{t("label.locationDetails")}</span>
             </li>
             <li>
-              <Link>Blog</Link>
+              <PhoneFilled />
+              <span>{t("label.phoneNumber")}</span>
             </li>
             <li>
-              <Link>Developers</Link>
+              <WhatsAppOutlined />
+              <span>{t("label.whatsAppNumber")}</span>
             </li>
             <li>
-              <Link>Cities</Link>
+              <MailFilled />
+              <span>{t("label.contactEmail")}</span>
             </li>
-            <li>
-              <Link>In press</Link>
+            <li className="footer-social-media-container">
+              <a
+                className="contact-social-Media-links"
+                target="_blank"
+                href="https://www.twitter.com"
+                rel="noreferrer"
+              >
+                <TwitterOutlined />
+              </a>
+              <a
+                className="contact-social-Media-links"
+                target="_blank"
+                href="https://www.youtube.com"
+                rel="noreferrer"
+              >
+                <YoutubeOutlined />
+              </a>
+              <a
+                className="contact-social-Media-links"
+                target="_blank"
+                href="https://www.facebook.com"
+                rel="noreferrer"
+              >
+                <FacebookFilled />
+              </a>
             </li>
           </ul>
         </div>
         <div className="links">
-          <h5>Quick Links</h5>
+          <h5>{t("label.footer.projectLinks.mainTitle")}</h5>
           <ul>
             <li>
-              <Link>About us</Link>
+              <Link>اويا تاورز العاصمة الادارية</Link>
             </li>
             <li>
-              <Link>Blog</Link>
+              <Link>ريفان العاصمة الإدارية الجديدة</Link>
             </li>
             <li>
-              <Link>Developers</Link>
+              <Link>الموندو العاصمة الإدارية الجديدة</Link>
             </li>
             <li>
-              <Link>Cities</Link>
+              <Link>المقصد ريزيدنس العاصمة الإدارية الجديدة</Link>
             </li>
             <li>
-              <Link>In press</Link>
+              <Link>اتيكا العاصمة الإدارية الجديدة</Link>
+            </li>
+            <li>
+              <Link>كمبوند انترادا العاصمة الادارية الجديدة</Link>
             </li>
           </ul>
         </div>
-        <div className="links">
-          <h5>Contact Details</h5>
-          <ul>
-            <li>
-              <Link>Cairo, Egypt</Link>
-            </li>
-            <li>
-              <Link to={"mailto:support@gmail.com"}>support@gmail.com</Link>
-            </li>
-            <li>
-              <Link to={"tele: 123456789"}>123-456-789</Link>
-            </li>
-          </ul>
-        </div>
+        <ContactUs />
       </div>
     </footer>
   );

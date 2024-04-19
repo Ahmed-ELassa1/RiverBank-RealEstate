@@ -30,18 +30,18 @@ const BlogCard = ({ item }) => {
         )}
 
         <div className="blogContent">
-          <h4 className="title">{item?.title}</h4>
-          <span className="date">
+          {/* <h4 className="title">{item?.title}</h4> */}
+          {/* <span className="date">
             {new Date(item?.createdAt).toUTCString()}
-          </span>
+          </span> */}
           <p className="desc">{item?.description}</p>
-          <button
+          {/* <button
             className="continue"
             onClick={showDrawer}
             key={`a-${item?._id}`}
           >
             continue reading
-          </button>
+          </button> */}
         </div>
       </div>
 
@@ -69,7 +69,7 @@ const BlogCard = ({ item }) => {
         ) : (
           <></>
         )}
-
+{/* 
         <Row>
           <Col span={12}>
             <DescriptionItem title="Title" />
@@ -77,16 +77,16 @@ const BlogCard = ({ item }) => {
           <Col span={12}>
             <DescriptionItem title={item?.title} />
           </Col>
-        </Row>
+        </Row> */}
 
-        <Row>
+        {/* <Row>
           <Col span={12}>
             <DescriptionItem title="Date" />
           </Col>
           <Col span={12}>
             <DescriptionItem title={new Date(item?.createdAt).toUTCString()} />
           </Col>
-        </Row>
+        </Row> */}
 
         <Row>
           <Col span={12}>

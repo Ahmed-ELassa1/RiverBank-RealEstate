@@ -82,7 +82,7 @@
     }
 
     .email-input {
-      padding: 15px;
+      padding: 8px 15px;
       width: 100%;
       border: 1px solid var(--sec);
       outline: 0;
@@ -96,7 +96,7 @@
     }
 
     .subscribe-btn {
-      padding: 15px 40px;
+      padding: 10px 40px;
       background-color: var(--sec);
       color: #fff;
       outline: 0;
@@ -104,28 +104,22 @@
       cursor: pointer;
       transition: 0.3s all ease-in-out;
       border-radius: 8px;
+      width: 30%;
+      min-width: 120px;
     }
 
     .subscribe-btn:hover {
-      background-color: var(--main);
+      background-color: #78530a;
     }
   }
 }
 
 @media (min-width: 1100px) {
   .contactus-page {
-    height: 100vh;
-
-    .contactus-bg {
-      height: 110vh;
-    }
-
-    .contactus-page-content {
-      padding: 70px 40px;
-    }
+    width: 30%;
 
     .sub-form {
-      width: 50%;
+      width: 100%;
 
       .contact-inputs-container {
         div {
@@ -138,22 +132,14 @@
 
 @media (min-width: 800px) and (max-width: 1100px) {
   .contactus-page {
-    height: 100vh;
-
-    .contactus-bg {
-      height: 110vh;
-    }
-
-    .contactus-page-content {
-      padding: 70px 40px;
-    }
+    width: 30%;
 
     .sub-form {
-      width: 65%;
+      width: 100%;
 
       .contact-inputs-container {
         div {
-          width: 48%;
+          width: 100%;
         }
       }
     }
@@ -162,22 +148,14 @@
 
 @media (min-width: 600px) and (max-width: 800px) {
   .contactus-page {
-    height: 100vh;
-
-    .contactus-bg {
-      height: 110vh;
-    }
-
-    .contactus-page-content {
-      padding: 60px 40px;
-    }
+    width: 80%;
 
     .sub-form {
-      width: 80%;
+      width: 100%;
 
       .contact-inputs-container {
         div {
-          width: 48%;
+          width: 100%;
         }
       }
     }
@@ -186,20 +164,11 @@
 
 @media screen and (max-width: 600px) {
   .contactus-page {
-    height: 130vh;
-
+    width: 80%;
     justify-content: center;
 
-    .contactus-page-content {
-      padding: 40px 40px;
-    }
-
-    .contactus-bg {
-      height: 160vh;
-    }
-
     .sub-form {
-      width: 90%;
+      width: 100%;
 
       .contact-inputs-container {
         flex-direction: column;
@@ -215,17 +184,9 @@
 
 @media screen and (max-width: 425px) {
   .contactus-page {
-    height: 75vh;
+    width: 80%;
 
     justify-content: center;
-
-    .contactus-page-content {
-      padding: 40px 10px;
-    }
-
-    .contactus-bg {
-      height: 75vh;
-    }
 
     .sub-form {
       width: 100%;

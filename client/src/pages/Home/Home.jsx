@@ -5,6 +5,8 @@ import ResidentialProjects from "../../components/ResidentialProjects/Residentia
 import BlogsSection from "../../components/BlogsSection/BlogsSection";
 import Subscribe from "../../components/Subscribe/Subscribe";
 import { useTranslation } from "react-i18next";
+import CommercialProjects from "../../components/CommercialProjects/CommercialProjects";
+import CoastalProjects from "../../components/CoastalProjects/CoastalProjects";
 
 const Home = () => {
   const { t } = useTranslation()
@@ -50,12 +52,10 @@ const Home = () => {
         </form>
       </div>
 
-      {/* <HomeContent /> */}
       <HomeCities />
-      {/* <Idea /> */}
       <ResidentialProjects />
-      <BlogsSection />
-      <Subscribe />
+      <CoastalProjects />
+      <CommercialProjects />
     </div>
   );
 };

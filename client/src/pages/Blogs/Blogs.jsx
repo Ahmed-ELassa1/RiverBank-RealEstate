@@ -35,9 +35,7 @@ const Blogs = () => {
           <h2>Blogs</h2>
         </div>
 
-        <div className="container">
-          <h3 className="cityLabel">Featured Articles</h3>
-
+        <div className="blogs-container">
           <div className="props-content">
             {/* Cards */}
             <div className="content-cards">
@@ -46,7 +44,7 @@ const Blogs = () => {
               {!loading &&
                 data?.length > 0 &&
                 data?.map((item) => (
-                  <div key={item?._id} className="props-card blogs-card">
+                  <div key={item?._id} className="blogs-card">
                     <BlogCard item={item} />
                   </div>
                 ))}

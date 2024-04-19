@@ -1,18 +1,33 @@
 import { Card } from "antd";
+import { useParams } from "react-router-dom";
 import Meta from "antd/es/card/Meta";
 import React from "react";
 import "./Cities.css";
 import City from "../../assets/cairo.avif";
+import { useTranslation } from "react-i18next";
 
 const Cities = () => {
+  const { t } = useTranslation();
+  const { cityId } = useParams();
+  console.log(cityId);
   return (
     <div className="cities">
       <div className="bg">
-        <h2>Cities</h2>
+        <h2>
+          {cityId == "newCapital"
+            ? t("label.navbar.newCapital")
+            : cityId == "newCairo"
+            ? t("label.navbar.newCairo")
+            : cityId == "northCoast"
+            ? t("label.navbar.northCoast")
+            : cityId == "rasSedr"
+            ? t("label.navbar.rasSedr")
+            : t("label.navbar.ainSokhna")}
+        </h2>
       </div>
-      <div className="container">
+      {/* <div className="container">
         <h3 className=" cityLabel">Our Cities</h3>
-      </div>
+      </div> */}
 
       <div className="main container city-container">
         <div className="cityCard">
@@ -21,7 +36,7 @@ const Cities = () => {
             // style={{ width: 240 }}
             cover={<img alt="example" src={City} />}
           >
-            <Meta title="New Cairo" description="127 companies" />
+            <Meta title="New Cairo" />
           </Card>
         </div>
 
@@ -31,7 +46,7 @@ const Cities = () => {
             // style={{ width: 240 }}
             cover={<img alt="example" src={City} />}
           >
-            <Meta title="New Capital City" description="127 companies" />
+            <Meta title="New Capital City" />
           </Card>
         </div>
 
@@ -41,7 +56,7 @@ const Cities = () => {
             // style={{ width: 240 }}
             cover={<img alt="example" src={City} />}
           >
-            <Meta title="Mostakbal City" description="127 companies" />
+            <Meta title="Mostakbal City" />
           </Card>
         </div>
 
@@ -51,7 +66,7 @@ const Cities = () => {
             style={{ width: 240 }}
             cover={<img alt="example" src={City} />}
           >
-            <Meta title="Ain Sokhna" description="127 companies" />
+            <Meta title="Ain Sokhna" />
           </Card>
         </div>
 
@@ -61,7 +76,7 @@ const Cities = () => {
             style={{ width: 240 }}
             cover={<img alt="example" src={City} />}
           >
-            <Meta title="North Coast" description="127 companies" />
+            <Meta title="North Coast" />
           </Card>
         </div>
 
@@ -71,7 +86,7 @@ const Cities = () => {
             style={{ width: 240 }}
             cover={<img alt="example" src={City} />}
           >
-            <Meta title="El Gouna" description="127 companies" />
+            <Meta title="El Gouna" />
           </Card>
         </div>
 
@@ -81,7 +96,7 @@ const Cities = () => {
             style={{ width: 240 }}
             cover={<img alt="example" src={City} />}
           >
-            <Meta title="New Heliopolis" description="127 companies" />
+            <Meta title="New Heliopolis" />
           </Card>
         </div>
       </div>

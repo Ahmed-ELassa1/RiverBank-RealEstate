@@ -6,14 +6,8 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  .homeCities-Card:nth-child(1),
-  .homeCities-Card:nth-child(4) {
-    width: 63%;
-  }
-  .homeCities-Card:nth-child(2),
-  .homeCities-Card:nth-child(3) {
-    width: 32%;
-  }
+
+
   .homeCities-Card {
     border: 2px solid #c18847;
     border-radius: 11px;
@@ -24,6 +18,7 @@
     position: relative;
     transition: 0.3s all ease-in-out;
     overflow: hidden;
+
     .homeCities-Card-img {
       width: 100%;
       position: absolute;
@@ -37,12 +32,14 @@
       background-size: cover;
       transition: transform 0.35s ease-out;
     }
+
     h4 {
       color: #fff;
       position: relative;
       letter-spacing: 1.2px;
     }
   }
+
   .homeCities-Card::before {
     position: absolute;
     top: 0;
@@ -56,6 +53,7 @@
     z-index: 0;
     transition: 0.3s ease-out;
   }
+
   .homeCities-Card:hover {
     opacity: 0.8;
     background-color: #84dbee;
@@ -96,6 +94,16 @@
       font-size: 40px;
     }
 
+    .homeCities-Card:nth-child(1),
+    .homeCities-Card:nth-child(4) {
+      width: 63%;
+    }
+
+    .homeCities-Card:nth-child(2),
+    .homeCities-Card:nth-child(3) {
+      width: 32%;
+    }
+
     .homeCities-section-subheader {
       padding: 10px 15px;
       font-size: 20px;
@@ -132,6 +140,16 @@
       font-size: 30px;
     }
 
+    .homeCities-Card:nth-child(1),
+    .homeCities-Card:nth-child(4) {
+      width: 63%;
+    }
+
+    .homeCities-Card:nth-child(2),
+    .homeCities-Card:nth-child(3) {
+      width: 32%;
+    }
+
     .homeCities-section-subheader {
       padding: 10px 15px;
       font-size: 20px;
@@ -166,6 +184,10 @@
     .homeCities-section-header {
       padding: 8px 15px;
       font-size: 30px;
+    }
+
+    .homeCities-Card {
+      width: 90%;
     }
 
     .homeCities-section-subheader {
@@ -214,6 +236,10 @@
       font-size: 30px;
     }
 
+    .homeCities-Card {
+      width: 90%;
+    }
+
     .homeCities-section-subheader {
       padding: 10px 12px;
       font-size: 18px;
@@ -257,7 +283,6 @@
   .homeCities-section-header {
     border-radius: 8px;
     margin: auto;
-    text-align: start;
     color: var(--sections-header);
   }
 

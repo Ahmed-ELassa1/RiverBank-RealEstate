@@ -5,7 +5,10 @@ import { toast } from "react-toastify";
 import joi from "joi";
 import img from "../../assets/contactUs.jpg";
 import { CloseCircleOutlined } from "@ant-design/icons";
+import { useTranslation } from "react-i18next";
+
 export default function ContactUs() {
+  const { t } = useTranslation();
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -76,23 +79,23 @@ export default function ContactUs() {
     e.preventDefault();
     const valid = validation();
     if (valid?.error?.details) {
-      setFormErros({
-        nameError: valid?.error?.details?.find(
-          (error) => error?.context?.label == "name"
-        )?.message,
-        phoneError: valid?.error?.details?.find(
-          (error) => error?.context?.label == "phone"
-        )?.message,
-        locationError: valid?.error?.details?.find(
-          (error) => error?.context?.label == "location"
-        )?.message,
-        messageError: valid?.error?.details?.find(
-          (error) => error?.context?.label == "message"
-        )?.message,
-        emailError: valid?.error?.details?.find(
-          (error) => error?.context?.label == "email"
-        )?.message,
-      });
+      // setFormErros({
+      //   nameError: valid?.error?.details?.find(
+      //     (error) => error?.context?.label == "name"
+      //   )?.message,
+      //   phoneError: valid?.error?.details?.find(
+      //     (error) => error?.context?.label == "phone"
+      //   )?.message,
+      //   locationError: valid?.error?.details?.find(
+      //     (error) => error?.context?.label == "location"
+      //   )?.message,
+      //   messageError: valid?.error?.details?.find(
+      //     (error) => error?.context?.label == "message"
+      //   )?.message,
+      //   emailError: valid?.error?.details?.find(
+      //     (error) => error?.context?.label == "email"
+      //   )?.message,
+      // });
       valid?.error?.details?.map((error) => {
         return toast.error(`${error?.message}`);
       });
@@ -128,108 +131,95 @@ export default function ContactUs() {
   };
   return (
     <div className="contactus-page">
-      {/* <div className="contactus-bg" style={{ backgroundImage: `url(${img})` }}>
-        <div className="contactus-overlay"></div>
-      </div> */}
-      <div className="contactus-bg">
-        <img src={img} />
-      </div>
-      {/* <div className="contactus-bg"> */}
-      {/* </div> */}
       <div className="contactus-page-content">
-        <h2>Contact us</h2>
         <div className="sub-form">
-          <div className="contact-inputs-container">
-            <div>
-              <input
-                className={
-                  formErros?.nameError == undefined
-                    ? "email-input"
-                    : "email-input-error"
-                }
-                type="text"
-                placeholder="Name"
-                onChange={handleChange}
-                name="name"
-                value={data.name}
-              />
-              {formErros?.nameError != undefined && (
-                <p className="input-error-message">
-                  <span>
-                    <CloseCircleOutlined className="input-error-icon" />
-                  </span>
-                  {formErros?.nameError}
-                </p>
-              )}
-            </div>
-            <div>
-              <input
-                className={
-                  formErros?.emailError == undefined
-                    ? "email-input"
-                    : "email-input-error"
-                }
-                type="text"
-                placeholder="email"
-                onChange={handleChange}
-                name="email"
-                value={data.email}
-              />
-              {formErros?.emailError != undefined && (
-                <p className="input-error-message">
-                  <span>
-                    <CloseCircleOutlined className="input-error-icon" />
-                  </span>
-                  {formErros?.emailError}
-                </p>
-              )}
-            </div>
+          <div>
+            <input
+              className={
+                formErros?.nameError == undefined
+                  ? "email-input"
+                  : "email-input-error"
+              }
+              type="text"
+              placeholder={t("label.name")}
+              onChange={handleChange}
+              name="name"
+              value={data.name}
+            />
+            {formErros?.nameError != undefined && (
+              <p className="input-error-message">
+                <span>
+                  <CloseCircleOutlined className="input-error-icon" />
+                </span>
+                {formErros?.nameError}
+              </p>
+            )}
           </div>
-          <div className="contact-inputs-container">
-            <div>
-              <input
-                className={
-                  formErros?.locationError == undefined
-                    ? "email-input"
-                    : "email-input-error"
-                }
-                type="text"
-                placeholder="Location"
-                onChange={handleChange}
-                name="location"
-                value={data.location}
-              />
-              {formErros?.locationError != undefined && (
-                <p className="input-error-message">
-                  <span>
-                    <CloseCircleOutlined className="input-error-icon" />
-                  </span>
-                  {formErros?.locationError}
-                </p>
-              )}
-            </div>
-            <div>
-              <input
-                className={
-                  formErros?.phoneError == undefined
-                    ? "email-input"
-                    : "email-input-error"
-                }
-                type="number"
-                placeholder="Phone"
-                onChange={handleChange}
-                name="phone"
-                value={data.phone}
-              />
-              {formErros?.phoneError != undefined && (
-                <p className="input-error-message">
-                  <span>
-                    <CloseCircleOutlined className="input-error-icon" />
-                  </span>
-                  {formErros?.phoneError}
-                </p>
-              )}
-            </div>
+          <div>
+            <input
+              className={
+                formErros?.emailError == undefined
+                  ? "email-input"
+                  : "email-input-error"
+              }
+              type="text"
+              placeholder={t("label.email")}
+              onChange={handleChange}
+              name="email"
+              value={data.email}
+            />
+            {formErros?.emailError != undefined && (
+              <p className="input-error-message">
+                <span>
+                  <CloseCircleOutlined className="input-error-icon" />
+                </span>
+                {formErros?.emailError}
+              </p>
+            )}
+          </div>
+          <div>
+            <input
+              className={
+                formErros?.locationError == undefined
+                  ? "email-input"
+                  : "email-input-error"
+              }
+              type="text"
+              placeholder={t("label.location")}
+              onChange={handleChange}
+              name="location"
+              value={data.location}
+            />
+            {formErros?.locationError != undefined && (
+              <p className="input-error-message">
+                <span>
+                  <CloseCircleOutlined className="input-error-icon" />
+                </span>
+                {formErros?.locationError}
+              </p>
+            )}
+          </div>
+          <div>
+            <input
+              className={
+                formErros?.phoneError == undefined
+                  ? "email-input"
+                  : "email-input-error"
+              }
+              type="number"
+              placeholder={t("label.phone")}
+              onChange={handleChange}
+              name="phone"
+              value={data.phone}
+            />
+            {formErros?.phoneError != undefined && (
+              <p className="input-error-message">
+                <span>
+                  <CloseCircleOutlined className="input-error-icon" />
+                </span>
+                {formErros?.phoneError}
+              </p>
+            )}
           </div>
           <div>
             <textarea
@@ -239,7 +229,7 @@ export default function ContactUs() {
                   : "email-input-error"
               }
               type="text"
-              placeholder="Message"
+              placeholder={t("label.message")}
               rows={5}
               onChange={handleChange}
               name="message"
@@ -256,7 +246,7 @@ export default function ContactUs() {
             )}
           </div>
           <button className="subscribe-btn" onClick={sendClientRequest}>
-            Submit
+            {t("button.Submit")}
           </button>
         </div>
       </div>

@@ -43,7 +43,7 @@ function App() {
       children: [
         { path: "/", index: true, element: <Home /> },
         { path: "/home", element: <Home /> },
-        { path: "/cities", element: <Cities /> },
+        { path: "/cities/:cityId", element: <Cities /> },
         { path: "/developers", element: <Developers /> },
         { path: "/properties", element: <Properties /> },
         { path: "/blogs", element: <Blogs /> },

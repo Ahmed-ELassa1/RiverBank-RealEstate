@@ -1,6 +1,7 @@
 import {
   AppstoreOutlined,
   MailOutlined,
+  PhoneFilled,
   PhoneOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
@@ -11,10 +12,10 @@ import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../assets/logoImg.png";
 import LogoTxt from "../../assets/logoTxt.png";
 import Bars from "../../assets/menu.png";
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const [current, setCurrent] = useState("/");
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
@@ -24,130 +25,57 @@ const Navbar = () => {
     {
       label: t("home"),
       key: "",
-      //   icon: <MailOutlined />,
     },
     {
-      label: t("cities"),
-      key: "cities",
+      label: t("label.navbar.newCapital"),
+      key: "cities/newCapital",
+    },
+    {
+      label: t("label.navbar.newCairo"),
+      key: "cities/newCairo",
+    },
+    {
+      label: t("label.navbar.costalProjects"),
       //   icon: <AppstoreOutlined />,
-      //   children: [
-      //     {
-      //       label: "New Cairo",
-      //       key: "newCairo",
-      //     },
-      //     {
-      //       label: "New Capital City",
-      //       key: "newCapital",
-      //     },
-      //     {
-      //       label: "Mostakbal City",
-      //       key: "mostakbal",
-      //     },
-      //     {
-      //       label: "Ain Sokhna",
-      //       key: "sokhna",
-      //     },
-      //     {
-      //       label: "North Coast",
-      //       key: "northcoast",
-      //     },
-      //     {
-      //       label: "El Gouna",
-      //       key: "gouna",
-      //     },
-      //     {
-      //       label: "New Heliopolis",
-      //       key: "newHel",
-      //     },
-      //   ],
+      children: [
+        {
+          label: "الساحل الشمالي",
+          key: "cities/northCoast",
+        },
+        {
+          label: "العين السخنة",
+          key: "cities/ainSokhna",
+        },
+        {
+          label: "راس سدر",
+          key: "cities/rasSedr",
+        },
+      ],
     },
     {
       label: t("developers"),
       key: "developers",
-      //   icon: <AppstoreOutlined />,
-    },
-    {
-      label: t("projects"),
-      key: "projects",
-      //   icon: <AppstoreOutlined />,
-    },
-    {
-      label: t("properties"),
-      key: "properties",
-      //   icon: <AppstoreOutlined />,
     },
     {
       label: t("blogs"),
       key: "blogs",
     },
-    // {
-    //   label: "Real Estate Tools / Calculators",
-    //   key: "tools",
-    //   //   icon: <SettingOutlined />,
-    //   children: [
-    //     {
-    //       type: "group",
-    //       label: "tools",
-    //       children: [
-    //         {
-    //           label: "Tool 1",
-    //           key: "tool1",
-    //         },
-    //         {
-    //           label: "Tool 2",
-    //           key: "tool2",
-    //         },
-    //         {
-    //           label: "Instalment Calculator",
-    //           key: "calc",
-    //         },
-    //       ],
-    //     },
-    //   ],
-    // },
-    // {
-    //   label: "Our Servies",
-    //   key: "services",
-    //   //   icon: <SettingOutlined />,
-    //   children: [
-    //     {
-    //       type: "group",
-    //       label: "services",
-    //       children: [
-    //         {
-    //           label: "Buy",
-    //           key: "Buy",
-    //         },
-    //         {
-    //           label: "Lease",
-    //           key: "Lease",
-    //         },
-    //         {
-    //           label: "Free Consulting",
-    //           key: "freeConsulting",
-    //         },
-    //         {
-    //           label: "Blogs",
-    //           key: "blogs",
-    //         },
-    //         {
-    //           label: " Knowledge HUB ",
-    //           key: " Knowledge HUB ",
-    //         },
-    //       ],
-    //     },
-    //   ],
-    // },
     {
-      label: t("contactUs"),
-      key: "contactUs",
+      label: <a href="tel:+1234567890">{t("label.phoneNumber")}</a>,
+      key: "#footer",
+      icon: <PhoneFilled />,
     },
   ];
 
   const onClick = (e) => {
-    setIsOpen(false);
-    setCurrent(e.key);
-    navigate(e.key);
+    if (e.key === "#footer") {
+      // Scroll to the footer section
+      return;
+    } else {
+      setIsOpen(false);
+      setCurrent(e.key);
+      navigate(e.key);
+    }
   };
 
   const [scroll, setScroll] = useState(false);

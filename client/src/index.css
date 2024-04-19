@@ -22,6 +22,7 @@ body {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
 .button-seeAll-link {
   font-size: 21px;
   position: absolute;
@@ -30,10 +31,13 @@ input[type="number"] {
   color: var(--sec);
   font-weight: 600;
   transition: color 0.4s;
+  text-decoration: underline;
 }
+
 .button-seeAll-link:hover {
   color: #78530a;
 }
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -71,25 +75,31 @@ code {
 
 @media screen and (min-width: 130px) {
   .container {
-    margin: auto 70px;
+    margin: auto;
+    padding-right: 70px;
+    padding-left: 70px;
   }
 }
 
 @media (min-width: 768px) and (max-width: 130px) {
   .container {
-    margin: auto 6%;
+    margin: auto;
+    padding-right: 6%;
+    padding-left: 6%;
   }
 }
 
 @media screen and (max-width: 768px) {
   .container {
-    margin: auto 6%;
+    margin: auto;
+    padding: 0 6%;
   }
 }
 
 @media screen and (max-width: 425px) {
   .container {
-    margin: auto 3%;
+    margin: auto;
+    padding: 0 3%;
   }
 }
 
@@ -98,7 +108,8 @@ code {
 }
 
 .main {
-  padding: 80px 0;
+  padding-top: 80px;
+  padding-bottom: 80px;
 }
 
 h2,
@@ -156,14 +167,14 @@ ul li {
 
 .ant-menu-submenu-open:hover .ant-menu-submenu::after,
 .ant-menu-submenu:hover::after,
-.ant-menu > .ant-menu-item:hover,
-.ant-menu > .ant-menu-submenu:hover,
-.ant-menu > .ant-menu-item-active,
-.ant-menu > .ant-menu-submenu-active,
-.ant-menu > .ant-menu-item-open,
-.ant-menu > .ant-menu-submenu-open,
-.ant-menu > .ant-menu-item-selected,
-.ant-menu > .ant-menu-submenu-selected {
+.ant-menu>.ant-menu-item:hover,
+.ant-menu>.ant-menu-submenu:hover,
+.ant-menu>.ant-menu-item-active,
+.ant-menu>.ant-menu-submenu-active,
+.ant-menu>.ant-menu-item-open,
+.ant-menu>.ant-menu-submenu-open,
+.ant-menu>.ant-menu-item-selected,
+.ant-menu>.ant-menu-submenu-selected {
   border-color: var(--sec) !important;
 }
 

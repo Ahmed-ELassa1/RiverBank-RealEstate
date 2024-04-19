@@ -30,14 +30,10 @@ const Developers = () => {
   }, []);
 
   return (
-    <section className="">
+    <section className="developer-page">
       <div className="dev bg">
         <h2>Developers</h2>
       </div>
-      <div className="container">
-        <h3 className="cityLabel">Our Developers</h3>
-      </div>
-
       <div className="main container dev-container">
         {loading && <LoadingOutlined className="loadingIndicator" />}
 
@@ -55,8 +51,6 @@ const Developers = () => {
             </div>
           ))}
       </div>
-
-      <Subscribe />
     </section>
   );
 };
