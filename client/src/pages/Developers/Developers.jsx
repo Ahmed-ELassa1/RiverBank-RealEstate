@@ -5,8 +5,10 @@ import { LoadingOutlined } from "@ant-design/icons";
 import "./Developers.css";
 import { Card } from "antd";
 import Meta from "antd/es/card/Meta";
+import { useNavigate } from "react-router-dom";
 
 const Developers = () => {
+  const Navigate = useNavigate();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const developerInstance = new DevelopersService();
@@ -42,6 +44,7 @@ const Developers = () => {
           data?.map((item) => (
             <div className="developer-card" key={item._id}>
               <Card
+                onClick={() => Navigate("/projects/1")}
                 hoverable
                 className="dev-img"
                 cover={<img alt={item.title} src={item.logo?.secure_url} />}

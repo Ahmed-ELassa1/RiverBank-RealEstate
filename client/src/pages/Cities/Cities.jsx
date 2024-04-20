@@ -1,5 +1,5 @@
 import { Card } from "antd";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Meta from "antd/es/card/Meta";
 import React from "react";
 import "./Cities.css";
@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 const Cities = () => {
   const { t } = useTranslation();
   const { cityId } = useParams();
-  console.log(cityId);
+  const Navigate = useNavigate();
   return (
     <div className="cities">
       <div className="bg">
@@ -32,6 +32,7 @@ const Cities = () => {
       <div className="main container city-container">
         <div className="cityCard">
           <Card
+            onClick={() => Navigate("/projects/1")}
             hoverable
             // style={{ width: 240 }}
             cover={<img alt="example" src={City} />}
@@ -42,6 +43,7 @@ const Cities = () => {
 
         <div className="cityCard">
           <Card
+            onClick={() => Navigate("/projects/1")}
             hoverable
             // style={{ width: 240 }}
             cover={<img alt="example" src={City} />}
@@ -52,6 +54,7 @@ const Cities = () => {
 
         <div className="cityCard">
           <Card
+            onClick={() => Navigate("/projects/1")}
             hoverable
             // style={{ width: 240 }}
             cover={<img alt="example" src={City} />}
@@ -62,6 +65,7 @@ const Cities = () => {
 
         <div className="cityCard">
           <Card
+            onClick={() => Navigate("/projects/1")}
             hoverable
             style={{ width: 240 }}
             cover={<img alt="example" src={City} />}
@@ -72,6 +76,7 @@ const Cities = () => {
 
         <div className="cityCard">
           <Card
+            onClick={() => Navigate("/projects/1")}
             hoverable
             style={{ width: 240 }}
             cover={<img alt="example" src={City} />}
@@ -82,6 +87,7 @@ const Cities = () => {
 
         <div className="cityCard">
           <Card
+            onClick={() => Navigate("/projects/1")}
             hoverable
             style={{ width: 240 }}
             cover={<img alt="example" src={City} />}
@@ -92,6 +98,7 @@ const Cities = () => {
 
         <div className="cityCard">
           <Card
+            onClick={() => Navigate("/projects/1")}
             hoverable
             style={{ width: 240 }}
             cover={<img alt="example" src={City} />}

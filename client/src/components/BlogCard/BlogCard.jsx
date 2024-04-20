@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Col, Divider, Drawer, Row } from "antd";
 import "./BlogCard.css";
+import { useNavigate } from "react-router-dom";
 
 const DescriptionItem = ({ title, content }) => (
   <div className="site-description-item-profile-wrapper">
@@ -10,6 +11,7 @@ const DescriptionItem = ({ title, content }) => (
 );
 
 const BlogCard = ({ item }) => {
+  const Navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const showDrawer = () => {
     setOpen(true);
@@ -20,7 +22,7 @@ const BlogCard = ({ item }) => {
 
   return (
     <>
-      <div className="blogCard" onClick={showDrawer}>
+      <div className="blogCard" onClick={() => Navigate("/projects/1")}>
         {item?.mainImage ? (
           <div className="blogImg">
             <img src={item?.mainImage?.secure_url} alt="blog" />
@@ -69,7 +71,7 @@ const BlogCard = ({ item }) => {
         ) : (
           <></>
         )}
-{/* 
+        {/* 
         <Row>
           <Col span={12}>
             <DescriptionItem title="Title" />
