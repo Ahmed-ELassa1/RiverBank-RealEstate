@@ -90,8 +90,8 @@ const Navbar = () => {
       <div id="navbar" className={`navbar ${scroll ? "sticky" : ""}`}>
         <Link to="/">
           <div className="logo">
-            <img src={Logo} alt="riverBank" />
             <img className="logoTxt" src={LogoTxt} alt="riverBank" />
+            <img src={Logo} alt="riverBank" />
           </div>
         </Link>
 

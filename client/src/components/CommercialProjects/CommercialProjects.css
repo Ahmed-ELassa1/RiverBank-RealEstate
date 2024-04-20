@@ -15,27 +15,27 @@
     transform: skewY(6deg);
   }
 
-  .cityLabel {
+  /* .cityLabel {
     margin: 0;
     margin-bottom: 50px;
     font-size: 24px;
     width: 100%;
     border-radius: 12px;
     padding: 16px 40px;
-  }
+  } */
 
   .residentialProjects-content {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     margin-top: 40px;
-    gap: 24px;
+    gap: 10px;
     position: relative;
 
     .residentialProjects-card {
-      width: 23%;
+      width: 24%;
       height: 350px;
-      max-height: 350p;
+      max-height: 350px;
 
       .img-whp {
         transition: 1s all;
@@ -49,6 +49,7 @@
 
     .residentialProjects_property {
       background-color: #fff;
+      height: 100%;
       border: 1px solid #ebebeb;
       border-radius: 8px;
       overflow: hidden;

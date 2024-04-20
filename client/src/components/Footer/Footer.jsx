@@ -1,9 +1,11 @@
 import React from "react";
 import "./Footer.css";
-import Logo from "../../assets/logo-01.png";
+// import Logo from "../../assets/logoImg";
 import { Link } from "react-router-dom";
 import FooterSkewed from "./FooterSkewed";
 import ContactUs from "../../pages/ContactUs/ContactUs";
+import Logo from "../../assets/logoImg.png";
+import LogoTxt from "../../assets/logoTxt.png";
 import { useTranslation } from "react-i18next";
 import {
   FacebookFilled,
@@ -22,6 +24,13 @@ const Footer = () => {
       {/* <FooterSkewed /> */}
 
       <div className="footer-content container">
+        <div className="footer-logo-container">
+          <div className="footer-logo">
+            <img className="logoTxt" src={LogoTxt} alt="riverBank" />
+            <img src={Logo} alt="riverBank" />
+          </div>{" "}
+          <p>{t("label.footer-logo-text")}</p>
+        </div>
         <div className="links">
           <h5>{t("label.footer.projectLinks.mainTitle")}</h5>
           <ul>
@@ -45,7 +54,6 @@ const Footer = () => {
             </li>
           </ul>
         </div>
-        <ContactUs />
         <div className="links">
           <h5>{t("بيانات التواصل")}</h5>
           <ul>
@@ -94,6 +102,7 @@ const Footer = () => {
             </li>
           </ul>
         </div>
+        <ContactUs />
       </div>
     </footer>
   );

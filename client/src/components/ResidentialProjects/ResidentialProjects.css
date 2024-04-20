@@ -18,7 +18,7 @@
 
   .cityLabel {
     margin: 0;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     font-size: 24px;
     width: 100%;
     border-radius: 12px;
@@ -30,11 +30,14 @@
     align-items: flex-start;
     justify-content: space-between;
     margin-top: 40px;
-    gap: 24px;
+    gap: 10px;
     position: relative;
 
     .residentialProjects-card {
       /* box-shadow: 4px 4px 10px #c5c5c5; */
+      width: 24%;
+      height: 350px;
+      max-height: 350px;
 
       .img-whp {
         transition: 1s all;
