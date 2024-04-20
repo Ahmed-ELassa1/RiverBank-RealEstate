@@ -47,6 +47,32 @@ const CommercialProjects = () => {
               <div className="thumb">
                 <img
                   className="img-whp w-100 h-100 cover"
+                  src={F1}
+                  alt="fp1.jpg"
+                />
+                <div className="thmb_cntnt">
+                  <p className="residentialProjects-card-name">
+                    العاصمة الإدارية الجديدة
+                  </p>
+                </div>
+              </div>
+              <div className="details">
+                <div className="tc_content">
+                  <h4>
+                    <Link to="/listing-details-v1/1">
+                      مول ماس تاور العاصمة الإدارية الجديدة Mall Mas Tower New
+                      Capital
+                    </Link>
+                  </h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="residentialProjects-card">
+            <div className="residentialProjects_property">
+              <div className="thumb">
+                <img
+                  className="img-whp w-100 h-100 cover"
                   src={F4}
                   alt="fp1.jpg"
                 />

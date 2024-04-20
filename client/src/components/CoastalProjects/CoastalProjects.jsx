@@ -82,6 +82,29 @@ const CoastalProjects = () => {
               <div className="details">
                 <div className="tc_content">
                   <h4>
+                    <Link to="/listing-details-v1/1">Luxury Family Home</Link>
+                  </h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="residentialProjects-card">
+            <div className="residentialProjects_property">
+              <div className="thumb">
+                <img
+                  className="img-whp w-100 h-100 cover"
+                  src={F4}
+                  alt="fp1.jpg"
+                />
+                <div className="thmb_cntnt">
+                  <p className="residentialProjects-card-name">
+                    الساحل الشمالي
+                  </p>
+                </div>
+              </div>
+              <div className="details">
+                <div className="tc_content">
+                  <h4>
                     <Link to="/listing-details-v1/1">
                       كمبوند ايون العاصمة الإدارية COMPOUND ION NEW CAPITAL
                     </Link>

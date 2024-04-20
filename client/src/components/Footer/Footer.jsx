@@ -23,6 +23,30 @@ const Footer = () => {
 
       <div className="footer-content container">
         <div className="links">
+          <h5>{t("label.footer.projectLinks.mainTitle")}</h5>
+          <ul>
+            <li>
+              <Link>اويا تاورز العاصمة الادارية</Link>
+            </li>
+            <li>
+              <Link>ريفان العاصمة الإدارية الجديدة</Link>
+            </li>
+            <li>
+              <Link>الموندو العاصمة الإدارية الجديدة</Link>
+            </li>
+            <li>
+              <Link>المقصد ريزيدنس العاصمة الإدارية الجديدة</Link>
+            </li>
+            <li>
+              <Link>اتيكا العاصمة الإدارية الجديدة</Link>
+            </li>
+            <li>
+              <Link>كمبوند انترادا العاصمة الادارية الجديدة</Link>
+            </li>
+          </ul>
+        </div>
+        <ContactUs />
+        <div className="links">
           <h5>{t("بيانات التواصل")}</h5>
           <ul>
             <li>
@@ -70,30 +94,6 @@ const Footer = () => {
             </li>
           </ul>
         </div>
-        <div className="links">
-          <h5>{t("label.footer.projectLinks.mainTitle")}</h5>
-          <ul>
-            <li>
-              <Link>اويا تاورز العاصمة الادارية</Link>
-            </li>
-            <li>
-              <Link>ريفان العاصمة الإدارية الجديدة</Link>
-            </li>
-            <li>
-              <Link>الموندو العاصمة الإدارية الجديدة</Link>
-            </li>
-            <li>
-              <Link>المقصد ريزيدنس العاصمة الإدارية الجديدة</Link>
-            </li>
-            <li>
-              <Link>اتيكا العاصمة الإدارية الجديدة</Link>
-            </li>
-            <li>
-              <Link>كمبوند انترادا العاصمة الادارية الجديدة</Link>
-            </li>
-          </ul>
-        </div>
-        <ContactUs />
       </div>
     </footer>
   );

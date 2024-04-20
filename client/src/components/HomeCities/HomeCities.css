@@ -101,7 +101,7 @@
 
     .homeCities-Card:nth-child(2),
     .homeCities-Card:nth-child(3) {
-      width: 32%;
+      width: 33%;
     }
 
     .homeCities-section-subheader {
@@ -111,7 +111,7 @@
 
     .homeCities-cards-container {
       margin-bottom: 80px;
-      gap: 40px;
+      gap: 15px;
     }
 
     .serviceLabel {
@@ -147,7 +147,7 @@
 
     .homeCities-Card:nth-child(2),
     .homeCities-Card:nth-child(3) {
-      width: 32%;
+      width: 33%;
     }
 
     .homeCities-section-subheader {
@@ -157,7 +157,7 @@
 
     .homeCities-cards-container {
       margin-bottom: 80px;
-      gap: 30px;
+      gap: 15px;
     }
 
     .homeCities-title {
@@ -197,7 +197,7 @@
 
     .homeCities-cards-container {
       margin-bottom: 50px;
-      gap: 40px;
+      gap: 15px;
     }
 
     .homeCities-title {

@@ -84,6 +84,7 @@
     }
 
     .footer-content {
+      gap: 60px;
 
       .links {
         width: 30%;
@@ -118,6 +119,7 @@
     }
 
     .footer-content {
+      gap: 50px;
 
       .links,
       .footer-logo {
@@ -141,7 +143,7 @@
     }
 
     .footer-content {
-      gap: 20px;
+      gap: 40px;
       flex-wrap: wrap;
       padding: 0 40px;
 
@@ -176,7 +178,7 @@
     }
 
     .footer-content {
-      gap: 20px;
+      gap: 40px;
       flex-wrap: wrap;
       padding: 0 30px;
 
