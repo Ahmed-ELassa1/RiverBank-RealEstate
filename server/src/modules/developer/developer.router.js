@@ -15,7 +15,10 @@ router
     "/",
     validation(tokenSchema, true),
     auth(developerEndPointsRoles.addDeveloper),
-    uploadFiles(uploadFilesValidation.image).single("logo"),
+    uploadFiles(uploadFilesValidation.image).fields([
+      { name: "mainImage", maxCount: 1 },
+      { name: "subImages", maxCount: 10 },
+    ]),
     validation(developerValidation.addDeveloperSchema),
     asyncHandler(developerController.addDeveloper)
   )
@@ -23,7 +26,10 @@ router
     "/:id",
     validation(tokenSchema, true),
     auth(developerEndPointsRoles.updateDeveloper),
-    uploadFiles(uploadFilesValidation.image).single("logo"),
+    uploadFiles(uploadFilesValidation.image).fields([
+      { name: "mainImage", maxCount: 1 },
+      { name: "subImages", maxCount: 10 },
+    ]),
     validation(developerValidation.updateDeveloperSchema),
     asyncHandler(developerController.updateDeveloper)
   )

@@ -14,12 +14,28 @@ export const addDeveloper = async (req, res, next) => {
     );
   }
   req.body.customId = nanoid();
-  if (req.file) {
+  if (req.files?.mainImage) {
     const { public_id, secure_url } = await cloudinary.uploader.upload(
-      req.file?.path,
-      { folder: `${process.env.APP_NAME}/developers/${req.body.customId}` }
+      req.files?.mainImage[0]?.path,
+      {
+        folder: `${process.env.APP_NAME}/developers/${req.body.customId}/mainImage`,
+      }
     );
-    req.body.logo = { public_id, secure_url };
+    req.body.mainImage = { public_id, secure_url };
+  }
+  if (req.files?.subImages) {
+    const subImages = [];
+    // upload subImages one by one
+    for (const image of req.files.subImages) {
+      const { public_id, secure_url } = await cloudinary.uploader.upload(
+        image?.path,
+        {
+          folder: `${process.env.APP_NAME}/developers/${req.body.customId}/subImage`,
+        }
+      );
+      subImages.push({ public_id, secure_url });
+    }
+    req.body.subImages = subImages;
   }
   req.body.createdBy = req.user._id;
   const newDeveloper = await developerModel.create(req.body);
@@ -49,16 +65,48 @@ export const updateDeveloper = async (req, res, next) => {
   if (!developerExist) {
     return next(new Error("developer not found", { cause: 404 }));
   }
-  if (req.file) {
+
+  if (req.files?.mainImage?.length > 0) {
     const { public_id, secure_url } = await cloudinary.uploader.upload(
-      req.file?.path,
+      req.files?.mainImage[0]?.path,
       {
-        folder: `${process.env.APP_NAME}/developers/${developerExist.customId}`,
+        folder: `${process.env.APP_NAME}/developers/${developerExist.customId}/mainImage`,
       }
     );
-    await cloudinary.uploader.destroy(developerExist?.logo?.public_id);
-    req.body.logo = { public_id, secure_url };
+    if (developerExist?.mainImage) {
+      await cloudinary.uploader.destroy(developerExist?.mainImage?.public_id);
+    }
+    req.body.mainImage = { public_id, secure_url };
   }
+  const subImagesArray = [];
+  if (req.body?.subImages) {
+    const deletedImagesArr = developerExist.subImages.filter(
+      (obj1) =>
+        !req.body?.subImages.some((obj2) => obj2.public_id == obj1.public_id)
+    );
+    const existImages = developerExist.subImages.filter((obj1) =>
+      req.body?.subImages.some((obj2) => obj2.public_id === obj1.public_id)
+    );
+    subImagesArray.push(...existImages);
+    for (const deletedImage of deletedImagesArr) {
+      await cloudinary?.uploader.destroy(deletedImage?.public_id);
+    }
+  }
+
+  if (req.files?.subImages?.length) {
+    // upload subImages one by one
+    for (const image of req.files.subImages) {
+      const { public_id, secure_url } = await cloudinary.uploader.upload(
+        image?.path,
+        {
+          folder: `${process.env.APP_NAME}/developers/${developerExist.customId}/subImage`,
+        }
+      );
+      subImagesArray.push({ public_id, secure_url });
+    }
+    req.body.subImages = subImagesArray;
+  }
+
   req.body.updatedBy = req.user._id;
   const updatedDeveloper = await developerModel
     .findOneAndUpdate({ _id: req.params.id, isDeleted: false }, req.body, {

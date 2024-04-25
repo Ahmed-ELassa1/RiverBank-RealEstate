@@ -4,15 +4,6 @@ import cloudinary from "../../../utils/cloudinary.js";
 import ApiFeatures from "../../../utils/ApiFeatures.js";
 
 export const addBlog = async (req, res, next) => {
-  const blogExist = await blogModel.findOne({
-    title: req.body.title,
-    isDeleted: false,
-  });
-  if (blogExist) {
-    return next(
-      new Error("blog already exist with the same header", { cause: 409 })
-    );
-  }
   req.body.customId = nanoid();
   if (req.files?.mainImage) {
     const { public_id, secure_url } = await cloudinary.uploader.upload(
@@ -37,7 +28,6 @@ export const addBlog = async (req, res, next) => {
   }
   req.body.createdBy = req.user._id;
   const newBlog = await blogModel.create(req.body);
-
   if (newBlog) {
     const unSelectetAttributes = [
       "isDeleted",
@@ -76,6 +66,21 @@ export const updateBlog = async (req, res, next) => {
     req.body.mainImage = { public_id, secure_url };
   }
   const subImages = [];
+  const subImagesArray = [];
+  if (req.body?.subImages) {
+    const deletedImagesArr = blogExist.subImages.filter(
+      (obj1) =>
+        !req.body?.subImages.some((obj2) => obj2.public_id == obj1.public_id)
+    );
+    const existImages = blogExist.subImages.filter((obj1) =>
+      req.body?.subImages.some((obj2) => obj2.public_id === obj1.public_id)
+    );
+    subImagesArray.push(...existImages);
+    for (const deletedImage of deletedImagesArr) {
+      await cloudinary?.uploader.destroy(deletedImage?.public_id);
+    }
+  }
+
   if (req.files?.subImages?.length) {
     // upload subImages one by one
     for (const image of req.files.subImages) {
@@ -85,9 +90,9 @@ export const updateBlog = async (req, res, next) => {
           folder: `${process.env.APP_NAME}/blogs/${blogExist.customId}/subImage`,
         }
       );
-      subImages.push({ public_id, secure_url });
+      subImagesArray.push({ public_id, secure_url });
     }
-    req.body.subImages = subImages;
+    req.body.subImages = subImagesArray;
   }
   req.body.updatedBy = req.user._id;
   const updatedBlog = await blogModel
@@ -136,8 +141,8 @@ export const deleteBlog = async (req, res, next) => {
     await cloudinary?.api?.delete_folder(blogFolderPath);
   }
   if (blog?.subImages.length > 0 && !blog?.mainImage) {
-      await cloudinary?.api?.delete_all_resources(blogFolderPath);
-      await cloudinary?.api?.delete_folder(blogFolderPath);
+    await cloudinary?.api?.delete_all_resources(blogFolderPath);
+    await cloudinary?.api?.delete_folder(blogFolderPath);
   }
 
   const deletedBlog = await blogModel.findByIdAndUpdate(

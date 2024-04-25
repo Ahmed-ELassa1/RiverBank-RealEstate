@@ -2,28 +2,67 @@ import { nanoid } from "nanoid";
 import cloudinary from "../../../utils/cloudinary.js";
 import ApiFeatures from "../../../utils/ApiFeatures.js";
 import projectModel from "../../../DB/models/Project.model.js";
+import developerModel from "../../../DB/models/Developer.model.js";
 
 export const addProject = async (req, res, next) => {
   const projectExist = await projectModel.findOne({
+    slug: req.body.slug,
     title: req.body.title,
     isDeleted: false,
   });
   if (projectExist) {
     return next(
-      new Error("project already exist with the same title", { cause: 409 })
+      new Error("project already exist with the same title or slug", {
+        cause: 409,
+      })
+    );
+  }
+  const cityExist = await cityModel.findById({ _id: req.body.cityId });
+  if (!cityExist) {
+    return next(
+      new Error("City Not Found", {
+        cause: 404,
+      })
+    );
+  }
+  const developerExist = await developerModel.findById({
+    _id: req.body.developerId,
+  });
+  if (!developerExist) {
+    return next(
+      new Error("Developer Not Found", {
+        cause: 404,
+      })
     );
   }
   req.body.customId = nanoid();
-  if (req.file) {
+  if (req.files?.mainImage) {
     const { public_id, secure_url } = await cloudinary.uploader.upload(
-      req.file?.path,
-      { folder: `${process.env.APP_NAME}/projects/${req.body.customId}` }
+      req.files?.mainImage[0].path,
+      {
+        folder: `${process.env.APP_NAME}/projects/${req.body.customId}/mainImage`,
+      }
     );
-    req.body.logo = { public_id, secure_url };
+    req.body.mainImage = { public_id, secure_url };
   }
+  // loop for all cover images and add one by one
+  const subImagesArray = [];
+  if (req.files?.subImages) {
+    for (const image of req.files?.subImages) {
+      const { public_id, secure_url } = await cloudinary.uploader.upload(
+        image.path,
+        {
+          folder: `${process.env.APP_NAME}/projects/${req.body.customId}/subImages`,
+        }
+      );
+
+      subImagesArray.push({ public_id, secure_url });
+    }
+  }
+  req.body.subImages = subImagesArray;
+
   req.body.createdBy = req.user._id;
   const newProject = await projectModel.create(req.body);
-
   if (newProject) {
     const unSelectetAttributes = [
       "isDeleted",
@@ -41,6 +80,7 @@ export const addProject = async (req, res, next) => {
     return res.status(201).json({ data: clonedResponse });
   }
 };
+
 export const updateProject = async (req, res, next) => {
   const projectExist = await projectModel.findOne({
     _id: req.params.id,
@@ -49,16 +89,78 @@ export const updateProject = async (req, res, next) => {
   if (!projectExist) {
     return next(new Error("project not found", { cause: 404 }));
   }
-  if (req.file) {
+  const cityExist = await cityModel.findById({ _id: req.body.cityId });
+  if (!cityExist) {
+    return next(
+      new Error("City Not Found", {
+        cause: 404,
+      })
+    );
+  }
+  const developerExist = await developerModel.findById({
+    _id: req.body.developerId,
+  });
+  if (!developerExist) {
+    return next(
+      new Error("Developer Not Found", {
+        cause: 404,
+      })
+    );
+  }
+  if (req.body?.title != projectExist?.title) {
+    const projectTitleExist = await projectModel.findOne({
+      title: req.body?.title,
+      isDeleted: false,
+    });
+    if (projectTitleExist) {
+      return next(new Error("project title exist", { cause: 409 }));
+    }
+  }
+  if (req.body?.slug != projectExist?.slug) {
+    const projectSlugExist = await projectModel.findOne({
+      slug: req.body?.slug,
+      isDeleted: false,
+    });
+    if (projectSlugExist) {
+      return next(new Error("project slug exist", { cause: 409 }));
+    }
+  }
+  if (req.files?.mainImage) {
     const { public_id, secure_url } = await cloudinary.uploader.upload(
-      req.file?.path,
+      req.files?.mainImage[0].path,
       {
-        folder: `${process.env.APP_NAME}/projects/${projectExist.customId}`,
+        folder: `${process.env.APP_NAME}/projects/${projectExist.customId}/mainImage`,
       }
     );
-    await cloudinary.uploader.destroy(projectExist?.logo?.public_id);
-    req.body.logo = { public_id, secure_url };
+    await cloudinary.uploader.destroy(projectExist?.mainImage?.public_id);
+    req.body.mainImage = { public_id, secure_url };
   }
+  const subImagesArray = [];
+  if (req.body?.subImages) {
+    const deletedImagesArr = projectExist.subImages.filter(
+      (obj1) =>
+        !req.body?.subImages.some((obj2) => obj2.public_id == obj1.public_id)
+    );
+    const existImages = projectExist.subImages.filter((obj1) =>
+      req.body?.subImages.some((obj2) => obj2.public_id === obj1.public_id)
+    );
+    subImagesArray.push(...existImages);
+    for (const deletedImage of deletedImagesArr) {
+      await cloudinary?.uploader.destroy(deletedImage?.public_id);
+    }
+  }
+  if (req.files?.subImages) {
+    for (const image of req.files?.subImages) {
+      const { public_id, secure_url } = await cloudinary.uploader.upload(
+        image.path,
+        {
+          folder: `${process.env.APP_NAME}/projects/${projectExist.customId}/subImages`,
+        }
+      );
+      subImagesArray.push({ public_id, secure_url });
+    }
+  }
+  req.body.subImages = subImagesArray;
   req.body.updatedBy = req.user._id;
   const updatedProject = await projectModel
     .findOneAndUpdate({ _id: req.params.id, isDeleted: false }, req.body, {
@@ -100,7 +202,18 @@ export const deleteProject = async (req, res, next) => {
     return next(new Error("project not found", { cause: 404 }));
   }
   const projectFolderPath = `${process.env.APP_NAME}/projects/${project?.customId}`;
-  await cloudinary.uploader.destroy(project.logo?.public_id);
+  if (project?.subImages) {
+    for (const image of project?.subImages) {
+      await cloudinary?.uploader.destroy(image?.public_id);
+    }
+  }
+  await cloudinary.uploader.destroy(project.mainImage?.public_id);
+  await cloudinary?.api?.delete_folder(
+    `${process.env.APP_NAME}/projects/${project?.customId}/mainImage`
+  );
+  await cloudinary?.api?.delete_folder(
+    `${process.env.APP_NAME}/projects/${project?.customId}/subImages`
+  );
   await cloudinary?.api?.delete_folder(projectFolderPath);
 
   await projectModel.deleteOne({

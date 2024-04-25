@@ -6,32 +6,118 @@ const projectSchema = new Schema(
       type: String,
       unique: true,
       required: [true, "title is required"],
-      min: [2, "min length 2 char"],
-      max: [20, "max length 20 char"],
     },
-    description: {
+    slug: {
       type: String,
-      required: [true, "description is required"],
-      min: [2, "min length 2 char"],
+      unique: true,
+      required: [true, "slug is required"],
     },
-    features: [String],
-    location: {
+    mainDescription: {
       type: String,
-      min: [2, "min length 2 char"],
+      required: [true, "Main Description is required"],
     },
-    logo: {
+    projectDetails: [
+      {
+        // id: {
+        //   type: String,
+        //   required: [true, "project Detail row id is required"],
+        // },
+        question: {
+          type: String,
+          required: [true, "question is required"],
+        },
+        answer: {
+          type: String,
+          required: [true, "answer is required"],
+        },
+      },
+    ],
+    projectContent: { type: [String], required: true },
+    cityId: {
+      type: Types.ObjectId,
+      require: [true, "City is required"],
+    },
+    developerId: {
+      type: Types.ObjectId,
+    },
+    mainImage: {
       type: Object,
-      required: [true, "logo is required"],
+      require: [true, "Main Image is required"],
     },
-    currency: {
+    projectType: {
       type: String,
-      enum: ["USD", "EGP", "SAR", "EUR", "AED"],
-      default: "EGP",
     },
-    price: {
-      type: Number,
-      min: 1,
+    seoData: String,
+    projectDescriptions: [
+      {
+        //   id: {
+        //     type: String,
+        //     required: [true, "project Descriptions row id is required"],
+        //   },
+        //   images: {
+        //     type: Object,
+        //     // required: [true, "question is required"],
+        //   },
+        // description: {
+        type: String,
+        required: [true, "Project Descriptions is required"],
+      },
+      // },
+    ],
+    subImages: [
+      {
+        type: Object,
+        required: [true, "sub Images is required"],
+      },
+    ],
+    projectQuestions: [
+      {
+        // id: {
+        //   type: String,
+        //   required: [true, "id is required"],
+        // },
+        question: {
+          type: String,
+          required: [true, "question is required"],
+        },
+        answer: {
+          type: String,
+          required: [true, "question is required"],
+        },
+      },
+    ],
+
+    whatsAppNumber: {
+      type: String,
+      required: [true, "WhatsApp Number is required"],
     },
+    callToAction: {
+      type: String,
+      required: [true, "Call To Action is required"],
+    },
+    contactMessage: {
+      type: String,
+      required: [true, "message is required"],
+    },
+
+    // features: [String],
+    // location: {
+    //   type: String,
+    //   min: [2, "min length 2 char"],
+    // },
+    // logo: {
+    //   type: Object,
+    //   required: [true, "logo is required"],
+    // },
+    // currency: {
+    //   type: String,
+    //   enum: ["USD", "EGP", "SAR", "EUR", "AED"],
+    //   default: "EGP",
+    // },
+    // price: {
+    //   type: Number,
+    //   min: 1,
+    // },
     customId: String,
     createdBy: {
       type: Types.ObjectId,

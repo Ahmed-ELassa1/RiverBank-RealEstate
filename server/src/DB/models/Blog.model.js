@@ -4,22 +4,35 @@ const blogSchema = new Schema(
   {
     title: {
       type: String,
-      unique: true,
       required: [true, "title is required"],
-      min: [3, "min length 3 char"],
-      max: [30, "max length 30 char"],
     },
-    description: {
+    mainDescription: {
       type: String,
-      required: [true, "description is required"],
-      min: [3, "min length 3 char"],
-      max: [500, "max length 500 char"],
     },
-    mainImage: Object,
+    blogContent: { type: [String], required: true },
+    mainImage: { type: Object, required: [true, "main image is required"] },
     customId: String,
+    blogDescriptions: [
+      {
+        type: String,
+        required: [true, "blog Descriptions is required"],
+      },
+    ],
     subImages: [
       {
         type: Object,
+      },
+    ],
+    blogQuestions: [
+      {
+        question: {
+          type: String,
+          required: [true, "question is required"],
+        },
+        answer: {
+          type: String,
+          required: [true, "question is required"],
+        },
       },
     ],
     createdBy: {

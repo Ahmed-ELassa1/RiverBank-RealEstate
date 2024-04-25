@@ -5,11 +5,37 @@ const developerSchema = new Schema(
     title: {
       type: String,
       unique: true,
+      required: [true, "title is required"],
     },
-    logo: {
-      type: Object,
-      required: [true, "logo is required"],
+    mainDescription: {
+      type: String,
     },
+    developerContent: { type: [String], required: true },
+    mainImage: { type: Object, required: [true, "main image is required"] },
+    customId: String,
+    developerDescriptions: [
+      {
+        type: String,
+        required: [true, "developer Descriptions is required"],
+      },
+    ],
+    subImages: [
+      {
+        type: Object,
+      },
+    ],
+    developerQuestions: [
+      {
+        question: {
+          type: String,
+          required: [true, "question is required"],
+        },
+        answer: {
+          type: String,
+          required: [true, "question is required"],
+        },
+      },
+    ],
     customId: String,
     createdBy: {
       type: Types.ObjectId,

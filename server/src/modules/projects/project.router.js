@@ -15,7 +15,10 @@ router
     "/",
     validation(tokenSchema, true),
     auth(projectEndPointsRoles.addProject),
-    uploadFiles(uploadFilesValidation.image).single("logo"),
+    uploadFiles(uploadFilesValidation.image).fields([
+      { name: "mainImage", maxCount: 1 },
+      { name: "subImages", maxCount: 10 },
+    ]),
     validation(projectValidation.addProjectSchema),
     asyncHandler(projectController.addProject)
   )
@@ -23,7 +26,10 @@ router
     "/:id",
     validation(tokenSchema, true),
     auth(projectEndPointsRoles.updateProject),
-    uploadFiles(uploadFilesValidation.image).single("logo"),
+    uploadFiles(uploadFilesValidation.image).fields([
+      { name: "mainImage", maxCount: 1 },
+      { name: "subImages", maxCount: 10 },
+    ]),
     validation(projectValidation.updateProjectSchema),
     asyncHandler(projectController.updateProject)
   )
