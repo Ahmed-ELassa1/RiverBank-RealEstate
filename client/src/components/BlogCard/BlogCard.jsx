@@ -22,7 +22,7 @@ const BlogCard = ({ item }) => {
 
   return (
     <>
-      <div className="blogCard" onClick={() => Navigate("/projects/1")}>
+      <div className="blogCard" onClick={() => Navigate(`/blogs/${item?._id}`)}>
         {item?.mainImage ? (
           <div className="blogImg">
             <img src={item?.mainImage?.secure_url} alt="blog" />
@@ -36,7 +36,7 @@ const BlogCard = ({ item }) => {
           {/* <span className="date">
             {new Date(item?.createdAt).toUTCString()}
           </span> */}
-          <p className="desc">{item?.description}</p>
+          <p className="desc">{item?.title}</p>
           {/* <button
             className="continue"
             onClick={showDrawer}
@@ -95,7 +95,7 @@ const BlogCard = ({ item }) => {
             <DescriptionItem title="Description" />
           </Col>
           <Col span={12}>
-            <DescriptionItem title={item?.description} />
+            <DescriptionItem title={item?.title} />
           </Col>
         </Row>
 

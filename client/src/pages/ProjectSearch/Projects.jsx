@@ -5,10 +5,11 @@ import { ProjectsService } from "../../services/Projects/ProjectsService";
 import { Link } from "react-router-dom";
 import { LoadingOutlined } from "@ant-design/icons";
 
-const Projects = () => {
+const ProjectSearch = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const projectInstance = new ProjectsService();
+
   const getAllProjects = async () => {
     try {
       const response = await projectInstance.getProjects({
@@ -67,4 +68,4 @@ const Projects = () => {
   );
 };
 
-export default Projects;
+export default ProjectSearch;

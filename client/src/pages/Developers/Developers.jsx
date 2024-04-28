@@ -34,7 +34,7 @@ const Developers = () => {
   return (
     <section className="developer-page">
       <div className="dev bg">
-        <h2>Developers</h2>
+        <h2>المطورون</h2>
       </div>
       <div className="main container dev-container">
         {loading && <LoadingOutlined className="loadingIndicator" />}
@@ -44,10 +44,12 @@ const Developers = () => {
           data?.map((item) => (
             <div className="developer-card" key={item._id}>
               <Card
-                onClick={() => Navigate("/projects/1")}
+                onClick={() => Navigate(`/developers/${item._id}`)}
                 hoverable
                 className="dev-img"
-                cover={<img alt={item.title} src={item.logo?.secure_url} />}
+                cover={
+                  <img alt={item.title} src={item?.mainImage?.secure_url} />
+                }
               >
                 <Meta title={item.title} />
               </Card>

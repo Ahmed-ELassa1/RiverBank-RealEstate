@@ -8,7 +8,8 @@
 body {
   margin: 0;
   overflow-x: hidden;
-  font-family: monospace, sans-serif;
+  font-family: 'aqaratmisr';
+  /* font-family: monospace, sans-serif; */
   background-color: #efefef9e;
   /* background-color: #f7f4f1; */
   scroll-behavior: smooth;
@@ -69,8 +70,8 @@ input::-webkit-inner-spin-button {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  /* font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace; */
 }
 
 @media screen and (min-width: 130px) {

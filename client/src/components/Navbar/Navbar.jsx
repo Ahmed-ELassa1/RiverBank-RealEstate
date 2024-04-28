@@ -28,7 +28,7 @@ const Navbar = () => {
     },
     {
       label: t("label.navbar.newCapital"),
-      key: "cities/newCapital",
+      key: "cities/662abcb327f0cd662fdf0d38",
     },
     {
       label: t("label.navbar.newCairo"),

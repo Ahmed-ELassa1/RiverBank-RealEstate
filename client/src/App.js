@@ -41,6 +41,9 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import { useEffect, useState } from "react";
+import ProjectSearch from "./pages/ProjectSearch/Projects";
+import ListBlogsDetails from "./pages/ListBlogsDetails/ListBlogsDetails";
+import ListDevelopersDetails from "./pages/ListDevelopersDetails/ListDevelopersDetails";
 
 function App() {
   const [isSticky, setIsSticky] = useState(false);
@@ -82,10 +85,13 @@ function App() {
       children: [
         { path: "/", index: true, element: <Home /> },
         { path: "/home", element: <Home /> },
+        { path: "/search", element: <ProjectSearch /> },
         { path: "/cities/:cityId", element: <Cities /> },
         { path: "/developers", element: <Developers /> },
+        { path: "/developers/:id", element: <ListDevelopersDetails /> },
         { path: "/properties", element: <Properties /> },
         { path: "/blogs", element: <Blogs /> },
+        { path: "/blogs/:id", element: <ListBlogsDetails /> },
         { path: "/projects", element: <Projects /> },
         {
           path: "/projects/:id",

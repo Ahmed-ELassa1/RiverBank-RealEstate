@@ -3,20 +3,21 @@ import "./ProjectDetails.css";
 import { useParams } from "react-router-dom";
 import { ProjectsService } from "../../services/Projects/ProjectsService";
 import {
-  GlobalOutlined,
   LoadingOutlined,
   PhoneFilled,
   WhatsAppOutlined,
 } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 import ContactUs from "../ContactUs/ContactUs";
-import img1 from "../../assets/contact.jpg";
+import { CityService } from "../../services/City/CityService";
 const ProjectDetails = ({ isSticky }) => {
   const { t } = useTranslation();
+  const [cityData, setCityData] = useState({});
   const { id } = useParams();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const projectInstance = new ProjectsService();
+  const cityService = new CityService();
 
   const getProject = async () => {
     try {
@@ -30,79 +31,80 @@ const ProjectDetails = ({ isSticky }) => {
   };
   useEffect(() => {
     getProject();
-  }, []);
-
+  }, [id]);
+  const scrollToSection = (e, sectionId) => {
+    e.preventDefault();
+    const section = document.getElementById(sectionId);
+    if (section) {
+      window.scrollTo({
+        top: section.offsetTop + 120,
+        behavior: "smooth",
+      });
+    }
+  };
   return (
     <div className="details-page">
-      {/* {loading && <LoadingOutlined className="loadingIndicator" />} */}
       <div className="blog bg">
-        <h2>كمبوند سعادة التجمع الخامس COMPOUND SAADA NEW CAIRO</h2>
+        <h2>{data?.title}</h2>
       </div>
-      {/* {loading && ( */}
       <div className="details-page-container">
-        <div className="details-page-content-container">
-          <div>
-            <img
-              // src={data?.logo?.secure_url}
-              src={img1}
-              alt={data?.title}
-              className="projectImg"
-            />
-          </div>
-          {/* questions */}
-          <div className="project-details-questions-container">
-            <h3 className="questionLabel">
-              {t("label.projectDetails.header")}
-            </h3>
-            <div className="project-details-questions-content">
-              <p className="project-questions-row">
-                <span>
-                  أين يقع المشروع<strong>:</strong>
-                </span>
-                <span>مدينه المستقبل سيتي</span>
-              </p>
-              <p className="project-questions-row">
-                <span>
-                  من هي الشركه المالكه للمشروع<strong>:</strong>
-                </span>
-                <span>شركه كونر ستون للتطوير العقاري</span>
-              </p>
-              <p className="project-questions-row">
-                <span>
-                  ما هو رقم المبيعات<strong>:</strong>
-                </span>
-                <span>01127814880</span>
-              </p>
+        {loading && <LoadingOutlined className="loadingIndicator" />}
+        {!loading ? (
+          <div className="details-page-content-container">
+            <div>
+              <img
+                src={data?.mainImage?.secure_url}
+                alt={data?.seoData}
+                className="projectImg"
+              />
             </div>
-          </div>
-          {/*project content summery*/}
-          <div className="project-details-content-headers">
-            <p>{t("label.projectDetails.pageContent")}</p>
-            <ol>
-              <li>
-                <a href="">
-                  موقع كمبوند ريد المستقبل سيتي Compound RED Mostakbal City
-                </a>
-              </li>
-              <li>
-                <a href="">
-                  تصميم كمبوند ريد المستقبل سيتي Compound RED Mostakbal City{" "}
-                </a>
-              </li>
-              <li>
-                <a href="">
-                  مساحه كمبوند ريد المستقبل سيتي Compound RED Mostakbal City{" "}
-                </a>
-              </li>
-            </ol>
-          </div>
-          {/* main description */}
-          <div className="project-details-main-desc-section">
-            {t("label.projectDetails.mainDescription")}
-          </div>
-          {/* details sections */}
-          <div className="details-descriptions-section-container">
-            <h3>موقع كمبوند ريد المستقبل سيتي Compound RED Mostakbal City</h3>
+            {/* questions */}
+            <div className="project-details-questions-container">
+              <h3 className="questionLabel">
+                {t("label.projectDetails.header")}
+              </h3>
+              <div className="project-details-questions-content">
+                {data?.projectDetails?.length > 0 &&
+                  data?.projectDetails?.map((detail, i) => {
+                    return (
+                      <p className="project-questions-row" key={i}>
+                        <span>
+                          {detail?.question}
+                          {/* <strong>:</strong> */}
+                        </span>
+                        <span>{detail?.answer}</span>
+                      </p>
+                    );
+                  })}
+              </div>
+            </div>
+            {/*project content summery*/}
+            {data?.projectContent?.length > 0 && (
+              <div className="project-details-content-headers">
+                <p>{t("label.projectDetails.pageContent")}</p>
+                <ol>
+                  {data?.projectContent?.map((projectContent, i) => {
+                    return (
+                      <li key={i}>
+                        <a
+                          href={`/#/projects/${id}/#section-${i}`}
+                          onClick={(e) => scrollToSection(e, `section-${i}`)}
+                        >
+                          {projectContent}
+                        </a>
+                      </li>
+                    );
+                  })}
+                </ol>
+              </div>
+            )}
+            {/* main description */}
+            <div className="project-details-main-desc-section">
+              {data?.mainDescription}
+            </div>
+            {/* details sections */}
+            <div className="details-descriptions-section-container">
+              {/* <h3>موقع كمبوند ريد المستقبل سيتي Compound RED Mostakbal City</h3>
             <img src={img1} />
             <p>
               اقتنصت شركه كونر ستون أهم موقع استراتيجي بقلب مدينه المستقبل، كما
@@ -131,9 +133,34 @@ const ProjectDetails = ({ isSticky }) => {
               الكمبوند عن مصر الجديده ومدينه نصر بدقائق معدوده. كذلك يجاور
               الكمبوند العديد من أهم المشروعات السكنيه والخدميه كمبوند اليفا
               مونتن فيو مستقبل سيتي، كذلك كمبوند البوسكو سيتي.
-            </p>
+            </p> */}
+              {data?.projectDescriptions?.length > 0 &&
+                data?.projectDescriptions?.map((projectDescription, i) => {
+                  return (
+                    <div id={`section-${i}`} key={i}>
+                      {data?.subImages?.length > i && (
+                        <img src={data?.subImages[i]?.secure_url} />
+                      )}
+                      <p>{projectDescription}</p>
+                    </div>
+                  );
+                })}
+            </div>
+            <div className="details-question-about-project">
+              {data?.projectQuestions?.length &&
+                data?.projectQuestions?.map((projectQuestion, i) => {
+                  return (
+                    <div key={i} className="details-question-about-project-row">
+                      <h3>{projectQuestion?.question}</h3>
+                      <p>{projectQuestion?.answer}</p>
+                    </div>
+                  );
+                })}
+            </div>
           </div>
-        </div>
+        ) : (
+          ""
+        )}
 
         {/* sidebar */}
         <div
@@ -171,7 +198,6 @@ const ProjectDetails = ({ isSticky }) => {
           </div>
         </div>
       </div>
-      {/* )} */}
     </div>
   );
 };
