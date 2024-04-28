@@ -178,7 +178,7 @@ export const getProjects = async (req, res, next) => {
         .find({ isDeleted: false })
         .populate({
           path: "cityId",
-          select: "-_id",
+          select: "_id",
         })
         .populate({
           path: "developerId",
