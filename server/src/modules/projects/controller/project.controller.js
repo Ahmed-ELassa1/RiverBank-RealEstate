@@ -3,6 +3,7 @@ import cloudinary from "../../../utils/cloudinary.js";
 import ApiFeatures from "../../../utils/ApiFeatures.js";
 import projectModel from "../../../DB/models/Project.model.js";
 import developerModel from "../../../DB/models/Developer.model.js";
+import cityModel from "../../../DB/models/City.model.js";
 
 export const addProject = async (req, res, next) => {
   const projectExist = await projectModel.findOne({
@@ -170,19 +171,65 @@ export const updateProject = async (req, res, next) => {
   return res.status(200).json({ message: "done", data: updatedProject });
 };
 export const getProjects = async (req, res, next) => {
-  req.query.fields = `-isDeleted,-updatedAt,-__v,-createdBy,-customId`;
-  const apiFeature = new ApiFeatures(
-    projectModel.find({ isDeleted: false }),
-    req.query
-  )
-    .paginate()
-    .filter()
-    .sort()
-    .fields()
-    .search();
-  const projects = await apiFeature.mongooseQuery;
-  return res.status(200).json({ message: "done", data: projects });
+  try {
+    req.query.fields = `-isDeleted,-updatedAt,-__v,-createdBy,-customId -createdAt`;
+    let apiFeature = new ApiFeatures(
+      projectModel
+        .find({ isDeleted: false })
+        .populate({
+          path: "cityId",
+          select: "-_id",
+        })
+        .populate({
+          path: "developerId",
+          select: "_id",
+        }),
+      req.query
+    );
+
+    // Apply pagination, filtering, sorting, field selection, and search
+    apiFeature = apiFeature.paginate().filter().sort().fields().search();
+
+    // Execute the query asynchronously
+    const projects = await apiFeature.mongooseQuery.exec();
+
+    // Modify the structure of the returned projects
+    const modifiedProjects = projects.map((project) => ({
+      ...project.toObject(),
+      cityId: project.cityId._id, // Modify the cityId field to be cityId: "the city Id"
+      developerId: project.developerId._id, // Modify the developerId field to be developerId: "the developer Id"
+    }));
+
+    // Send the modified projects in the response
+    return res.status(200).json({ message: "done", data: modifiedProjects });
+  } catch (err) {
+    // Handle error
+    return next(new Error(err, { cause: 400 }));
+  }
 };
+// export const getProjects = async (req, res, next) => {
+//   req.query.fields = `-isDeleted,-updatedAt,-__v,-createdBy,-customId`;
+//   const apiFeature = new ApiFeatures(
+//     projectModel
+//       .find({ isDeleted: false })
+//       .populate({
+//         path: "cityId",
+//         select: "-_id",
+//       })
+//       .populate({
+//         path: "developerId",
+//         select: "_id",
+//       }),
+//     req.query
+//   )
+//     .paginate()
+//     .filter()
+//     .sort()
+//     .fields()
+//     .search();
+//   const projects = await apiFeature.mongooseQuery;
+//   return res.status(200).json({ message: "done", data: projects });
+// };
 export const getProjectById = async (req, res, next) => {
   const project = await projectModel
     .findOne({ _id: req.params.id, isDeleted: false })

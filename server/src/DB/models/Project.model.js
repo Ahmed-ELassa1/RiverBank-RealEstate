@@ -35,10 +35,12 @@ const projectSchema = new Schema(
     projectContent: { type: [String], required: true },
     cityId: {
       type: Types.ObjectId,
+      ref: "City",
       require: [true, "City is required"],
     },
     developerId: {
       type: Types.ObjectId,
+      ref: "Developer",
     },
     mainImage: {
       type: Object,
