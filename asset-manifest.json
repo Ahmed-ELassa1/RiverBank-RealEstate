@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/riverBank/static/css/main.07209526.css",
-    "main.js": "/riverBank/static/js/main.aedde079.js",
+    "main.css": "/riverBank/static/css/main.9c7f5e05.css",
+    "main.js": "/riverBank/static/js/main.b441a9e1.js",
     "static/js/453.512f9272.chunk.js": "/riverBank/static/js/453.512f9272.chunk.js",
     "static/media/city.avif": "/riverBank/static/media/city.25c109ff79206eec8f2b.avif",
     "static/media/props.avif": "/riverBank/static/media/props.a19e5c4ec6d25d2ca1f6.avif",
@@ -24,12 +24,12 @@
     "static/media/logoTxt.png": "/riverBank/static/media/logoTxt.3048aadf4c276299bbd2.png",
     "index.html": "/riverBank/index.html",
     "static/media/getFetch.cjs": "/riverBank/static/media/getFetch.40f37ddea2378391108f.cjs",
-    "main.07209526.css.map": "/riverBank/static/css/main.07209526.css.map",
-    "main.aedde079.js.map": "/riverBank/static/js/main.aedde079.js.map",
+    "main.9c7f5e05.css.map": "/riverBank/static/css/main.9c7f5e05.css.map",
+    "main.b441a9e1.js.map": "/riverBank/static/js/main.b441a9e1.js.map",
     "453.512f9272.chunk.js.map": "/riverBank/static/js/453.512f9272.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.07209526.css",
-    "static/js/main.aedde079.js"
+    "static/css/main.9c7f5e05.css",
+    "static/js/main.b441a9e1.js"
   ]
 }
