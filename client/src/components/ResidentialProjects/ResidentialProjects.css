@@ -35,6 +35,7 @@
 
     .residentialProjects-card {
       /* box-shadow: 4px 4px 10px #c5c5c5; */
+      cursor: pointer;
       width: 24%;
       height: 350px;
       max-height: 350px;

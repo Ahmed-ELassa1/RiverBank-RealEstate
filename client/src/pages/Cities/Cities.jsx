@@ -15,6 +15,7 @@ const Cities = () => {
   const { t } = useTranslation();
   const { cityId } = useParams();
   const [projectCards, setProjectCards] = useState([]);
+  const [currentCity, setCurrentCity] = useState("");
   const [loading, setLoading] = useState(true);
   const Navigate = useNavigate();
   async function getCityProjects() {
@@ -24,25 +25,23 @@ const Cities = () => {
     setProjectCards(response?.data?.data);
     setLoading(false);
   }
-
+  async function getCityName() {
+    const response = await cityService.getCityById(cityId);
+    const data = response.data.data;
+    setCurrentCity(data?.title);
+  }
   useEffect(() => {
+    getCityName();
+  }, [currentCity]);
+  useEffect(() => {
+    setCurrentCity("")
     getCityProjects();
   }, [cityId]);
 
   return (
     <div className="cities">
       <div className="bg">
-        <h2>
-          {cityId == "newCapital"
-            ? t("label.navbar.newCapital")
-            : cityId == "newCairo"
-            ? t("label.navbar.newCairo")
-            : cityId == "northCoast"
-            ? t("label.navbar.northCoast")
-            : cityId == "rasSedr"
-            ? t("label.navbar.rasSedr")
-            : t("label.navbar.ainSokhna")}
-        </h2>
+        <h2>{currentCity}</h2>
       </div>
       {/* <div className="container">
         <h3 className=" cityLabel">Our Cities</h3>

@@ -13,11 +13,15 @@ import Logo from "../../assets/logoImg.png";
 import LogoTxt from "../../assets/logoTxt.png";
 import Bars from "../../assets/menu.png";
 import { useTranslation } from "react-i18next";
+import { CityService } from "../../services/City/CityService";
 
 const Navbar = () => {
   const { t } = useTranslation();
   const [current, setCurrent] = useState("/");
+  const cityService = new CityService();
   const [isOpen, setIsOpen] = useState(false);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   // #0A383D
   //#B07A12
@@ -28,11 +32,11 @@ const Navbar = () => {
     },
     {
       label: t("label.navbar.newCapital"),
-      key: "cities/العاصمة-الإدارية-الجديدة",
+      key: `cities/${getCityId("العاصمة-الإدارية-الجديدة")}`,
     },
     {
       label: t("label.navbar.newCairo"),
-      key: "cities/القاهرة-الجديدة",
+      key: `cities/${getCityId("القاهرة-الجديدة")}`,
     },
     {
       label: t("label.navbar.costalProjects"),
@@ -40,15 +44,15 @@ const Navbar = () => {
       children: [
         {
           label: "الساحل الشمالي",
-          key: "cities/الساحل-الشمالي",
+          key: `cities/${getCityId("الساحل-الشمالي")}`,
         },
         {
           label: "العين السخنة",
-          key: "cities/العين-السخنة",
+          key: `cities/${getCityId("العين-السخنة")}`,
         },
         {
           label: "راس سدر",
-          key: "cities/راس-سدر",
+          key: `cities/${getCityId("راس-سدر")}`,
         },
       ],
     },
@@ -66,7 +70,22 @@ const Navbar = () => {
       icon: <PhoneFilled />,
     },
   ];
-
+  const getCities = async () => {
+    try {
+      const response = await cityService.getCities();
+      const data = await response.data.data;
+      setLoading(false);
+      setData(data);
+    } catch (err) {
+      setLoading(false);
+    }
+  };
+  function getCityId(navBarCity) {
+    const selectedCity = data?.find((city) => {
+      return city?.slug == navBarCity;
+    });
+    return selectedCity ? selectedCity?._id : "";
+  }
   const onClick = (e) => {
     if (e.key === "#footer") {
       // Scroll to the footer section
@@ -77,7 +96,9 @@ const Navbar = () => {
       navigate(e.key);
     }
   };
-
+  useEffect(() => {
+    getCities();
+  }, []);
   const [scroll, setScroll] = useState(false);
   useEffect(() => {
     window.addEventListener("scroll", () => {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Home.css";
 import HomeCities from "../../components/HomeCities/HomeCities";
 import ResidentialProjects from "../../components/ResidentialProjects/ResidentialProjects";
@@ -9,17 +9,40 @@ import CommercialProjects from "../../components/CommercialProjects/CommercialPr
 import CoastalProjects from "../../components/CoastalProjects/CoastalProjects";
 import { ProjectsService } from "../../services/Projects/ProjectsService";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { CityService } from "../../services/City/CityService";
+import { LoadingOutlined } from "@ant-design/icons";
+import { ProjectTypesService } from "../../services/ProjectTypesService/ProjectTypesService";
 
 const Home = () => {
   const Navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const { t } = useTranslation();
+  const projectTypesService = new ProjectTypesService();
   const projectService = new ProjectsService();
+  const cityService = new CityService();
   const [resultProjects, setResultProjects] = useState([]);
+  const [citiesOptions, setCitiesOptions] = useState([]);
+  const [projectCards, setProjectCards] = useState([]);
+  const [resedinationalProjects, setResedinationalProjects] = useState([]);
+  const [commercialProjects, setCommercialProjects] = useState([]);
+  const [costalProjects, setCostalProjects] = useState([]);
+  const [citiesData, setCitiesData] = useState([]);
+  const [projectTypesData, setProjectTypesData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     project: searchParams.get("project") || "",
     city: searchParams.get("city") || "",
   });
+  async function getCities() {
+    const response = await cityService.getCities();
+    const data = response?.data?.data;
+    setCitiesData(data);
+    const options = data?.map((city) => {
+      return { label: city?.title, value: city?._id };
+    });
+    setLoading(false);
+    setCitiesOptions([{ label: "كل المدن", value: "" }, ...options]);
+  }
   function handleFormInputs(e) {
     const clonedForm = { ...formData };
     clonedForm[e.target.name] = e.target.value;
@@ -27,14 +50,52 @@ const Home = () => {
   }
   async function searchInProjects(e) {
     e.preventDefault();
-    const response = await projectService.getProjects({
-      title: formData.project,
-      cityId: formData.city,
-    });
+    let response;
+    if (formData.cityId != "" && formData.project == "") {
+      response = await projectService.getProjects({
+        cityId: formData.city,
+      });
+    } else if (formData.cityId == "" && formData.project != "") {
+      response = await projectService.getProjects({
+        title: formData.project,
+      });
+    } else {
+      response = await projectService.getProjects({
+        title: formData.project,
+        cityId: formData.city,
+      });
+    }
     if (response?.status == 200) {
-      console.log(response?.data);
       setResultProjects(response?.data);
     }
+  }
+  useEffect(() => {
+    getCities();
+    getCityProjects();
+    getProjectTypes();
+  }, []);
+  async function getCityProjects() {
+    setProjectCards([]);
+    const response = await projectService.getProjects();
+    const data = response?.data?.data;
+    const resdintianlProjects = data?.filter((project) => {
+      return project?.projectType == "مشروعات-سكنية";
+    });
+    const commercialProjects = data?.filter((project) => {
+      return project?.projectType == "مشروعات-تجارية";
+    });
+    const coastalProjects = data?.filter((project) => {
+      return project?.projectType == "مشروعات-ساحلية";
+    });
+    setResedinationalProjects(resdintianlProjects?.splice(0, 3));
+    setCommercialProjects(commercialProjects?.splice(0, 3));
+    setCostalProjects(coastalProjects?.splice(0, 3));
+    setProjectCards(data);
+  }
+  async function getProjectTypes() {
+    const response = await projectTypesService.getProjectTypes();
+    const data = response?.data?.data;
+    setProjectTypesData(data);
   }
   return (
     <div className="homepage">
@@ -65,17 +126,31 @@ const Home = () => {
             placeholder={t("input.findByProject")}
             value={formData.project}
           />
-          <select
-            className="home-search-input"
-            name="city"
-            onChange={handleFormInputs}
-            placeholder={t("input.findByCity")}
-            value={formData.city}
-          >
-            <option value={""}>{t("input.findByCity")}</option>
-            <option value="662abcb327f0cd662fdf0d38">alex</option>
-            <option value="cairooo">cairo</option>
-          </select>
+          {loading ? (
+            <div className="home-search-input">
+              <LoadingOutlined />
+            </div>
+          ) : (
+            <select
+              className="home-search-input"
+              name="city"
+              onChange={handleFormInputs}
+              placeholder={t("input.findByCity")}
+              value={formData.city}
+            >
+              {citiesOptions?.length > 0 ? (
+                citiesOptions?.map((city, i) => {
+                  return (
+                    <option key={i} value={city?.value}>
+                      {city?.label}
+                    </option>
+                  );
+                })
+              ) : (
+                <option value="">none</option>
+              )}
+            </select>
+          )}
           <button
             type="submit"
             onClick={searchInProjects}
@@ -86,10 +161,28 @@ const Home = () => {
         </form>
       </div>
 
-      <HomeCities />
-      <ResidentialProjects />
-      <CoastalProjects />
-      <CommercialProjects />
+      <HomeCities citiesData={citiesData} />
+      {resedinationalProjects?.length > 0 && (
+        <ResidentialProjects
+          resedinationalProjects={resedinationalProjects}
+          cities={citiesData}
+          projectTypesData={projectTypesData}
+        />
+      )}
+      {costalProjects?.length > 0 && (
+        <CoastalProjects
+          costalProjects={costalProjects}
+          cities={citiesData}
+          projectTypesData={projectTypesData}
+        />
+      )}
+      {commercialProjects?.length > 0 && (
+        <CommercialProjects
+          commercialProjects={commercialProjects}
+          cities={citiesData}
+          projectTypesData={projectTypesData}
+        />
+      )}
     </div>
   );
 };
