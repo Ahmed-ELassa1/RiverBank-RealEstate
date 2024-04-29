@@ -178,11 +178,11 @@ export const getProjects = async (req, res, next) => {
         .find({ isDeleted: false })
         .populate({
           path: "cityId",
-          select: "_id",
+          select: "_id slug",
         })
         .populate({
           path: "developerId",
-          select: "_id",
+          select: "_id slug",
         }),
       req.query
     );

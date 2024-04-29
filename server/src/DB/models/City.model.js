@@ -7,6 +7,11 @@ const citySchema = new Schema(
       unique: true,
       required: [true, "title is required"],
     },
+    slug: {
+      type: String,
+      unique: true,
+      required: [true, "slug is required"],
+    },
     projects: [Types.ObjectId],
     description: {
       type: String,

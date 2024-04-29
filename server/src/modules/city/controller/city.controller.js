@@ -34,6 +34,8 @@ export const addCity = async (req, res, next) => {
       }
     }
   }
+  const slug = slugify(req.body.title);
+  req.body.slug = slug;
   req.body.createdBy = req.user._id;
   const newCity = await cityModel.create(req.body);
   if (newCity) {
@@ -77,6 +79,8 @@ export const updateCity = async (req, res, next) => {
         })
       );
     }
+    const slug = slugify(req.body.title);
+    req.body.slug = slug;
   }
   // check if add project to the city that is already exist
   if (req.body?.projects) {
