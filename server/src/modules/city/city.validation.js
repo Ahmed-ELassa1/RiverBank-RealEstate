@@ -5,7 +5,7 @@ export const addCitySchema = joi
   .object({
     title: joi.string().required(),
     description: joi.string(),
-    projects: joi.array().items(generalFields._id),
+    projectType: generalFields.id,
     cityQuestions: joi.array().items(
       joi.object({
         question: joi.string(),
@@ -19,7 +19,7 @@ export const updateCitySchema = joi
     id: generalFields.id,
     title: joi.string().required(),
     description: joi.string(),
-    projects: joi.array().items(generalFields._id),
+    projectType: generalFields.id,
     cityQuestions: joi.array().items(
       joi.object({
         question: joi.string(),

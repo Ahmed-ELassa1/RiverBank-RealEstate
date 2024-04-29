@@ -12,7 +12,11 @@ const citySchema = new Schema(
       unique: true,
       required: [true, "slug is required"],
     },
-    projects: [Types.ObjectId],
+    projectType: {
+      type: Types.ObjectId,
+      ref: "ProjectType",
+      required: [true, "Project Type is required"],
+    },
     description: {
       type: String,
     },

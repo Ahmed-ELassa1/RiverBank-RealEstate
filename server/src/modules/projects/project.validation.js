@@ -5,6 +5,7 @@ export const addProjectSchema = joi
   .object({
     title: joi.string().required(),
     slug: joi.string().required(),
+    projectType: generalFields.id,
     mainDescription: joi.string().required(),
     projectDetails: joi
       .array()
@@ -62,6 +63,7 @@ export const updateProjectSchema = joi
   .object({
     id: generalFields.id,
     title: joi.string().required(),
+    projectType: generalFields.id,
     slug: joi.string().required(),
     mainDescription: joi.string().required(),
     mainImage: joi.array().items(

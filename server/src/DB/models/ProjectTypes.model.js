@@ -7,6 +7,10 @@ const projectTypesSchema = new Schema(
       unique: true,
       required: [true, "title is required"],
     },
+    slug: {
+      type: String,
+      required: [true, "slug is required"],
+    },
     createdBy: {
       type: Types.ObjectId,
       required: [true, "userId is required"],

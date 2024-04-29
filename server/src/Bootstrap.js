@@ -8,6 +8,7 @@ import propertyRouter from "./modules/property/property.router.js";
 import developersRouter from "./modules/developer/developer.router.js";
 import projectRouter from "./modules/projects/project.router.js";
 import cityRouter from "./modules/city/city.router.js";
+import projectTypeRouter from "./modules/projectType/projectType.router.js";
 function Bootstrap(app, express) {
   var whitelist = ["http://example1.com", "http://example2.com"];
   connection();
@@ -33,6 +34,7 @@ function Bootstrap(app, express) {
   app.use("/developer", developersRouter);
   app.use("/project", projectRouter);
   app.use("/city", cityRouter);
+  app.use("/projectType", projectTypeRouter);
   app.use(globalErrorHandling);
 }
 export default Bootstrap;

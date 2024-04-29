@@ -28,11 +28,11 @@ const Navbar = () => {
     },
     {
       label: t("label.navbar.newCapital"),
-      key: "cities/662abcb327f0cd662fdf0d38",
+      key: "cities/العاصمة-الإدارية-الجديدة",
     },
     {
       label: t("label.navbar.newCairo"),
-      key: "cities/newCairo",
+      key: "cities/القاهرة-الجديدة",
     },
     {
       label: t("label.navbar.costalProjects"),
@@ -40,15 +40,15 @@ const Navbar = () => {
       children: [
         {
           label: "الساحل الشمالي",
-          key: "cities/northCoast",
+          key: "cities/الساحل-الشمالي",
         },
         {
           label: "العين السخنة",
-          key: "cities/ainSokhna",
+          key: "cities/العين-السخنة",
         },
         {
           label: "راس سدر",
-          key: "cities/rasSedr",
+          key: "cities/راس-سدر",
         },
       ],
     },

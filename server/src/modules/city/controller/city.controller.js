@@ -5,6 +5,7 @@ import CityModel from "../../../DB/models/City.model.js";
 import developerModel from "../../../DB/models/Developer.model.js";
 import projectModel from "../../../DB/models/Project.model.js";
 import cityModel from "../../../DB/models/City.model.js";
+import projectTypeModel from "../../../DB/models/ProjectTypes.model.js";
 
 export const addCity = async (req, res, next) => {
   const cityExist = await cityModel.findOne({
@@ -16,6 +17,18 @@ export const addCity = async (req, res, next) => {
     return next(
       new Error("city already exist with the same title", {
         cause: 409,
+      })
+    );
+  }
+
+  const projectTypeExist = await projectTypeModel.findById({
+    _id: req.body.projectType,
+  });
+
+  if (!projectTypeExist) {
+    return next(
+      new Error("Project Type Not Found", {
+        cause: 404,
       })
     );
   }
@@ -34,7 +47,12 @@ export const addCity = async (req, res, next) => {
       }
     }
   }
-  const slug = slugify(req.body.title);
+  const slug = req.body.title
+    .trim()
+    // Changes all characters to lower case.
+    .toLowerCase()
+    // Remove symbols with a space.
+    .replaceAll(" ", "-");
   req.body.slug = slug;
   req.body.createdBy = req.user._id;
   const newCity = await cityModel.create(req.body);
@@ -68,6 +86,17 @@ export const updateCity = async (req, res, next) => {
       })
     );
   }
+  const projectTypeExist = await projectTypeModel.findById({
+    _id: req.body.projectType,
+  });
+
+  if (!projectTypeExist) {
+    return next(
+      new Error("Project Type Not Found", {
+        cause: 404,
+      })
+    );
+  }
   if (req.body.title != cityExist.title) {
     const cityWithSameTitle = await cityModel.findOne({
       title: req.body.title,
@@ -79,7 +108,12 @@ export const updateCity = async (req, res, next) => {
         })
       );
     }
-    const slug = slugify(req.body.title);
+    const slug = req.body.title
+      .trim()
+      // Changes all characters to lower case.
+      .toLowerCase()
+      // Remove symbols with a space.
+      .replaceAll(" ", "-");
     req.body.slug = slug;
   }
   // check if add project to the city that is already exist

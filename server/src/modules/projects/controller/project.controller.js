@@ -4,6 +4,7 @@ import ApiFeatures from "../../../utils/ApiFeatures.js";
 import projectModel from "../../../DB/models/Project.model.js";
 import developerModel from "../../../DB/models/Developer.model.js";
 import cityModel from "../../../DB/models/City.model.js";
+import projectTypeModel from "../../../DB/models/ProjectTypes.model.js";
 
 export const addProject = async (req, res, next) => {
   const projectExist = await projectModel.findOne({
@@ -15,6 +16,17 @@ export const addProject = async (req, res, next) => {
     return next(
       new Error("project already exist with the same title or slug", {
         cause: 409,
+      })
+    );
+  }
+  const projectTypeExist = await projectTypeModel.findById({
+    _id: req.body.projectType,
+  });
+
+  if (!projectTypeExist) {
+    return next(
+      new Error("Project Type Not Found", {
+        cause: 404,
       })
     );
   }
@@ -94,6 +106,17 @@ export const updateProject = async (req, res, next) => {
   if (!cityExist) {
     return next(
       new Error("City Not Found", {
+        cause: 404,
+      })
+    );
+  }
+  const projectTypeExist = await projectTypeModel.findById({
+    _id: req.body.projectType,
+  });
+
+  if (!projectTypeExist) {
+    return next(
+      new Error("Project Type Not Found", {
         cause: 404,
       })
     );
@@ -183,6 +206,10 @@ export const getProjects = async (req, res, next) => {
         .populate({
           path: "developerId",
           select: "_id slug",
+        })
+        .populate({
+          path: "projectType",
+          select: "_id slug title",
         }),
       req.query
     );
@@ -196,8 +223,9 @@ export const getProjects = async (req, res, next) => {
     // Modify the structure of the returned projects
     const modifiedProjects = projects.map((project) => ({
       ...project.toObject(),
-      cityId: project.cityId._id, // Modify the cityId field to be cityId: "the city Id"
-      developerId: project.developerId._id, // Modify the developerId field to be developerId: "the developer Id"
+      cityId: project.cityId.slug, // Modify the cityId field to be cityId: "the city Id"
+      developerId: project.developerId.slug, // Modify the developerId field to be developerId: "the developer Id"
+      projectType: project.projectType.slug, // Modify the developerId field to be developerId: "the developer Id"
     }));
 
     // Send the modified projects in the response

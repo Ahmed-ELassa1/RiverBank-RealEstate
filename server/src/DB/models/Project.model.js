@@ -38,6 +38,11 @@ const projectSchema = new Schema(
       ref: "City",
       require: [true, "City is required"],
     },
+    projectType: {
+      type: Types.ObjectId,
+      ref: "ProjectType",
+      required: [true, "Project Type is required"],
+    },
     developerId: {
       type: Types.ObjectId,
       ref: "Developer",
