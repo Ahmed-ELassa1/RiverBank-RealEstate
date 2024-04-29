@@ -18,16 +18,36 @@ class ApiFeatures {
   }
   // filtering
   filter() {
-    let excludeQuery = { ...this.data };
-    const includedQueries = ["page", "size", "sort", "fields", "search"];
-    includedQueries.forEach((e) => {
-      delete excludeQuery[e];
-    });
-    const filter = JSON.stringify(excludeQuery).replaceAll(
-      /(gt|gte|lte|lt|eq|in|nin|ne)/g,
-      (match) => `$${match}`
-    );
-    this.mongooseQuery = this.mongooseQuery.find(JSON.parse(filter));
+    // let excludeQuery = { ...this.data };
+    // const includedQueries = ["page", "size", "sort", "fields", "search"];
+    // includedQueries.forEach((e) => {
+    //   delete excludeQuery[e];
+    // });
+    // const filter = JSON.stringify(excludeQuery).replaceAll(
+    //   /(gt|gte|lte|lt|eq|in|nin|ne)/g,
+    //   (match) => `$${match}`
+    // );
+    // this.mongooseQuery = this.mongooseQuery.find(JSON.parse(filter));
+    // return this;
+    const { page, size, sort, fields, search, ...filters } = this.data;
+
+    const filterObj = { ...filters };
+
+    // Convert filter values to MongoDB query operators
+    for (const key in filterObj) {
+      if (Object.hasOwnProperty.call(filterObj, key)) {
+        // Check if the field is 'cityId' or 'title' for specific handling
+        if (key === "cityId") {
+          filterObj[key] = filterObj[key]; // Perform exact match on cityId
+        } else if (key === "title") {
+          filterObj[key] = { $regex: new RegExp(filterObj[key], "i") }; // Case-insensitive regex search on title
+        } else {
+          filterObj[key] = { $regex: new RegExp(filterObj[key], "i") }; // Case-insensitive regex search on other fields
+        }
+      }
+    }
+
+    this.mongooseQuery = this.mongooseQuery.find(filterObj);
     return this;
   }
   //sort
@@ -49,11 +69,9 @@ class ApiFeatures {
   //search
   search() {
     if (this.data?.search) {
+      const searchRegex = new RegExp(this.data.search, "i"); // Case-insensitive search
       this.mongooseQuery = this.mongooseQuery.find({
-        $or: [
-          { name: { $regex: this.data.search } },
-          { title: { $regex: this.data.search } },
-        ],
+        $or: [{ cityId: this.data.search }, { title: { $regex: searchRegex } }],
       });
     }
     return this;
