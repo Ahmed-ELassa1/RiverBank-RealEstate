@@ -51,9 +51,6 @@ const projectSchema = new Schema(
       type: Object,
       require: [true, "Main Image is required"],
     },
-    projectType: {
-      type: String,
-    },
     seoData: String,
     projectDescriptions: [
       {

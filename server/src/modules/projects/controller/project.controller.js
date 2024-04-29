@@ -207,10 +207,10 @@ export const getProjects = async (req, res, next) => {
           path: "developerId",
           select: "_id slug",
         })
-        .populate({
-          path: "projectType",
-          select: "_id slug title",
-        }),
+      .populate({
+        path: "projectType",
+        select: "_id slug",
+      }),
       req.query
     );
 
