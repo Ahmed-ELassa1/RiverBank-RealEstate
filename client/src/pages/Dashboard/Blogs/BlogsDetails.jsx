@@ -1,5 +1,6 @@
 import {
   CloseCircleOutlined,
+  DeleteOutlined,
   LoadingOutlined,
   UploadOutlined,
 } from "@ant-design/icons";
@@ -11,6 +12,8 @@ import { Button, Input, Popconfirm, Upload } from "antd";
 import joi from "joi";
 import EditableRows from "../../../utils/EditableRows";
 import TextArea from "antd/es/input/TextArea";
+import { formats, modules } from "../../../data/sharedData";
+import ReactQuill from "react-quill";
 
 const BlogsDetails = () => {
   const params = useParams();
@@ -137,10 +140,14 @@ const BlogsDetails = () => {
   const mainImageProps = {
     onRemove: (file) => {
       setMainImage(null);
+      setData({ ...data, mainImage: "" });
+
       setIsEdited(true);
     },
     beforeUpload: (file) => {
       setMainImage(file);
+      setData({ ...data, mainImage: URL.createObjectURL(file) });
+
       setIsEdited(true);
 
       return false;
@@ -337,6 +344,21 @@ const BlogsDetails = () => {
     }
   };
 
+  const deleteSubImage = (item) => {
+    setIsEdited(true);
+
+    setData({
+      ...data,
+      subImages: data.subImages.filter(
+        (ele) => ele.secure_url !== item.secure_url
+      ),
+    });
+
+    setSubImgsObj((prev) =>
+      prev.filter((ele) => ele.secure_url !== item.secure_url)
+    );
+  };
+
   useEffect(() => {
     getBlogById();
   }, []);
@@ -380,12 +402,23 @@ const BlogsDetails = () => {
 
           <div className="form-input">
             <p>الوصف الرئيسي</p>
-            <TextArea
+            {/* <TextArea
               name="description"
               value={data.description}
               onChange={handleChange}
               size="large"
               rows={6}
+            /> */}
+            <ReactQuill
+              theme="snow"
+              value={data.description}
+              onChange={(e) => {
+                setIsEdited(true);
+                setData({ ...data, description: e });
+              }}
+              modules={modules}
+              formats={formats}
+              style={{ height: "250px", background: "#fff", overflow: "auto" }}
             />
             {formErros?.descriptionError != undefined && (
               <p className="input-error-message">
@@ -450,13 +483,15 @@ const BlogsDetails = () => {
 
           <div className="form-input">
             <p>الصورة الرئيسية</p>
-            <img
-              name="logo"
-              src={data.mainImage}
-              alt={data.mainImage}
-              width={250}
-              height={250}
-            />
+            {data.mainImage && (
+              <img
+                name="logo"
+                src={data.mainImage}
+                alt={data.mainImage}
+                width={250}
+                height={250}
+              />
+            )}
           </div>
 
           <div className="form-input">
@@ -472,15 +507,37 @@ const BlogsDetails = () => {
             <div style={{ display: "flex", gap: "10px" }}>
               {data?.subImages?.length > 0 &&
                 data?.subImages?.map((item, i) => (
-                  <img
-                    key={item?.public_id}
-                    name={i}
-                    src={item?.secure_url}
-                    alt={`img-${i}`}
-                    width={250}
-                    height={250}
-                    style={{ backgroundColor: "#EEE" }}
-                  />
+                  <div
+                    key={item.secure_url}
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      position: "relative",
+                    }}
+                  >
+                    <DeleteOutlined
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        right: 0,
+                        padding: "10px",
+                        background: "#fff",
+                        color: "red",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => deleteSubImage(item)}
+                    />
+
+                    <img
+                      key={item?.public_id}
+                      name={i}
+                      src={item?.secure_url}
+                      alt={`img-${i}`}
+                      width={250}
+                      height={250}
+                      style={{ backgroundColor: "#EEE" }}
+                    />
+                  </div>
                 ))}
             </div>
           </div>

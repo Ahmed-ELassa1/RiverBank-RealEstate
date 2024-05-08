@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
   CloseCircleOutlined,
+  DeleteOutlined,
   LoadingOutlined,
   UploadOutlined,
 } from "@ant-design/icons";
@@ -14,6 +15,8 @@ import { CityService } from "../../../services/City/CityService";
 import { ProjectTypesService } from "../../../services/ProjectTypesService/ProjectTypesService";
 import { DevelopersService } from "../../../services/Developers/DevelopersService";
 import EditableRows from "../../../utils/EditableRows";
+import ReactQuill from "react-quill";
+import { formats, modules } from "../../../data/sharedData";
 
 const ProjectsDetails = () => {
   const params = useParams();
@@ -37,22 +40,6 @@ const ProjectsDetails = () => {
 
   const token = localStorage.getItem("token");
   const projectInstance = new ProjectsService(token);
-
-  const logoProps = {
-    onRemove: (file) => {
-      setMainImage(null);
-      setMainImageError("");
-      setIsEdited(true);
-    },
-    beforeUpload: (file) => {
-      setMainImage(file);
-      setMainImageError("");
-      setIsEdited(true);
-
-      return false;
-    },
-    mainImage,
-  };
 
   const [data, setData] = useState({
     title: "",
@@ -83,6 +70,26 @@ const ProjectsDetails = () => {
       return false;
     },
     fileList,
+  };
+
+  const logoProps = {
+    onRemove: (file) => {
+      setMainImage(null);
+      setMainImageError("");
+      setData({ ...data, mainImage: "" });
+
+      setIsEdited(true);
+    },
+    beforeUpload: (file) => {
+      setMainImage(file);
+      setMainImageError("");
+      setData({ ...data, mainImage: URL.createObjectURL(file) });
+
+      setIsEdited(true);
+
+      return false;
+    },
+    mainImage,
   };
 
   const [formErros, setFormErros] = useState({
@@ -346,6 +353,7 @@ const ProjectsDetails = () => {
     if (isEdited) {
       const valid = validation();
       if (valid?.error?.details) {
+        console.log(valid);
         setFormErros({
           titleError: valid?.error?.details?.find(
             (error) => error?.context?.label == "title"
@@ -548,6 +556,21 @@ const ProjectsDetails = () => {
     getProjectById();
   }, []);
 
+  const deleteSubImage = (item) => {
+    setIsEdited(true);
+
+    setData({
+      ...data,
+      subImages: data.subImages.filter(
+        (ele) => ele.secure_url !== item.secure_url
+      ),
+    });
+
+    setSubImgsObj((prev) =>
+      prev.filter((ele) => ele.secure_url !== item.secure_url)
+    );
+  };
+
   return (
     <div>
       <div className="form-input-btn">
@@ -588,12 +611,27 @@ const ProjectsDetails = () => {
 
             <div className="form-input">
               <p>الوصف</p>
-              <TextArea
+              {/* <TextArea
                 name="mainDescription"
                 value={data.mainDescription}
                 onChange={handleChange}
                 size="large"
                 rows={4}
+              /> */}
+              <ReactQuill
+                theme="snow"
+                value={data.mainDescription}
+                onChange={(e) => {
+                  setIsEdited(true);
+                  setData({ ...data, mainDescription: e });
+                }}
+                modules={modules}
+                formats={formats}
+                style={{
+                  height: "250px",
+                  background: "#fff",
+                  overflow: "auto",
+                }}
               />
               {formErros?.mainDescriptionError != undefined && (
                 <p className="input-error-message">
@@ -707,14 +745,16 @@ const ProjectsDetails = () => {
 
             <div className="form-input">
               <p>الصورة البارزة للمقال</p>
-              <img
-                name="mainImage"
-                src={data.mainImage}
-                alt={data.mainImage}
-                width={250}
-                height={250}
-                style={{ backgroundColor: "#eee" }}
-              />
+              {data.mainImage && (
+                <img
+                  name="mainImage"
+                  src={data.mainImage}
+                  alt={data.mainImage}
+                  width={250}
+                  height={250}
+                  style={{ backgroundColor: "#eee" }}
+                />
+              )}
             </div>
 
             <div className="form-input">
@@ -738,15 +778,36 @@ const ProjectsDetails = () => {
               <div style={{ display: "flex", gap: "10px" }}>
                 {data.subImages.length > 0 &&
                   data.subImages?.map((item, i) => (
-                    <img
+                    <div
                       key={item.secure_url}
-                      name={`img-${i}`}
-                      src={item.secure_url}
-                      alt={`img-${i}`}
-                      width={250}
-                      height={250}
-                      style={{ backgroundColor: "#eee" }}
-                    />
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        position: "relative",
+                      }}
+                    >
+                      <DeleteOutlined
+                        style={{
+                          position: "absolute",
+                          top: 0,
+                          right: 0,
+                          padding: "10px",
+                          background: "#fff",
+                          color: "red",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => deleteSubImage(item)}
+                      />
+
+                      <img
+                        name={`img-${i}`}
+                        src={item.secure_url}
+                        alt={`img-${i}`}
+                        width={250}
+                        height={250}
+                        style={{ backgroundColor: "#eee" }}
+                      />
+                    </div>
                   ))}
               </div>
             </div>

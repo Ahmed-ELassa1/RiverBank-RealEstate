@@ -7,6 +7,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { UserProvider } from "./contexts/UserContext";
 import i18n from "./contexts/i18Configration";
+import "react-quill/dist/quill.snow.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

@@ -1,5 +1,6 @@
 import {
   CloseCircleOutlined,
+  DeleteOutlined,
   LoadingOutlined,
   UploadOutlined,
 } from "@ant-design/icons";
@@ -10,6 +11,8 @@ import { DevelopersService } from "../../../services/Developers/DevelopersServic
 import { toast } from "react-toastify";
 import joi from "joi";
 import EditableRows from "../../../utils/EditableRows";
+import { formats, modules } from "../../../data/sharedData";
+import ReactQuill from "react-quill";
 
 const DevelopersDetails = () => {
   const params = useParams();
@@ -156,11 +159,13 @@ const DevelopersDetails = () => {
     onRemove: (file) => {
       setMainImage(null);
       setIsEdited(true);
+      setData({ ...data, logo: "" });
 
       setMainImageError("");
     },
     beforeUpload: (file) => {
       setMainImage(file);
+      setData({ ...data, logo: URL.createObjectURL(file) });
       setIsEdited(true);
 
       setMainImageError("");
@@ -211,7 +216,7 @@ const DevelopersDetails = () => {
       setData({
         title: data?.title,
         description: data?.mainDescription,
-        logo: data?.logo?.secure_url,
+        logo: data?.mainImage?.secure_url,
         subImages: data?.subImages,
       });
 
@@ -349,6 +354,21 @@ const DevelopersDetails = () => {
     }
   };
 
+  const deleteSubImage = (item) => {
+    setIsEdited(true);
+
+    setData({
+      ...data,
+      subImages: data.subImages.filter(
+        (ele) => ele.secure_url !== item.secure_url
+      ),
+    });
+
+    setSubImgsObj((prev) =>
+      prev.filter((ele) => ele.secure_url !== item.secure_url)
+    );
+  };
+
   useEffect(() => {
     getDeveloperById();
   }, []);
@@ -392,11 +412,22 @@ const DevelopersDetails = () => {
 
           <div className="form-input">
             <p>الوصف الرئيسي</p>
-            <Input
+            {/* <Input
               name="description"
               value={data.description}
               onChange={handleChange}
               size="large"
+            /> */}
+            <ReactQuill
+              theme="snow"
+              value={data.description}
+              onChange={(e) => {
+                setIsEdited(true);
+                setData({ ...data, description: e });
+              }}
+              modules={modules}
+              formats={formats}
+              style={{ height: "250px", background: "#fff", overflow: "auto" }}
             />
             {formErros?.descriptionError != undefined && (
               <p className="input-error-message">
@@ -461,14 +492,16 @@ const DevelopersDetails = () => {
 
           <div className="form-input">
             <p>Logo</p>
-            <img
-              name="logo"
-              src={data.logo}
-              alt={"img-main"}
-              width={250}
-              height={250}
-              style={{ backgroundColor: "#eee" }}
-            />
+            {data.logo && (
+              <img
+                name="logo"
+                src={data.logo}
+                alt={"img-main"}
+                width={250}
+                height={250}
+                style={{ backgroundColor: "#eee" }}
+              />
+            )}
           </div>
 
           <div className="form-input">
@@ -483,15 +516,37 @@ const DevelopersDetails = () => {
             <div style={{ display: "flex", gap: "10px" }}>
               {data.subImages.length > 0 &&
                 data.subImages?.map((item, i) => (
-                  <img
+                  <div
                     key={item.secure_url}
-                    name={`img-${i}`}
-                    src={item.secure_url}
-                    alt={`img-${i}`}
-                    width={250}
-                    height={250}
-                    style={{ backgroundColor: "#eee" }}
-                  />
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      position: "relative",
+                    }}
+                  >
+                    <DeleteOutlined
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        right: 0,
+                        padding: "10px",
+                        background: "#fff",
+                        color: "red",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => deleteSubImage(item)}
+                    />
+
+                    <img
+                      key={item.secure_url}
+                      name={`img-${i}`}
+                      src={item.secure_url}
+                      alt={`img-${i}`}
+                      width={250}
+                      height={250}
+                      style={{ backgroundColor: "#eee" }}
+                    />
+                  </div>
                 ))}
             </div>
           </div>

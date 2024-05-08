@@ -10,6 +10,8 @@ import TextArea from "antd/es/input/TextArea";
 import { CityService } from "../../../services/City/CityService";
 import { DevelopersService } from "../../../services/Developers/DevelopersService";
 import { ProjectTypesService } from "../../../services/ProjectTypesService/ProjectTypesService";
+import ReactQuill from "react-quill";
+import { formats, modules } from "../../../data/sharedData";
 
 const CreateProject = () => {
   const navigate = useNavigate();
@@ -464,12 +466,21 @@ const CreateProject = () => {
 
           <div className="form-input">
             <p> الوصف الرئيسي</p>
-            <Input
+            {/* <Input
               name="description"
               value={data.description}
               onChange={handleChange}
               size="large"
+            /> */}
+            <ReactQuill
+              theme="snow"
+              value={data.description}
+              onChange={(e) => setData({ ...data, description: e })}
+              modules={modules}
+              formats={formats}
+              style={{ height: "250px", background: "#fff", overflow: "auto" }}
             />
+
             {formErros?.descriptionError != undefined && (
               <p className="input-error-message">
                 <span>

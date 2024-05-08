@@ -7,6 +7,8 @@ import joi from "joi";
 import { CityService } from "../../../services/City/CityService";
 import { ProjectTypesService } from "../../../services/ProjectTypesService/ProjectTypesService";
 import EditableRows from "../../../utils/EditableRows";
+import { formats, modules } from "../../../data/sharedData";
+import ReactQuill from "react-quill";
 
 const CityDetails = () => {
   const params = useParams();
@@ -256,11 +258,23 @@ const CityDetails = () => {
 
           <div className="form-input">
             <p>الوصف</p>
-            <Input
+            {/* <Input
               name="description"
               value={data.description}
               onChange={handleChange}
               size="large"
+            /> */}
+
+            <ReactQuill
+              theme="snow"
+              value={data.description}
+              onChange={(e) => {
+                setIsEdited(true);
+                setData({ ...data, description: e });
+              }}
+              modules={modules}
+              formats={formats}
+              style={{ height: "250px", background: "#fff", overflow: "auto" }}
             />
             {formErros?.descriptionError != undefined && (
               <p className="input-error-message">
