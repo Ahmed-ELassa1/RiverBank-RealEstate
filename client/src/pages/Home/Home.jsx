@@ -12,6 +12,9 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { CityService } from "../../services/City/CityService";
 import { LoadingOutlined } from "@ant-design/icons";
 import { ProjectTypesService } from "../../services/ProjectTypesService/ProjectTypesService";
+import { Card } from "antd";
+import Meta from "antd/es/card/Meta";
+import { toast } from "react-toastify";
 
 const Home = () => {
   const Navigate = useNavigate();
@@ -29,6 +32,7 @@ const Home = () => {
   const [citiesData, setCitiesData] = useState([]);
   const [projectTypesData, setProjectTypesData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchLoading, setSearchLoading] = useState(false);
   const [formData, setFormData] = useState({
     project: searchParams.get("project") || "",
     city: searchParams.get("city") || "",
@@ -52,16 +56,17 @@ const Home = () => {
   }
   async function searchInProjects(e) {
     e.preventDefault();
+    setSearchLoading(true);
     let response;
-    if (formData.cityId != "" && formData.project == "") {
+    if (formData.city != "" && formData.project == "") {
       response = await projectService.getProjects({
         cityId: formData.city,
       });
-    } else if (formData.cityId == "" && formData.project != "") {
+    } else if (formData.city == "" && formData.project != "") {
       response = await projectService.getProjects({
         title: formData.project,
       });
-    } else if (formData.cityId == "" && formData.project == "") {
+    } else if (formData.city == "" && formData.project == "") {
       return;
     } else {
       response = await projectService.getProjects({
@@ -70,8 +75,12 @@ const Home = () => {
       });
     }
     if (response?.status == 200) {
-      setResultProjects(response?.data);
+      if (response?.data?.data?.length == 0) {
+        toast.error("لا يوجد مشاريع مماثلة");
+      }
+      setResultProjects(response?.data?.data);
     }
+    setSearchLoading(false);
   }
   useEffect(() => {
     getCities();
@@ -97,11 +106,20 @@ const Home = () => {
     setCostalProjects(coastalProjects?.splice(0, 3));
     setProjectCards(data);
   }
+  async function deleteSearchValues() {
+    setFormData({
+      project: "",
+      city: "",
+    });
+    setResultProjects([]);
+    Navigate("/");
+  }
   async function getProjectTypes() {
     const response = await projectTypesService.getProjectTypes();
     const data = response?.data?.data;
     setProjectTypesData(data);
   }
+  console.log(resultProjects);
   return (
     <div className="homepage">
       <div className="home home-bg">
@@ -163,30 +181,67 @@ const Home = () => {
           >
             {t("btn.search")}
           </button>
+          {resultProjects?.length > 0 && (
+            <button
+              type="submit"
+              onClick={deleteSearchValues}
+              className="home-clear-button"
+            >
+              حذف
+            </button>
+          )}
         </form>
       </div>
 
-      <HomeCities citiesData={citiesData} />
-      {resedinationalProjects?.length > 0 && (
-        <ResidentialProjects
-          resedinationalProjects={resedinationalProjects}
-          cities={citiesData}
-          projectTypesData={projectTypesData}
-        />
-      )}
-      {costalProjects?.length > 0 && (
-        <CoastalProjects
-          costalProjects={costalProjects}
-          cities={citiesData}
-          projectTypesData={projectTypesData}
-        />
-      )}
-      {commercialProjects?.length > 0 && (
-        <CommercialProjects
-          commercialProjects={commercialProjects}
-          cities={citiesData}
-          projectTypesData={projectTypesData}
-        />
+      {searchLoading ? (
+        <LoadingOutlined className="loadingIndicator" />
+      ) : resultProjects?.length > 0 ? (
+        resultProjects?.map((project) => {
+          return (
+            <div className="home-search-cards-container">
+              <div className="home-search-card" key={project._id}>
+                <Card
+                  onClick={() => Navigate(`/projects/${project._id}`)}
+                  hoverable
+                  className="dev-img"
+                  cover={
+                    <img
+                      alt={project.title}
+                      src={project?.mainImage?.secure_url}
+                    />
+                  }
+                >
+                  <Meta title={project.title} />
+                </Card>
+              </div>
+            </div>
+          );
+        })
+      ) : (
+        <>
+          <HomeCities citiesData={citiesData} />
+          {resedinationalProjects?.length > 0 && (
+            <ResidentialProjects
+              resedinationalProjects={resedinationalProjects}
+              cities={citiesData}
+              projectTypesData={projectTypesData}
+            />
+          )}
+          {costalProjects?.length > 0 && (
+            <CoastalProjects
+              costalProjects={costalProjects}
+              cities={citiesData}
+              projectTypesData={projectTypesData}
+            />
+          )}
+          {commercialProjects?.length > 0 && (
+            <CommercialProjects
+              commercialProjects={commercialProjects}
+              cities={citiesData}
+              projectTypesData={projectTypesData}
+            />
+          )}
+        </>
       )}
     </div>
   );
