@@ -66,12 +66,10 @@ export const updateProjectSchema = joi
     projectType: generalFields.id,
     slug: joi.string().required(),
     mainDescription: joi.string().required(),
-    mainImage: joi.array().items(
-      joi.object({
+    mainImage: joi.object({
         public_id: joi.string().required(),
         secure_url: joi.string().required(),
-      })
-    ),
+      }),
     projectDetails: joi
       .array()
       .items(
