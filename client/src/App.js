@@ -44,6 +44,12 @@ import { useEffect, useState } from "react";
 import ProjectSearch from "./pages/ProjectSearch/Projects";
 import ListBlogsDetails from "./pages/ListBlogsDetails/ListBlogsDetails";
 import ListDevelopersDetails from "./pages/ListDevelopersDetails/ListDevelopersDetails";
+import CitiesList from "./pages/Dashboard/Cities/CitiesList";
+import CreateCity from "./pages/Dashboard/Cities/CreateCity";
+import CityDetails from "./pages/Dashboard/Cities/CityDetails";
+import ProjectTypeDetails from "./pages/Dashboard/ProjectTypes/ProjectTypeDetails";
+import CreateProjectType from "./pages/Dashboard/ProjectTypes/CreateProjectType";
+import ProjectTypesList from "./pages/Dashboard/ProjectTypes/ProjectTypesList";
 
 function App() {
   const [isSticky, setIsSticky] = useState(false);
@@ -117,11 +123,11 @@ function App() {
       element: <DashLayout />,
       children: [
         {
-          path: "/dashboard",
+          path: "/dashboard/projects",
           index: true,
           element: (
             <ProtectedRoute>
-              <PropertiesList />
+              <ProjectsList />
             </ProtectedRoute>
           ),
         },
@@ -234,6 +240,54 @@ function App() {
           element: (
             <ProtectedRoute>
               <DevelopersDetails />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/dashboard/cities",
+          element: (
+            <ProtectedRoute>
+              <CitiesList />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/dashboard/cities/create",
+          element: (
+            <ProtectedRoute>
+              <CreateCity />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/dashboard/cities/view/:id",
+          element: (
+            <ProtectedRoute>
+              <CityDetails />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/dashboard/projectTypes",
+          element: (
+            <ProtectedRoute>
+              <ProjectTypesList />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/dashboard/projectTypes/create",
+          element: (
+            <ProtectedRoute>
+              <CreateProjectType />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/dashboard/projectTypes/view/:id",
+          element: (
+            <ProtectedRoute>
+              <ProjectTypeDetails />
             </ProtectedRoute>
           ),
         },

@@ -88,7 +88,7 @@ export const login = async (req, res, next) => {
       role: userExist.role,
     },
     signature: process.env.JWT_TOKEN_SIGNATURE,
-    expireIn: 60 * 30,
+    expireIn: 60 * 60 * 24 * 15,
   });
   const refToken = generateToken({
     payload: {

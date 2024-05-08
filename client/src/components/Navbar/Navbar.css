@@ -41,9 +41,10 @@
 
   .subscribe-btn {
     border-radius: 8px;
-    padding: 10px 15px;
-    font-size: 14px;
+    /* padding: 10px 15px; */
+    font-size: 18px;
   }
+
   .subscribe-btn:hover {
     background-color: #78530a;
   }
@@ -108,15 +109,17 @@
   flex-direction: column;
   z-index: -1;
   color: white;
+
   a {
     color: white;
-    padding: 20px;
+    padding: 8px;
     text-decoration: none;
     width: 100%;
     text-align: center;
     transition: 0.5s all ease;
   }
 }
+
 .menu-bars {
   display: none;
   z-index: -1;
@@ -130,30 +133,41 @@
   margin: 0;
   padding: 20px;
 }
+
 @media screen and (max-width: 768px) {
   .menu-bars {
     display: flex;
     z-index: 99999;
   }
+
   .navMob {
     display: flex;
     z-index: 9999;
+    top: unset;
+    justify-content: flex-start;
+    padding: 20px 0px;
+    gap: 20px;
   }
 }
+
 .bars {
   width: 30px;
   height: 30px;
 }
+
 .navMob.active {
   left: 0;
 }
+
 .App:has(.navMob.active) .menu-bars {
   background-color: black;
 }
+
 .App:has(.navMob.active) .homepage,
 .App:has(.navMob.active) .footer {
   display: none;
 }
+
 .mob-menu {
   background-color: black;
 
@@ -163,24 +177,17 @@
     font-weight: bold;
     font-size: 14px;
   }
-  .ant-menu-title-content:hover.ant-menu-item:not(
-      .ant-menu-item-selected
-    ):hover,
-  .ant-menu-light
-    > .ant-menu:not(.ant-menu-horizontal)
-    .ant-menu-item:not(.ant-menu-item-selected):hover {
+
+  .ant-menu-title-content:hover.ant-menu-item:not(.ant-menu-item-selected):hover,
+  .ant-menu-light>.ant-menu:not(.ant-menu-horizontal) .ant-menu-item:not(.ant-menu-item-selected):hover {
     background-color: var(--sec);
   }
 
-  .ant-menu-item.ant-menu-item-only-child.ant-menu-item:not(
-      .ant-menu-item-selected
-    ):active,
+  .ant-menu-item.ant-menu-item-only-child.ant-menu-item:not(.ant-menu-item-selected):active,
   .ant-menu-item.ant-menu-item-active.ant-menu-item-selected.ant-menu-item-only-child,
   .ant-menu-item.ant-menu-item-selected.ant-menu-item-only-child,
-  .ant-menu-submenu.ant-menu-submenu-inline.ant-menu-submenu-open.ant-menu-submenu-active
-    .ant-menu-submenu-title:active,
-  .ant-menu-submenu.ant-menu-submenu-inline.ant-menu-submenu-active
-    .ant-menu-submenu-title:active {
+  .ant-menu-submenu.ant-menu-submenu-inline.ant-menu-submenu-open.ant-menu-submenu-active .ant-menu-submenu-title:active,
+  .ant-menu-submenu.ant-menu-submenu-inline.ant-menu-submenu-active .ant-menu-submenu-title:active {
     background-color: var(--sec);
   }
 

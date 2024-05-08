@@ -73,7 +73,7 @@ const ClientInfoDetails = () => {
           className="subscribe-btn delete"
           style={{ backgroundColor: "rgb(203 60 60)" }}
         >
-          Delete
+          مسح
         </button>
       </div>
 

@@ -1,21 +1,23 @@
+import React, { useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   DeleteOutlined,
   EditOutlined,
   LoadingOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
-import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import { ClientRequestService } from "../../../services/ClientRequest/ClientRequestService";
 import { Button, Input, Space, Table } from "antd";
-import Highlighter from "react-highlight-words";
 import { toast } from "react-toastify";
+import Highlighter from "react-highlight-words";
+import { CityService } from "../../../services/City/CityService";
 
-const ClientInfoList = () => {
+const CitiesList = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
   const token = localStorage.getItem("token");
-  const clientInstance = new ClientRequestService(token);
+  const cityInstance = new CityService(token);
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
@@ -137,49 +139,46 @@ const ClientInfoList = () => {
     toast.loading("Loading...");
 
     try {
-      const response = await clientInstance.deleteClientRequest(_id);
+      const response = await cityInstance.deleteCity(_id);
 
       if (response.status === 200) {
         toast.dismiss();
         toast.success(` Deleted Successfully`);
 
-        getAllClientInfo();
+        getAllCities();
       }
     } catch (err) {
       toast.dismiss();
       toast.error(err);
     }
   };
+
   const columns = [
     {
-      title: "اسم المستخدم",
-      dataIndex: "userName",
-      key: "userName",
+      title: "العنوان",
+      dataIndex: "title",
+      key: "title",
       width: "30%",
-      ...getColumnSearchProps("userName"),
-      sorter: (a, b) => a.userName.length - b.userName.length,
+      ...getColumnSearchProps("title"),
+      sorter: (a, b) => a.title.length - b.title.length,
       sortDirections: ["descend", "ascend"],
     },
     {
-      title: "البريد الالكتروني",
-      dataIndex: "email",
-      key: "email",
+      title: "الكلمة المميزة (slug)",
+      dataIndex: "slug",
+      key: "slug",
       width: "20%",
-      ...getColumnSearchProps("email"),
-    },
-    {
-      title: "رقم الجوال",
-      dataIndex: "phone",
-      key: "phone",
-      ...getColumnSearchProps("phone"),
-      sorter: (a, b) => a.phone.length - b.phone.developers,
+      ...getColumnSearchProps("slug"),
+      sorter: (a, b) => a.slug.length - b.slug.length,
       sortDirections: ["descend", "ascend"],
     },
     {
-      title: "الرسالة",
-      dataIndex: "message",
-      key: "message",
-      ...getColumnSearchProps("message"),
+      title: "تاريخ الانشاء",
+      dataIndex: "createdAt",
+      key: "createdAt",
+      ...getColumnSearchProps("createdAt"),
+      sorter: (a, b) => a.createdAt.length - b.createdAt.length,
+      sortDirections: ["descend", "ascend"],
     },
     {
       title: "الاجراء",
@@ -199,27 +198,33 @@ const ClientInfoList = () => {
     },
   ];
 
-  const getAllClientInfo = async () => {
+  const getAllCities = async () => {
     try {
-      const response = await clientInstance.getClientRequest({
+      const response = await cityInstance.getCities({
         page: pageNumber,
         size: 10,
       });
       const data = await response.data.data;
-      setLoading(false);
       setData(data);
+      setLoading(false);
     } catch (err) {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    getAllClientInfo();
+    getAllCities();
   }, [pageNumber]);
 
   return (
     <div>
-      <h2 style={{ margin: "20px 0" }}>طلبات العملاء</h2>
+      <h2 style={{ margin: "20px 0" }}>المدن</h2>
+
+      <div className="form-input-btn">
+        <button className="subscribe-btn" onClick={() => navigate("create")}>
+          اضف جديد
+        </button>
+      </div>
 
       <Table columns={columns} dataSource={data} pagination={false} />
 
@@ -241,4 +246,4 @@ const ClientInfoList = () => {
   );
 };
 
-export default ClientInfoList;
+export default CitiesList;

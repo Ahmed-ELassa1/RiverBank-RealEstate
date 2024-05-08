@@ -295,7 +295,7 @@ const CreateProperty = () => {
 
       <div className="form-input">
         <p>Upload Main Image</p>
-        <Upload {...mainImageProps} maxCount={1}>
+        <Upload {...mainImageProps} maxCount={1} listType="picture">
           <Button icon={<UploadOutlined />}>Select File</Button>
         </Upload>
 
@@ -311,7 +311,7 @@ const CreateProperty = () => {
 
       <div className="form-input">
         <p>Upload Cover Images</p>
-        <Upload {...props} maxCount={3} multiple>
+        <Upload {...props} maxCount={3} multiple listType="picture">
           <Button icon={<UploadOutlined />}>Select File</Button>
         </Upload>
       </div>

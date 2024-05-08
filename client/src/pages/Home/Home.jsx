@@ -37,11 +37,13 @@ const Home = () => {
     const response = await cityService.getCities();
     const data = response?.data?.data;
     setCitiesData(data);
-    const options = data?.map((city) => {
-      return { label: city?.title, value: city?._id };
-    });
-    setLoading(false);
-    setCitiesOptions([{ label: "كل المدن", value: "" }, ...options]);
+    if (data?.length > 0) {
+      const options = data?.map((city) => {
+        return { label: city?.title, value: city?._id };
+      });
+      setLoading(false);
+      setCitiesOptions([{ label: "كل المدن", value: "" }, ...options]);
+    }
   }
   function handleFormInputs(e) {
     const clonedForm = { ...formData };
@@ -59,6 +61,8 @@ const Home = () => {
       response = await projectService.getProjects({
         title: formData.project,
       });
+    } else if (formData.cityId == "" && formData.project == "") {
+      return;
     } else {
       response = await projectService.getProjects({
         title: formData.project,
@@ -74,6 +78,7 @@ const Home = () => {
     getCityProjects();
     getProjectTypes();
   }, []);
+
   async function getCityProjects() {
     setProjectCards([]);
     const response = await projectService.getProjects();

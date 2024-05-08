@@ -1,10 +1,15 @@
-import { LoadingOutlined, UploadOutlined } from "@ant-design/icons";
-import { Button, Input, Upload } from "antd";
+import {
+  CloseCircleOutlined,
+  LoadingOutlined,
+  UploadOutlined,
+} from "@ant-design/icons";
+import { Button, Input, Popconfirm, Upload } from "antd";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { DevelopersService } from "../../../services/Developers/DevelopersService";
 import { toast } from "react-toastify";
 import joi from "joi";
+import EditableRows from "../../../utils/EditableRows";
 
 const DevelopersDetails = () => {
   const params = useParams();
@@ -17,23 +22,147 @@ const DevelopersDetails = () => {
 
   const token = localStorage.getItem("token");
   const developerInstance = new DevelopersService(token);
+  const [fileList, setFileList] = useState([]);
+  const [contentDataSource, setContentDataSource] = useState([]);
+  const [quesDataSource, setQuesDataSource] = useState([]);
+  const [descDataSource, setDescDataSource] = useState([]);
+  const [mainImgObj, setMainImgObj] = useState();
+  const [subImgsObj, setSubImgsObj] = useState();
 
   const [data, setData] = useState({
     title: "",
     logo: "",
+    description: "",
+    subImages: [],
   });
 
   const [formErros, setFormErros] = useState({
     titleError: undefined,
+    descriptionError: undefined,
   });
+
+  const defaultDetailsColumns = [
+    {
+      title: "المحتوي",
+      dataIndex: "question",
+      width: "30%",
+      editable: true,
+    },
+
+    {
+      title: "الاجراء",
+      dataIndex: "operation",
+      render: (_, record) =>
+        contentDataSource.length >= 1 ? (
+          <Popconfirm
+            title="هل انت متأكد من الحذف"
+            onConfirm={() => handleDeleteRow(record.key)}
+          >
+            <a>حذف</a>
+          </Popconfirm>
+        ) : null,
+    },
+  ];
+  const defaultDescColumns = [
+    {
+      title: "الوصف",
+      dataIndex: "question",
+      width: "30%",
+      editable: true,
+    },
+
+    {
+      title: "الاجراء",
+      dataIndex: "operation",
+      render: (_, record) =>
+        contentDataSource.length >= 1 ? (
+          <Popconfirm
+            title="هل انت متأكد من الحذف"
+            onConfirm={() => handleDeleteDescription(record.key)}
+          >
+            <a>حذف</a>
+          </Popconfirm>
+        ) : null,
+    },
+  ];
+  const defaultQuesColumns = [
+    {
+      title: "السؤال",
+      dataIndex: "question",
+      width: "30%",
+      editable: true,
+    },
+    {
+      title: "الاجابة",
+      dataIndex: "answer",
+      width: "30%",
+      editable: true,
+    },
+    {
+      title: "الاجراء",
+      dataIndex: "operation",
+      render: (_, record) =>
+        contentDataSource.length >= 1 ? (
+          <Popconfirm
+            title="هل انت متأكد من الحذف"
+            onConfirm={() => handleDeleteQuestion(record.key)}
+          >
+            <a>حذف</a>
+          </Popconfirm>
+        ) : null,
+    },
+  ];
+
+  const handleDeleteQuestion = (key) => {
+    setIsEdited(true);
+
+    const newData = quesDataSource.filter((item) => item.key !== key);
+    setQuesDataSource(newData);
+  };
+
+  const handleDeleteRow = (key) => {
+    setIsEdited(true);
+
+    const newData = contentDataSource.filter((item) => item.key !== key);
+    setContentDataSource(newData);
+  };
+
+  const handleDeleteDescription = (key) => {
+    setIsEdited(true);
+
+    const newData = descDataSource.filter((item) => item.key !== key);
+    setDescDataSource(newData);
+  };
+
+  const props = {
+    onRemove: (file) => {
+      const index = fileList.indexOf(file);
+      const newFileList = fileList.slice();
+      setIsEdited(true);
+
+      newFileList.splice(index, 1);
+      setFileList(newFileList);
+    },
+    beforeUpload: (file) => {
+      setFileList([...fileList, file]);
+      setIsEdited(true);
+
+      return false;
+    },
+    fileList,
+  };
 
   const logoProps = {
     onRemove: (file) => {
       setMainImage(null);
+      setIsEdited(true);
+
       setMainImageError("");
     },
     beforeUpload: (file) => {
       setMainImage(file);
+      setIsEdited(true);
+
       setMainImageError("");
 
       return false;
@@ -43,14 +172,18 @@ const DevelopersDetails = () => {
 
   function validation() {
     const schema = joi.object({
-      title: joi.string().min(2).max(20).required().messages({
-        "string.min": "min length is 2 char at least",
-        "string.max": "max length is 20 char",
+      title: joi.string().required().messages({
         "string.empty": "Title is a required field",
         "string.base": "Title is a required field",
         "any.required": "Title is a required field",
       }),
+      description: joi.string().required().messages({
+        "string.empty": "description is a required field",
+        "string.base": "description is a required field",
+        "any.required": "description is a required field",
+      }),
       logo: joi.optional(),
+      subImages: joi.optional(),
     });
     const valid = schema.validate(data, { abortEarly: false });
     return valid;
@@ -77,8 +210,33 @@ const DevelopersDetails = () => {
 
       setData({
         title: data?.title,
+        description: data?.mainDescription,
         logo: data?.logo?.secure_url,
+        subImages: data?.subImages,
       });
+
+      setMainImgObj(data.logo);
+      setSubImgsObj(data.subImages);
+
+      setContentDataSource(
+        data?.developerContent?.map((item) => {
+          return { key: Math.random(), question: item };
+        })
+      );
+      setDescDataSource(
+        data?.developerDescriptions?.map((item) => {
+          return { key: Math.random(), question: item };
+        })
+      );
+      setQuesDataSource(
+        data?.developerQuestions?.map((item) => {
+          return {
+            key: item?._id,
+            question: item.question,
+            answer: item?.answer,
+          };
+        })
+      );
     } catch (err) {
       setLoading(false);
       toast.error(err);
@@ -90,9 +248,13 @@ const DevelopersDetails = () => {
       const valid = validation();
 
       if (valid?.error?.details) {
+        console.log(valid);
         setFormErros({
           titleError: valid?.error?.details?.find(
             (error) => error?.context?.label === "title"
+          )?.message,
+          descriptionError: valid?.error?.details?.find(
+            (error) => error?.context?.label === "description"
           )?.message,
         });
       } else {
@@ -103,8 +265,51 @@ const DevelopersDetails = () => {
 
         const formData = new FormData();
 
-        mainImage && formData.append("logo", mainImage);
+        contentDataSource?.forEach((feat) => {
+          formData.append("developerContent", feat.question);
+        });
+
+        descDataSource?.forEach((feat, i) => {
+          formData.append(`developerDescriptions[${[i]}]`, feat.question);
+        });
+
+        quesDataSource?.forEach((feat, i) => {
+          formData.append(
+            `developerQuestions[${[i]}][question]`,
+            feat.question
+          );
+          formData.append(`developerQuestions[${[i]}][answer]`, feat.answer);
+        });
+
+        if (mainImage) {
+          formData.append("mainImage", mainImage);
+        } else {
+          formData.append("mainImage[public_id]", mainImgObj?.public_id);
+          formData.append("mainImage[secure_url]", mainImgObj?.secure_url);
+        }
+
+        if (fileList.length > 0 && subImgsObj?.length > 0) {
+          fileList?.forEach((feat) => {
+            formData.append("subImages", feat);
+          });
+
+          subImgsObj?.forEach((feat, i) => {
+            formData.append(`subImages[${[i]}][public_id]`, feat.public_id);
+            formData.append(`subImages[${[i]}][secure_url]`, feat.secure_url);
+          });
+        } else if (fileList.length > 0 && subImgsObj?.length === 0) {
+          fileList?.forEach((feat) => {
+            formData.append("subImages", feat);
+          });
+        } else {
+          subImgsObj?.forEach((feat, i) => {
+            formData.append(`subImages[${[i]}][public_id]`, feat.public_id);
+            formData.append(`subImages[${[i]}][secure_url]`, feat.secure_url);
+          });
+        }
+
         formData.append("title", data.title);
+        formData.append("mainDescription", data.description);
 
         try {
           const response = await developerInstance.EditDeveloper(id, formData);
@@ -156,10 +361,10 @@ const DevelopersDetails = () => {
           className="subscribe-btn delete"
           style={{ backgroundColor: "rgb(203 60 60)" }}
         >
-          Delete
+          مسح
         </button>
         <button type="submit" onClick={handleSave} className="subscribe-btn">
-          Save
+          حفظ
         </button>
       </div>
 
@@ -168,13 +373,90 @@ const DevelopersDetails = () => {
       {!loading && (
         <>
           <div className="form-input">
-            <p>Title</p>
+            <p>العنوان</p>
             <Input
               name="title"
               value={data.title}
               onChange={handleChange}
               size="large"
             />
+            {formErros?.titleError != undefined && (
+              <p className="input-error-message">
+                <span>
+                  <CloseCircleOutlined className="input-error-icon" />
+                </span>
+                {formErros?.titleError}
+              </p>
+            )}
+          </div>
+
+          <div className="form-input">
+            <p>الوصف الرئيسي</p>
+            <Input
+              name="description"
+              value={data.description}
+              onChange={handleChange}
+              size="large"
+            />
+            {formErros?.descriptionError != undefined && (
+              <p className="input-error-message">
+                <span>
+                  <CloseCircleOutlined className="input-error-icon" />
+                </span>
+                {formErros?.descriptionError}
+              </p>
+            )}
+          </div>
+
+          <div className="form-input">
+            <p>محتوي المطور</p>
+            <EditableRows
+              dataSource={contentDataSource}
+              setDataSource={setContentDataSource}
+              defaultColumns={defaultDetailsColumns}
+            />
+            {contentDataSource.length === 0 && (
+              <p className="input-error-message">
+                <span>
+                  <CloseCircleOutlined className="input-error-icon" />
+                </span>
+                Developer Content is a required field
+              </p>
+            )}
+          </div>
+
+          <div className="form-input">
+            <p>استفسارات حول المطور</p>
+            <EditableRows
+              dataSource={quesDataSource}
+              setDataSource={setQuesDataSource}
+              defaultColumns={defaultQuesColumns}
+            />
+            {quesDataSource.length === 0 && (
+              <p className="input-error-message">
+                <span>
+                  <CloseCircleOutlined className="input-error-icon" />
+                </span>
+                Developer Questions is a required field
+              </p>
+            )}
+          </div>
+
+          <div className="form-input">
+            <p>وصف المطور</p>
+            <EditableRows
+              dataSource={descDataSource}
+              setDataSource={setDescDataSource}
+              defaultColumns={defaultDescColumns}
+            />
+            {descDataSource.length === 0 && (
+              <p className="input-error-message">
+                <span>
+                  <CloseCircleOutlined className="input-error-icon" />
+                </span>
+                Developer Description is a required field
+              </p>
+            )}
           </div>
 
           <div className="form-input">
@@ -182,16 +464,42 @@ const DevelopersDetails = () => {
             <img
               name="logo"
               src={data.logo}
-              alt={data.logo}
+              alt={"img-main"}
               width={250}
               height={250}
+              style={{ backgroundColor: "#eee" }}
             />
           </div>
 
           <div className="form-input">
             <p>Upload Logo</p>
-            <Upload {...logoProps} maxCount={1}>
+            <Upload {...logoProps} maxCount={1} listType="picture">
               <Button icon={<UploadOutlined />}>Select File</Button>
+            </Upload>
+          </div>
+
+          <div className="form-input">
+            <p>الصورة الفرعية </p>
+            <div style={{ display: "flex", gap: "10px" }}>
+              {data.subImages.length > 0 &&
+                data.subImages?.map((item, i) => (
+                  <img
+                    key={item.secure_url}
+                    name={`img-${i}`}
+                    src={item.secure_url}
+                    alt={`img-${i}`}
+                    width={250}
+                    height={250}
+                    style={{ backgroundColor: "#eee" }}
+                  />
+                ))}
+            </div>
+          </div>
+
+          <div className="form-input">
+            <p>الصور الفرعية</p>
+            <Upload {...props} multiple listType="picture">
+              <Button icon={<UploadOutlined />}>اختر صور</Button>
             </Upload>
           </div>
         </>

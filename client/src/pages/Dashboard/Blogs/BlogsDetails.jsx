@@ -7,8 +7,10 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { BlogsServices } from "../../../services/Blogs/BlogsServices";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button, Input, Upload } from "antd";
+import { Button, Input, Popconfirm, Upload } from "antd";
 import joi from "joi";
+import EditableRows from "../../../utils/EditableRows";
+import TextArea from "antd/es/input/TextArea";
 
 const BlogsDetails = () => {
   const params = useParams();
@@ -18,6 +20,104 @@ const BlogsDetails = () => {
   const [mainImage, setMainImage] = useState(null);
   const [isEdited, setIsEdited] = useState(false);
   const [fileList, setFileList] = useState([]);
+  const [contentDataSource, setContentDataSource] = useState([]);
+  const [quesDataSource, setQuesDataSource] = useState([]);
+  const [descDataSource, setDescDataSource] = useState([]);
+  const [subImgsObj, setSubImgsObj] = useState();
+  const [mainImgObj, setMainImgObj] = useState();
+
+  const defaultDetailsColumns = [
+    {
+      title: "المحتوي",
+      dataIndex: "question",
+      width: "30%",
+      editable: true,
+    },
+
+    {
+      title: "الاجراء",
+      dataIndex: "operation",
+      render: (_, record) =>
+        contentDataSource.length >= 1 ? (
+          <Popconfirm
+            title="هل انت متأكد من الحذف"
+            onConfirm={() => handleDeleteRow(record.key)}
+          >
+            <a>حذف</a>
+          </Popconfirm>
+        ) : null,
+    },
+  ];
+  const defaultDescColumns = [
+    {
+      title: "الوصف",
+      dataIndex: "question",
+      width: "30%",
+      editable: true,
+    },
+
+    {
+      title: "الاجراء",
+      dataIndex: "operation",
+      render: (_, record) =>
+        contentDataSource.length >= 1 ? (
+          <Popconfirm
+            title="هل انت متأكد من الحذف"
+            onConfirm={() => handleDeleteDescription(record.key)}
+          >
+            <a>حذف</a>
+          </Popconfirm>
+        ) : null,
+    },
+  ];
+  const defaultQuesColumns = [
+    {
+      title: "السؤال",
+      dataIndex: "question",
+      width: "30%",
+      editable: true,
+    },
+    {
+      title: "الاجابة",
+      dataIndex: "answer",
+      width: "30%",
+      editable: true,
+    },
+    {
+      title: "الاجراء",
+      dataIndex: "operation",
+      render: (_, record) =>
+        contentDataSource.length >= 1 ? (
+          <Popconfirm
+            title="هل انت متأكد من الحذف"
+            onConfirm={() => handleDeleteQuestion(record.key)}
+          >
+            <a>حذف</a>
+          </Popconfirm>
+        ) : null,
+    },
+  ];
+
+  const handleDeleteQuestion = (key) => {
+    setIsEdited(true);
+
+    const newData = quesDataSource.filter((item) => item.key !== key);
+    setQuesDataSource(newData);
+  };
+
+  const handleDeleteRow = (key) => {
+    setIsEdited(true);
+
+    const newData = contentDataSource.filter((item) => item.key !== key);
+    setContentDataSource(newData);
+  };
+
+  const handleDeleteDescription = (key) => {
+    setIsEdited(true);
+
+    const newData = descDataSource.filter((item) => item.key !== key);
+    setDescDataSource(newData);
+  };
 
   const token = localStorage.getItem("token");
   const blogInstance = new BlogsServices(token);
@@ -37,9 +137,12 @@ const BlogsDetails = () => {
   const mainImageProps = {
     onRemove: (file) => {
       setMainImage(null);
+      setIsEdited(true);
     },
     beforeUpload: (file) => {
       setMainImage(file);
+      setIsEdited(true);
+
       return false;
     },
     mainImage,
@@ -50,10 +153,14 @@ const BlogsDetails = () => {
       const index = fileList.indexOf(file);
       const newFileList = fileList.slice();
       newFileList.splice(index, 1);
+      setIsEdited(true);
+
       setFileList(newFileList);
     },
     beforeUpload: (file) => {
       setFileList([...fileList, file]);
+      setIsEdited(true);
+
       return false;
     },
     fileList,
@@ -61,16 +168,12 @@ const BlogsDetails = () => {
 
   function validation() {
     const schema = joi.object({
-      title: joi.string().min(2).max(20).required().messages({
-        "string.min": "min length is 2 char at least",
-        "string.max": "max length is 20 char",
+      title: joi.string().required().messages({
         "string.empty": "Title is a required field",
         "string.base": "Title is a required field",
         "any.required": "Title is a required field",
       }),
-      description: joi.string().min(2).max(20).required().messages({
-        "string.min": "min length is 2 char at least",
-        "string.max": "max length is 20 char",
+      description: joi.string().required().messages({
         "string.empty": "Description is a required field",
         "string.base": "Description is a required field",
         "any.required": "Description is a required field",
@@ -103,10 +206,32 @@ const BlogsDetails = () => {
 
       setData({
         title: data?.title,
-        description: data?.description,
+        description: data?.mainDescription,
         mainImage: data?.mainImage?.secure_url,
         subImages: data?.subImages,
       });
+      setMainImgObj(data?.mainImage);
+      setSubImgsObj(data?.subImages);
+
+      setContentDataSource(
+        data?.blogContent?.map((item) => {
+          return { key: Math.random(), question: item };
+        })
+      );
+      setDescDataSource(
+        data?.blogDescriptions?.map((item) => {
+          return { key: Math.random(), question: item };
+        })
+      );
+      setQuesDataSource(
+        data?.blogQuestions?.map((item) => {
+          return {
+            key: item?._id,
+            question: item.question,
+            answer: item?.answer,
+          };
+        })
+      );
     } catch (err) {
       setLoading(false);
       toast.error(err);
@@ -117,6 +242,7 @@ const BlogsDetails = () => {
     if (isEdited) {
       const valid = validation();
       if (valid?.error?.details) {
+        console.log(valid);
         setFormErros({
           titleError: valid?.error?.details?.find(
             (error) => error?.context?.label === "title"
@@ -130,13 +256,48 @@ const BlogsDetails = () => {
 
         const formData = new FormData();
 
-        fileList?.forEach((feat) => {
-          formData.append("subImages", feat);
+        if (fileList.length > 0 && subImgsObj?.length > 0) {
+          fileList?.forEach((feat) => {
+            formData.append("subImages", feat);
+          });
+
+          subImgsObj?.forEach((feat, i) => {
+            formData.append(`subImages[${[i]}][public_id]`, feat.public_id);
+            formData.append(`subImages[${[i]}][secure_url]`, feat.secure_url);
+          });
+        } else if (fileList.length > 0 && subImgsObj?.length === 0) {
+          fileList?.forEach((feat) => {
+            formData.append("subImages", feat);
+          });
+        } else {
+          subImgsObj?.forEach((feat, i) => {
+            formData.append(`subImages[${[i]}][public_id]`, feat.public_id);
+            formData.append(`subImages[${[i]}][secure_url]`, feat.secure_url);
+          });
+        }
+
+        if (mainImage) {
+          formData.append("mainImage", mainImage);
+        } else {
+          formData.append("mainImage[public_id]", mainImgObj.public_id);
+          formData.append("mainImage[secure_url]", mainImgObj.secure_url);
+        }
+
+        contentDataSource?.forEach((feat) => {
+          formData.append("blogContent", feat.question);
         });
 
-        mainImage && formData.append("mainImage", mainImage);
+        descDataSource?.forEach((feat, i) => {
+          formData.append(`blogDescriptions[${[i]}]`, feat.question);
+        });
+
+        quesDataSource?.forEach((feat, i) => {
+          formData.append(`blogQuestions[${[i]}][question]`, feat.question);
+          formData.append(`blogQuestions[${[i]}][answer]`, feat.answer);
+        });
+
         formData.append("title", data.title);
-        formData.append("description", data.description);
+        formData.append("mainDescription", data.description);
 
         try {
           const response = await blogInstance.EditBlog(id, formData);
@@ -188,10 +349,10 @@ const BlogsDetails = () => {
           className="subscribe-btn delete"
           style={{ backgroundColor: "rgb(203 60 60)" }}
         >
-          Delete
+          مسح
         </button>
         <button type="submit" onClick={handleSave} className="subscribe-btn">
-          Save
+          حفظ
         </button>
       </div>
 
@@ -200,7 +361,7 @@ const BlogsDetails = () => {
       {!loading && (
         <>
           <div className="form-input">
-            <p>Title</p>
+            <p>العنوان</p>
             <Input
               name="title"
               value={data.title}
@@ -218,12 +379,13 @@ const BlogsDetails = () => {
           </div>
 
           <div className="form-input">
-            <p>Description</p>
-            <Input
+            <p>الوصف الرئيسي</p>
+            <TextArea
               name="description"
               value={data.description}
               onChange={handleChange}
               size="large"
+              rows={6}
             />
             {formErros?.descriptionError != undefined && (
               <p className="input-error-message">
@@ -236,7 +398,58 @@ const BlogsDetails = () => {
           </div>
 
           <div className="form-input">
-            <p>Main Image</p>
+            <p>محتوي المقالة</p>
+            <EditableRows
+              dataSource={contentDataSource}
+              setDataSource={setContentDataSource}
+              defaultColumns={defaultDetailsColumns}
+            />
+            {contentDataSource.length === 0 && (
+              <p className="input-error-message">
+                <span>
+                  <CloseCircleOutlined className="input-error-icon" />
+                </span>
+                Blog Content is a required field
+              </p>
+            )}
+          </div>
+
+          <div className="form-input">
+            <p>استفسارات حول المقالة</p>
+            <EditableRows
+              dataSource={quesDataSource}
+              setDataSource={setQuesDataSource}
+              defaultColumns={defaultQuesColumns}
+            />
+            {quesDataSource.length === 0 && (
+              <p className="input-error-message">
+                <span>
+                  <CloseCircleOutlined className="input-error-icon" />
+                </span>
+                Blog Questions is a required field
+              </p>
+            )}
+          </div>
+
+          <div className="form-input">
+            <p>وصف المقالة</p>
+            <EditableRows
+              dataSource={descDataSource}
+              setDataSource={setDescDataSource}
+              defaultColumns={defaultDescColumns}
+            />
+            {descDataSource.length === 0 && (
+              <p className="input-error-message">
+                <span>
+                  <CloseCircleOutlined className="input-error-icon" />
+                </span>
+                Blog Description is a required field
+              </p>
+            )}
+          </div>
+
+          <div className="form-input">
+            <p>الصورة الرئيسية</p>
             <img
               name="logo"
               src={data.mainImage}
@@ -247,32 +460,34 @@ const BlogsDetails = () => {
           </div>
 
           <div className="form-input">
-            <p>Upload Main Image</p>
-            <Upload {...mainImageProps} maxCount={1}>
+            <p>اختر صورة</p>
+            <Upload {...mainImageProps} maxCount={1} listType="picture">
               <Button icon={<UploadOutlined />}>Select File</Button>
             </Upload>
           </div>
 
           <div className="form-input">
-            <p>Sub Images</p>
+            <p>الصور الفرعية</p>
 
             <div style={{ display: "flex", gap: "10px" }}>
-              {data?.subImages?.map((item) => (
-                <img
-                  key={item?.public_id}
-                  name="sub"
-                  src={item?.secure_url}
-                  alt={item?.secure_url}
-                  width={250}
-                  height={250}
-                />
-              ))}
+              {data?.subImages?.length > 0 &&
+                data?.subImages?.map((item, i) => (
+                  <img
+                    key={item?.public_id}
+                    name={i}
+                    src={item?.secure_url}
+                    alt={`img-${i}`}
+                    width={250}
+                    height={250}
+                    style={{ backgroundColor: "#EEE" }}
+                  />
+                ))}
             </div>
           </div>
 
           <div className="form-input">
-            <p>Upload Sub Images</p>
-            <Upload {...props} multiple>
+            <p>اختر صور</p>
+            <Upload {...props} multiple listType="picture">
               <Button icon={<UploadOutlined />}>Select File</Button>
             </Upload>
           </div>

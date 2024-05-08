@@ -1,25 +1,28 @@
+import React, { useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   DeleteOutlined,
   EditOutlined,
   LoadingOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
-import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import { ClientRequestService } from "../../../services/ClientRequest/ClientRequestService";
 import { Button, Input, Space, Table } from "antd";
-import Highlighter from "react-highlight-words";
 import { toast } from "react-toastify";
+import Highlighter from "react-highlight-words";
+import { CityService } from "../../../services/City/CityService";
+import { ProjectTypesService } from "../../../services/ProjectTypesService/ProjectTypesService";
 
-const ClientInfoList = () => {
+const ProjectTypesList = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  const [pageNumber, setPaegNumber] = useState(1);
+
   const token = localStorage.getItem("token");
-  const clientInstance = new ClientRequestService(token);
+  const projectTypeInstance = new ProjectTypesService(token);
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
-  const [pageNumber, setPaegNumber] = useState(1);
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
@@ -137,49 +140,38 @@ const ClientInfoList = () => {
     toast.loading("Loading...");
 
     try {
-      const response = await clientInstance.deleteClientRequest(_id);
+      const response = await projectTypeInstance.deleteProjectType(_id);
 
       if (response.status === 200) {
         toast.dismiss();
-        toast.success(` Deleted Successfully`);
+        toast.success(`Deleted Successfully`);
 
-        getAllClientInfo();
+        getProjectTypes();
       }
     } catch (err) {
       toast.dismiss();
       toast.error(err);
     }
   };
+
   const columns = [
     {
-      title: "اسم المستخدم",
-      dataIndex: "userName",
-      key: "userName",
+      title: "العنوان",
+      dataIndex: "title",
+      key: "title",
       width: "30%",
-      ...getColumnSearchProps("userName"),
-      sorter: (a, b) => a.userName.length - b.userName.length,
+      ...getColumnSearchProps("title"),
+      sorter: (a, b) => a.title.length - b.title.length,
       sortDirections: ["descend", "ascend"],
     },
     {
-      title: "البريد الالكتروني",
-      dataIndex: "email",
-      key: "email",
-      width: "20%",
-      ...getColumnSearchProps("email"),
-    },
-    {
-      title: "رقم الجوال",
-      dataIndex: "phone",
-      key: "phone",
-      ...getColumnSearchProps("phone"),
-      sorter: (a, b) => a.phone.length - b.phone.developers,
+      title: "تاريخ الانشاء",
+      dataIndex: "createdAt",
+      key: "createdAt",
+      width: "30%",
+      ...getColumnSearchProps("createdAt"),
+      sorter: (a, b) => a.createdAt.length - b.createdAt.length,
       sortDirections: ["descend", "ascend"],
-    },
-    {
-      title: "الرسالة",
-      dataIndex: "message",
-      key: "message",
-      ...getColumnSearchProps("message"),
     },
     {
       title: "الاجراء",
@@ -199,27 +191,33 @@ const ClientInfoList = () => {
     },
   ];
 
-  const getAllClientInfo = async () => {
+  const getProjectTypes = async () => {
     try {
-      const response = await clientInstance.getClientRequest({
+      const response = await projectTypeInstance.getProjectTypes({
         page: pageNumber,
         size: 10,
       });
       const data = await response.data.data;
-      setLoading(false);
       setData(data);
+      setLoading(false);
     } catch (err) {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    getAllClientInfo();
+    getProjectTypes();
   }, [pageNumber]);
 
   return (
     <div>
-      <h2 style={{ margin: "20px 0" }}>طلبات العملاء</h2>
+      <h2 style={{ margin: "20px 0" }}>انواع المشروعات</h2>
+
+      <div className="form-input-btn">
+        <button className="subscribe-btn" onClick={() => navigate("create")}>
+          اضف جديد
+        </button>
+      </div>
 
       <Table columns={columns} dataSource={data} pagination={false} />
 
@@ -241,4 +239,4 @@ const ClientInfoList = () => {
   );
 };
 
-export default ClientInfoList;
+export default ProjectTypesList;

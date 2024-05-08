@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./Login.css";
 import Logo from "../../assets/logoTxt.png";
 import Logoimg from "../../assets/logoImg.png";
 import EmailIcon from "../../components/Icons/Email";
@@ -9,6 +8,7 @@ import { UsersService } from "../../services/Users/UsersService";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import joi from "joi";
+import "./Login.css";
 
 const Login = () => {
   const loginInstance = new UsersService();
@@ -16,7 +16,7 @@ const Login = () => {
 
   const [data, setData] = useState({
     email: "ahmedhamed2150@gmail.com",
-    password: "1234",
+    password: "123",
   });
 
   const [formErros, setFormErros] = useState({
@@ -79,25 +79,25 @@ const Login = () => {
       try {
         const response = await loginInstance.login(data);
 
-        if (response.status === 200) {
+        if (response?.status === 200) {
           localStorage.setItem("token", response?.data?.token);
           localStorage.setItem("refreshToken", response?.data?.refToken);
 
           toast.dismiss();
           toast.success(`You are successfully logged in`);
 
-          navigate("/dashboard");
+          navigate("/dashboard/projects");
         }
       } catch (err) {
-        console.log(err);
         toast.dismiss();
+        toast.error("حدث خطا ,  برجاء المحاولة مجددا");
       }
     }
   };
 
   return (
     <div className="login-page">
-      <div className="form_container">
+      <form className="form_container" onSubmit={handleLogin}>
         <div className="logo_container">
           <img src={Logoimg} alt="riverBank" />
           <img src={Logo} alt="riverBankTxt" />
@@ -165,12 +165,7 @@ const Login = () => {
             </p>
           )}
         </div>
-        <button
-          onClick={handleLogin}
-          title="Sign In"
-          type="submit"
-          className="sign-in_btn"
-        >
+        <button title="Sign In" type="submit" className="sign-in_btn">
           <span>Sign In</span>
         </button>
 
@@ -187,13 +182,13 @@ const Login = () => {
         </button> */}
         <button
           title="Forgot Password?"
-          // type="submit"
+          type="button"
           className="sign-in_apl"
           onClick={() => navigate("/forgotPassword")}
         >
           <span>Forgot Password?</span>
         </button>
-      </div>
+      </form>
     </div>
   );
 };
