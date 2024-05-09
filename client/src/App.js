@@ -89,7 +89,7 @@ function App() {
       path: "/",
       element: <MainLayout />,
       children: [
-        { path: "/", index: true, element: <Home /> },
+        { path: "/", element: <Home /> },
         { path: "/home", element: <Home /> },
         { path: "/search", element: <ProjectSearch /> },
         { path: "/cities/:cityId", element: <Cities /> },
@@ -295,7 +295,7 @@ function App() {
     },
   ]);
   return (
-    <>
+    <div className="App">
       <RouterProvider router={routers} />
       <ToastContainer
         limit={6}
@@ -306,7 +306,7 @@ function App() {
         pauseOnHover
         position="top-right"
       />
-    </>
+    </div>
   );
 }
 

@@ -11,13 +11,13 @@ import "react-quill/dist/quill.snow.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <I18nextProvider i18n={i18n}>
-      <UserProvider>
-        <App />
-      </UserProvider>
-    </I18nextProvider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <I18nextProvider i18n={i18n}>
+    <UserProvider>
+      <App />
+    </UserProvider>
+  </I18nextProvider>
+  // </React.StrictMode>
 );
 
 reportWebVitals();
