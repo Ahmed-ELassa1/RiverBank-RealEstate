@@ -11,6 +11,11 @@
   --sections-header-bg: #cbc7c759;
 }
 
+:where(.css-dev-only-do-not-override-usln0u).ant-pagination .ant-pagination-item-active {
+  display: flex;
+  justify-content: center;
+}
+
 * {
   font-family: "Cairo", Sans-serif;
 }

@@ -1,0 +1,8 @@
+.dash-content {
+    .ant-table-cell {
+        width: 15%;
+    }
+    .ant-table-cell:first-child {
+        width: 85%;
+    }
+}

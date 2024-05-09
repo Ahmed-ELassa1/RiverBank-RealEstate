@@ -41,8 +41,8 @@
 
   .subscribe-btn {
     border-radius: 8px;
-    /* padding: 10px 15px; */
-    font-size: 18px;
+    padding: 10px 15px;
+    font-size: 14px;
   }
 
   .subscribe-btn:hover {
