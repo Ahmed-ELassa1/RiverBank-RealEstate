@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/riverBank-realEstate/static/css/main.7e289068.css",
-    "main.js": "/riverBank-realEstate/static/js/main.32819a3d.js",
-    "static/js/453.3871fd0a.chunk.js": "/riverBank-realEstate/static/js/453.3871fd0a.chunk.js",
+    "main.js": "/riverBank-realEstate/static/js/main.e53ef338.js",
+    "static/js/453.478c7cb0.chunk.js": "/riverBank-realEstate/static/js/453.478c7cb0.chunk.js",
     "static/media/city.avif": "/riverBank-realEstate/static/media/city.25c109ff79206eec8f2b.avif",
     "static/media/props.avif": "/riverBank-realEstate/static/media/props.a19e5c4ec6d25d2ca1f6.avif",
     "static/media/cairo.avif": "/riverBank-realEstate/static/media/cairo.da9c2600b73aebfb494a.avif",
@@ -19,13 +19,13 @@
     "static/media/logoImg.png": "/riverBank-realEstate/static/media/logoImg.58e4842c570f8ee03a9d.png",
     "static/media/logoTxt.png": "/riverBank-realEstate/static/media/logoTxt.3048aadf4c276299bbd2.png",
     "index.html": "/riverBank-realEstate/index.html",
-    "static/media/getFetch.cjs": "/riverBank-realEstate/static/media/getFetch.40f37ddea2378391108f.cjs",
+    "static/media/getFetch.cjs": "/riverBank-realEstate/static/media/getFetch.c4cca45e22bc1b2c7d0d.cjs",
     "main.7e289068.css.map": "/riverBank-realEstate/static/css/main.7e289068.css.map",
-    "main.32819a3d.js.map": "/riverBank-realEstate/static/js/main.32819a3d.js.map",
-    "453.3871fd0a.chunk.js.map": "/riverBank-realEstate/static/js/453.3871fd0a.chunk.js.map"
+    "main.e53ef338.js.map": "/riverBank-realEstate/static/js/main.e53ef338.js.map",
+    "453.478c7cb0.chunk.js.map": "/riverBank-realEstate/static/js/453.478c7cb0.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7e289068.css",
-    "static/js/main.32819a3d.js"
+    "static/js/main.e53ef338.js"
   ]
 }
