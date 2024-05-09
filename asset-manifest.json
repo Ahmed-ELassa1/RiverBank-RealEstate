@@ -1,35 +1,31 @@
 {
   "files": {
-    "main.css": "/riverBank/static/css/main.9c7f5e05.css",
-    "main.js": "/riverBank/static/js/main.b441a9e1.js",
-    "static/js/453.512f9272.chunk.js": "/riverBank/static/js/453.512f9272.chunk.js",
+    "main.css": "/riverBank/static/css/main.c1bb1795.css",
+    "main.js": "/riverBank/static/js/main.6880312e.js",
+    "static/js/453.a7fa1d97.chunk.js": "/riverBank/static/js/453.a7fa1d97.chunk.js",
     "static/media/city.avif": "/riverBank/static/media/city.25c109ff79206eec8f2b.avif",
     "static/media/props.avif": "/riverBank/static/media/props.a19e5c4ec6d25d2ca1f6.avif",
     "static/media/cairo.avif": "/riverBank/static/media/cairo.da9c2600b73aebfb494a.avif",
+    "static/media/Cairo-VariableFont.ttf": "/riverBank/static/media/Cairo-VariableFont.32b01d6a21d9433a251c.ttf",
     "static/media/projects.avif": "/riverBank/static/media/projects.cf7b1140700463018851.avif",
     "static/media/blogs.avif": "/riverBank/static/media/blogs.b16e3692f3a592bfd9ed.avif",
     "static/media/facade.webp": "/riverBank/static/media/facade.8156ee22e623e343798f.webp",
     "static/media/blog1.jpeg": "/riverBank/static/media/blog1.59f82c143985efcb12ab.jpeg",
     "static/media/developers.avif": "/riverBank/static/media/developers.f6419b4897cbf61387ff.avif",
     "static/media/contactUs.jpg": "/riverBank/static/media/contactUs.29645a02581ec7795f98.jpg",
-    "static/media/fp2.jpg": "/riverBank/static/media/fp2.0a3dcaedd7c89665084a.jpg",
     "static/media/blog3.jpeg": "/riverBank/static/media/blog3.f117ae302c8c0d0c4fc3.jpeg",
     "static/media/ASQ.jpeg": "/riverBank/static/media/ASQ.2118dd4894aa0e40eeb0.jpeg",
-    "static/media/fp4.jpeg": "/riverBank/static/media/fp4.5afed7366a96274a3721.jpeg",
     "static/media/blog2.jpeg": "/riverBank/static/media/blog2.0af4f3df47dd3e176a00.jpeg",
-    "static/media/contact.jpg": "/riverBank/static/media/contact.56c579ed3c4ee1306b5f.jpg",
-    "static/media/fp1.jpg": "/riverBank/static/media/fp1.ef0dc868de1c62d2152e.jpg",
     "static/media/logoImg.png": "/riverBank/static/media/logoImg.58e4842c570f8ee03a9d.png",
-    "static/media/fp3.jpg": "/riverBank/static/media/fp3.8d78370f17019ad47947.jpg",
     "static/media/logoTxt.png": "/riverBank/static/media/logoTxt.3048aadf4c276299bbd2.png",
     "index.html": "/riverBank/index.html",
     "static/media/getFetch.cjs": "/riverBank/static/media/getFetch.40f37ddea2378391108f.cjs",
-    "main.9c7f5e05.css.map": "/riverBank/static/css/main.9c7f5e05.css.map",
-    "main.b441a9e1.js.map": "/riverBank/static/js/main.b441a9e1.js.map",
-    "453.512f9272.chunk.js.map": "/riverBank/static/js/453.512f9272.chunk.js.map"
+    "main.c1bb1795.css.map": "/riverBank/static/css/main.c1bb1795.css.map",
+    "main.6880312e.js.map": "/riverBank/static/js/main.6880312e.js.map",
+    "453.a7fa1d97.chunk.js.map": "/riverBank/static/js/453.a7fa1d97.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9c7f5e05.css",
-    "static/js/main.b441a9e1.js"
+    "static/css/main.c1bb1795.css",
+    "static/js/main.6880312e.js"
   ]
 }
