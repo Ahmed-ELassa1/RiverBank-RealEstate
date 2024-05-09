@@ -163,5 +163,43 @@ export const egyptianCities = [
   { value: "ashmun", label: "Ashmun" },
   { value: "faiyum", label: "Faiyum" },
   { value: "dairut", label: "Dairut" },
-  { value: "edfu", label: "Edfu" }
+  { value: "edfu", label: "Edfu" },
 ];
+
+export const formats = [
+  "header",
+  "font",
+  "size",
+  "bold",
+  "italic",
+  "underline",
+  "strike",
+  "blockquote",
+  "list",
+  "bullet",
+  "indent",
+  "link",
+  "image",
+  "video",
+];
+
+export const modules = {
+  toolbar: [
+    [{ header: [1, 2, 3, false] }],
+    [{ size: [] }],
+    ["bold", "italic", "underline", "strike", "blockquote"],
+    [
+      { list: "ordered" },
+      { list: "bullet" },
+      { indent: "-1" },
+      { indent: "+1" },
+    ],
+    ["link", "image", "video"],
+    ["clean"],
+    ["emoji"],
+  ],
+  clipboard: {
+    // toggle to add extra line breaks when pasting HTML:
+    matchVisual: false,
+  },
+};

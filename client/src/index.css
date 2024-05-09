@@ -192,14 +192,14 @@ button {
 
 .ant-menu-submenu-open:hover .ant-menu-submenu::after,
 .ant-menu-submenu:hover::after,
-.ant-menu>.ant-menu-item:hover,
-.ant-menu>.ant-menu-submenu:hover,
-.ant-menu>.ant-menu-item-active,
-.ant-menu>.ant-menu-submenu-active,
-.ant-menu>.ant-menu-item-open,
-.ant-menu>.ant-menu-submenu-open,
-.ant-menu>.ant-menu-item-selected,
-.ant-menu>.ant-menu-submenu-selected {
+.ant-menu > .ant-menu-item:hover,
+.ant-menu > .ant-menu-submenu:hover,
+.ant-menu > .ant-menu-item-active,
+.ant-menu > .ant-menu-submenu-active,
+.ant-menu > .ant-menu-item-open,
+.ant-menu > .ant-menu-submenu-open,
+.ant-menu > .ant-menu-item-selected,
+.ant-menu > .ant-menu-submenu-selected {
   border-color: var(--sec) !important;
 }
 
@@ -333,4 +333,14 @@ button {
       width: 100%;
     }
   }
+}
+.ql-container .ql-editor {
+  text-align: start;
+}
+.quill .ql-toolbar.ql-snow .ql-picker-label {
+  padding-right: 20px;
+}
+.quill .ql-editor li:not(.ql-direction-rtl)::before {
+  margin-right: 0.5em;
+  margin-left: 0.5em;
 }

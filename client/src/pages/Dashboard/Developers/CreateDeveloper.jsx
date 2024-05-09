@@ -6,6 +6,8 @@ import { Button, Input, Popconfirm, Upload } from "antd";
 import { CloseCircleOutlined, UploadOutlined } from "@ant-design/icons";
 import joi from "joi";
 import EditableRows from "../../../utils/EditableRows";
+import { formats, modules } from "../../../data/sharedData";
+import ReactQuill from "react-quill";
 
 const CreateDeveloper = () => {
   const navigate = useNavigate();
@@ -260,11 +262,19 @@ const CreateDeveloper = () => {
 
       <div className="form-input">
         <p>الوصف الرئيسي</p>
-        <Input
+        {/* <Input
           name="description"
           value={data.description}
           onChange={handleChange}
           size="large"
+        /> */}
+        <ReactQuill
+          theme="snow"
+          value={data.description}
+          onChange={(e) => setData({ ...data, description: e })}
+          modules={modules}
+          formats={formats}
+          style={{ height: "250px", background: "#fff", overflow: "auto" }}
         />
         {formErros?.descriptionError != undefined && (
           <p className="input-error-message">

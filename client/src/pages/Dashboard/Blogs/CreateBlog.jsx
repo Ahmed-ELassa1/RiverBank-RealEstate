@@ -7,6 +7,8 @@ import { CloseCircleOutlined, UploadOutlined } from "@ant-design/icons";
 import joi from "joi";
 import EditableRows from "../../../utils/EditableRows";
 import TextArea from "antd/es/input/TextArea";
+import ReactQuill from "react-quill";
+import { formats, modules } from "../../../data/sharedData";
 
 const CreateBlog = () => {
   const navigate = useNavigate();
@@ -15,6 +17,7 @@ const CreateBlog = () => {
   const [contentDataSource, setContentDataSource] = useState([]);
   const [quesDataSource, setQuesDataSource] = useState([]);
   const [descDataSource, setDescDataSource] = useState([]);
+  const [value, setValue] = useState("");
 
   const defaultDetailsColumns = [
     {
@@ -143,16 +146,12 @@ const CreateBlog = () => {
 
   function validation() {
     const schema = joi.object({
-      title: joi.string().min(2).max(20).required().messages({
-        "string.min": "min length is 2 char at least",
-        "string.max": "max length is 20 char",
+      title: joi.string().required().messages({
         "string.empty": "Title is a required field",
         "string.base": "Title is a required field",
         "any.required": "Title is a required field",
       }),
-      description: joi.string().min(2).max(20).required().messages({
-        "string.min": "min length is 2 char at least",
-        "string.max": "max length is 20 char",
+      description: joi.string().required().messages({
         "string.empty": "Description is a required field",
         "string.base": "Description is a required field",
         "any.required": "Description is a required field",
@@ -193,7 +192,7 @@ const CreateBlog = () => {
         formData.append("blogContent", feat.question);
       });
 
-      descDataSource?.forEach((feat,i) => {
+      descDataSource?.forEach((feat, i) => {
         formData.append(`blogDescriptions[${[i]}]`, feat.question);
       });
 
@@ -250,13 +249,22 @@ const CreateBlog = () => {
 
       <div className="form-input">
         <p>الوصف الرئيسي</p>
-        <TextArea
+        {/* <TextArea
           name="description"
           value={data.description}
           onChange={handleChange}
           size="large"
           rows={6}
+        /> */}
+        <ReactQuill
+          theme="snow"
+          value={data.description}
+          onChange={(e) => setData({ ...data, description: e })}
+          modules={modules}
+          formats={formats}
+          style={{ height: "250px", background: "#fff", overflow: "auto" }}
         />
+
         {formErros?.descriptionError != undefined && (
           <p className="input-error-message">
             <span>
