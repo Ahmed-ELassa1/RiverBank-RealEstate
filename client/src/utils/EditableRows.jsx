@@ -130,8 +130,6 @@ const EditableRows = ({ dataSource, setDataSource, defaultColumns }) => {
     };
   });
 
-  // console.log(dataSource);
-
   return (
     <div>
       <Button

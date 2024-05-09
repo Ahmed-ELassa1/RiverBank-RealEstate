@@ -100,7 +100,10 @@ const ProjectDetails = ({ isSticky }) => {
             )}
             {/* main description */}
             <div className="project-details-main-desc-section">
-              {data?.mainDescription}
+              <div
+                style={{ padding: "0 30px" }}
+                dangerouslySetInnerHTML={{ __html: data?.mainDescription }}
+              />
             </div>
             {/* details sections */}
             <div className="details-descriptions-section-container">
@@ -141,7 +144,11 @@ const ProjectDetails = ({ isSticky }) => {
                       {data?.subImages?.length > i && (
                         <img src={data?.subImages[i]?.secure_url} />
                       )}
-                      <p>{projectDescription}</p>
+                      {/* <p>{projectDescription}</p> */}
+                      <div
+                        style={{ padding: "0 30px" }}
+                        dangerouslySetInnerHTML={{ __html: projectDescription }}
+                      />
                     </div>
                   );
                 })}

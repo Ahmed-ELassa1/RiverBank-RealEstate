@@ -101,12 +101,13 @@ const ProjectsDetails = () => {
     {
       title: "المحتوي",
       dataIndex: "question",
-      width: "30%",
+      // width: "30%",
       editable: true,
     },
 
     {
       title: "الاجراء",
+      width: "10%",
       dataIndex: "operation",
       render: (_, record) =>
         contentDataSource.length >= 1 ? (
@@ -123,17 +124,18 @@ const ProjectsDetails = () => {
     {
       title: "الوصف",
       dataIndex: "question",
-      width: "30%",
+      // width: "30%",
       editable: true,
     },
     {
       title: "الخاصية",
       dataIndex: "answer",
-      width: "30%",
+      // width: "30%",
       editable: true,
     },
     {
       title: "الاجراء",
+      width: "10%",
       dataIndex: "operation",
       render: (_, record) =>
         detailsDataSource.length >= 1 ? (
@@ -150,11 +152,12 @@ const ProjectsDetails = () => {
     {
       title: "الوصف",
       dataIndex: "question",
-      width: "30%",
+      // width: "30%",
       editable: true,
     },
     {
       title: "الاجراء",
+      width: "10%",
       dataIndex: "operation",
       render: (_, record) =>
         descDataSource.length >= 1 ? (
@@ -171,17 +174,18 @@ const ProjectsDetails = () => {
     {
       title: "السؤال",
       dataIndex: "question",
-      width: "30%",
+      // width: "40%",
       editable: true,
     },
     {
       title: "الاجابة",
       dataIndex: "answer",
-      width: "30%",
+      // width: "40%",
       editable: true,
     },
     {
       title: "الاجراء",
+      width: "10%",
       dataIndex: "operation",
       render: (_, record) =>
         quesDataSource.length >= 1 ? (
@@ -353,7 +357,6 @@ const ProjectsDetails = () => {
     if (isEdited) {
       const valid = validation();
       if (valid?.error?.details) {
-        console.log(valid);
         setFormErros({
           titleError: valid?.error?.details?.find(
             (error) => error?.context?.label == "title"

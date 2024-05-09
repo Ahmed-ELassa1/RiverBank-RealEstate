@@ -119,7 +119,6 @@ const Home = () => {
     const data = response?.data?.data;
     setProjectTypesData(data);
   }
-  console.log(resultProjects);
   return (
     <div className="homepage">
       <div className="home home-bg">

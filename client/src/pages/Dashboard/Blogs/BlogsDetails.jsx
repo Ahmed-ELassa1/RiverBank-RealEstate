@@ -33,12 +33,13 @@ const BlogsDetails = () => {
     {
       title: "المحتوي",
       dataIndex: "question",
-      width: "30%",
+      // width: "30%",
       editable: true,
     },
 
     {
       title: "الاجراء",
+      width: "10%",
       dataIndex: "operation",
       render: (_, record) =>
         contentDataSource.length >= 1 ? (
@@ -55,12 +56,13 @@ const BlogsDetails = () => {
     {
       title: "الوصف",
       dataIndex: "question",
-      width: "30%",
+      // width: "30%",
       editable: true,
     },
 
     {
       title: "الاجراء",
+      width: "10%",
       dataIndex: "operation",
       render: (_, record) =>
         contentDataSource.length >= 1 ? (
@@ -77,17 +79,18 @@ const BlogsDetails = () => {
     {
       title: "السؤال",
       dataIndex: "question",
-      width: "30%",
+      // width: "30%",
       editable: true,
     },
     {
       title: "الاجابة",
       dataIndex: "answer",
-      width: "30%",
+      // width: "30%",
       editable: true,
     },
     {
       title: "الاجراء",
+      width: "10%",
       dataIndex: "operation",
       render: (_, record) =>
         contentDataSource.length >= 1 ? (
@@ -249,7 +252,6 @@ const BlogsDetails = () => {
     if (isEdited) {
       const valid = validation();
       if (valid?.error?.details) {
-        console.log(valid);
         setFormErros({
           titleError: valid?.error?.details?.find(
             (error) => error?.context?.label === "title"

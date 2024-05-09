@@ -23,12 +23,13 @@ const CreateBlog = () => {
     {
       title: "المحتوي",
       dataIndex: "question",
-      width: "30%",
+      // width: "30%",
       editable: true,
     },
 
     {
       title: "الاجراء",
+      width: "10%",
       dataIndex: "operation",
       render: (_, record) =>
         contentDataSource.length >= 1 ? (
@@ -45,12 +46,13 @@ const CreateBlog = () => {
     {
       title: "الوصف",
       dataIndex: "question",
-      width: "30%",
+      // width: "30%",
       editable: true,
     },
 
     {
       title: "الاجراء",
+      width: "10%",
       dataIndex: "operation",
       render: (_, record) =>
         contentDataSource.length >= 1 ? (
@@ -67,17 +69,18 @@ const CreateBlog = () => {
     {
       title: "السؤال",
       dataIndex: "question",
-      width: "30%",
+      // width: "30%",
       editable: true,
     },
     {
       title: "الاجابة",
       dataIndex: "answer",
-      width: "30%",
+      // width: "30%",
       editable: true,
     },
     {
       title: "الاجراء",
+      width: "10%",
       dataIndex: "operation",
       render: (_, record) =>
         contentDataSource.length >= 1 ? (

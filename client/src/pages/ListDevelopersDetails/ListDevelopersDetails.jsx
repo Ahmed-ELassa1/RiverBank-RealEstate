@@ -54,7 +54,7 @@ const ListDevelopersDetails = ({ isSticky }) => {
                 alt={data?.seoData}
                 className="projectImg"
               />
-            </div>  
+            </div>
             {/*project content summery*/}
             {data?.developerContent?.length > 0 && (
               <div className="project-details-content-headers">
@@ -77,7 +77,13 @@ const ListDevelopersDetails = ({ isSticky }) => {
             )}
             {/* main description */}
             <div className="project-details-main-desc-section">
-              {data?.mainDescription}
+              {/* {data?.mainDescription} */}
+              <div
+                style={{ padding: "0 30px" }}
+                dangerouslySetInnerHTML={{
+                  __html: data?.mainDescription,
+                }}
+              />
             </div>
             {/* details sections */}
             <div className="details-descriptions-section-container">
@@ -88,7 +94,13 @@ const ListDevelopersDetails = ({ isSticky }) => {
                       {data?.subImages?.length > i && (
                         <img src={data?.subImages[i]?.secure_url} />
                       )}
-                      <p>{developerDescriptions}</p>
+                      {/* <p>{developerDescriptions}</p> */}
+                      <div
+                        style={{ padding: "0 30px" }}
+                        dangerouslySetInnerHTML={{
+                          __html: developerDescriptions,
+                        }}
+                      />
                     </div>
                   );
                 })}

@@ -158,7 +158,7 @@ const ProjectsList = () => {
       title: "العنوان",
       dataIndex: "title",
       key: "title",
-      width: "30%",
+      // width: "30%",
       ...getColumnSearchProps("title"),
       sorter: (a, b) => a.title.length - b.title.length,
       sortDirections: ["descend", "ascend"],
@@ -167,7 +167,7 @@ const ProjectsList = () => {
       title: "المدن",
       dataIndex: "cityId",
       key: "cityId",
-      width: "20%",
+      // width: "20%",
       ...getColumnSearchProps("cityId"),
       sorter: (a, b) => a.cityId.length - b.cityId.length,
       sortDirections: ["descend", "ascend"],
@@ -184,7 +184,7 @@ const ProjectsList = () => {
       title: "الاجراء",
       key: "operation",
       fixed: "right",
-      width: 100,
+      width: "10%",
       render: ({ _id }) => (
         <div className="actions">
           <button onClick={() => handleDelete(_id)}>

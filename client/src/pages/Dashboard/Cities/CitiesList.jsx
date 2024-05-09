@@ -158,7 +158,7 @@ const CitiesList = () => {
       title: "العنوان",
       dataIndex: "title",
       key: "title",
-      width: "30%",
+      // width: "30%",
       ...getColumnSearchProps("title"),
       sorter: (a, b) => a.title.length - b.title.length,
       sortDirections: ["descend", "ascend"],
@@ -167,7 +167,7 @@ const CitiesList = () => {
       title: "الكلمة المميزة (slug)",
       dataIndex: "slug",
       key: "slug",
-      width: "20%",
+      // width: "20%",
       ...getColumnSearchProps("slug"),
       sorter: (a, b) => a.slug.length - b.slug.length,
       sortDirections: ["descend", "ascend"],
@@ -182,9 +182,9 @@ const CitiesList = () => {
     },
     {
       title: "الاجراء",
+      width: "10%",
       key: "operation",
       fixed: "right",
-      width: 100,
       render: ({ _id }) => (
         <div className="actions">
           <button onClick={() => handleDelete(_id)}>

@@ -94,7 +94,13 @@ const ListBlogsDetails = ({ isSticky }) => {
             )}
             {/* main description */}
             <div className="project-details-main-desc-section">
-              {data?.mainDescription}
+              {/* {data?.mainDescription} */}
+              <div
+                style={{ padding: "0 30px" }}
+                dangerouslySetInnerHTML={{
+                  __html: data?.mainDescription,
+                }}
+              />
             </div>
             {/* details sections */}
             <div className="details-descriptions-section-container">
@@ -108,7 +114,13 @@ const ListBlogsDetails = ({ isSticky }) => {
                           alt={data?.title}
                         />
                       )}
-                      <p>{blogDescription}</p>
+                      {/* <p>{blogDescription}</p> */}
+                      <div
+                        style={{ padding: "0 30px" }}
+                        dangerouslySetInnerHTML={{
+                          __html: blogDescription,
+                        }}
+                      />
                     </div>
                   );
                 })}

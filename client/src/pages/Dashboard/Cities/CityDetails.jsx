@@ -190,7 +190,7 @@ const CityDetails = () => {
     {
       title: "السؤال",
       dataIndex: "question",
-      width: "30%",
+      // width: "30%",
       editable: true,
     },
     {
@@ -201,6 +201,7 @@ const CityDetails = () => {
 
     {
       title: "الاجراء",
+      width: "10%",
       dataIndex: "operation",
       render: (_, record) =>
         dataSource.length >= 1 ? (

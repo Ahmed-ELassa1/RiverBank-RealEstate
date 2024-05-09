@@ -155,7 +155,7 @@ const ClientInfoList = () => {
       title: "اسم المستخدم",
       dataIndex: "userName",
       key: "userName",
-      width: "30%",
+      // width: "30%",
       ...getColumnSearchProps("userName"),
       sorter: (a, b) => a.userName.length - b.userName.length,
       sortDirections: ["descend", "ascend"],
@@ -164,7 +164,7 @@ const ClientInfoList = () => {
       title: "البريد الالكتروني",
       dataIndex: "email",
       key: "email",
-      width: "20%",
+      // width: "20%",
       ...getColumnSearchProps("email"),
     },
     {
@@ -183,6 +183,7 @@ const ClientInfoList = () => {
     },
     {
       title: "الاجراء",
+      width: "10%",
       key: "operation",
       fixed: "right",
       width: 100,

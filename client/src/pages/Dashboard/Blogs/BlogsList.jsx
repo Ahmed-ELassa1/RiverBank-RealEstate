@@ -140,7 +140,7 @@ const BlogsList = () => {
       title: "العنوان",
       dataIndex: "title",
       key: "title",
-      width: "30%",
+      // width: "30%",
       ...getColumnSearchProps("title"),
       sorter: (a, b) => a.title.length - b.title.length,
       sortDirections: ["descend", "ascend"],
@@ -149,7 +149,7 @@ const BlogsList = () => {
       title: "المحتوي",
       dataIndex: "blogContent",
       key: "blogContent",
-      width: "30%",
+      // width: "30%",
       ...getColumnSearchProps("blogContent"),
       sorter: (a, b) => a.blogContent.length - b.blogContent.length,
       sortDirections: ["descend", "ascend"],
@@ -169,7 +169,7 @@ const BlogsList = () => {
       title: "تاريخ الانشاء",
       dataIndex: "createdAt",
       key: "createdAt",
-      width: "30%",
+      // width: "30%",
       ...getColumnSearchProps("createdAt"),
       sorter: (a, b) => a.createdAt.length - b.createdAt.length,
       sortDirections: ["descend", "ascend"],
@@ -178,7 +178,7 @@ const BlogsList = () => {
       title: "الاجراء",
       key: "operation",
       fixed: "right",
-      width: 100,
+      width: "10%",
       render: ({ _id }) => (
         <div className="actions">
           <button onClick={() => handleDelete(_id)}>
