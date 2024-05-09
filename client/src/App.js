@@ -1,10 +1,4 @@
-import {
-  Route,
-  RouterProvider,
-  Routes,
-  createBrowserRouter,
-  createHashRouter,
-} from "react-router-dom";
+import { RouterProvider, createHashRouter } from "react-router-dom";
 
 import MainLayout from "./layouts/MainLayout";
 import DashLayout from "./layouts/DashLayout/DashLayout";
