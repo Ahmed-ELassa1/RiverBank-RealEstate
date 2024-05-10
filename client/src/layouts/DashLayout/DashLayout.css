@@ -77,11 +77,13 @@
   .dashLayout .sidebar {
     display: none;
   }
-  .dashLayout .menu-bars {
+
+  .App:has(.dashLayout .navMob.active) .menu-bars {
     display: flex;
     z-index: 100;
+    background-color: white;
   }
-  .dashLayout .navMob {
+  .dashLayout .navMob.active {
     display: flex;
     z-index: 99;
     background-color: var(--main);
