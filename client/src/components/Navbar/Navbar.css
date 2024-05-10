@@ -137,17 +137,18 @@
 @media screen and (max-width: 768px) {
   .menu-bars {
     display: flex;
-    z-index: 99999;
+    z-index: 9999;
   }
 
-  .navMob {
+  /* .navMob {
     display: flex;
     z-index: 9999;
-    top: unset;
+    top: 60px;
+    left: 0;
     justify-content: flex-start;
     padding: 20px 0px;
     gap: 20px;
-  }
+  } */
 }
 
 .bars {
@@ -157,6 +158,8 @@
 
 .navMob.active {
   left: 0;
+  display: flex;
+  z-index: 999;
 }
 
 .App:has(.navMob.active) .menu-bars {
@@ -178,16 +181,24 @@
     font-size: 14px;
   }
 
-  .ant-menu-title-content:hover.ant-menu-item:not(.ant-menu-item-selected):hover,
-  .ant-menu-light>.ant-menu:not(.ant-menu-horizontal) .ant-menu-item:not(.ant-menu-item-selected):hover {
+  .ant-menu-title-content:hover.ant-menu-item:not(
+      .ant-menu-item-selected
+    ):hover,
+  .ant-menu-light
+    > .ant-menu:not(.ant-menu-horizontal)
+    .ant-menu-item:not(.ant-menu-item-selected):hover {
     background-color: var(--sec);
   }
 
-  .ant-menu-item.ant-menu-item-only-child.ant-menu-item:not(.ant-menu-item-selected):active,
+  .ant-menu-item.ant-menu-item-only-child.ant-menu-item:not(
+      .ant-menu-item-selected
+    ):active,
   .ant-menu-item.ant-menu-item-active.ant-menu-item-selected.ant-menu-item-only-child,
   .ant-menu-item.ant-menu-item-selected.ant-menu-item-only-child,
-  .ant-menu-submenu.ant-menu-submenu-inline.ant-menu-submenu-open.ant-menu-submenu-active .ant-menu-submenu-title:active,
-  .ant-menu-submenu.ant-menu-submenu-inline.ant-menu-submenu-active .ant-menu-submenu-title:active {
+  .ant-menu-submenu.ant-menu-submenu-inline.ant-menu-submenu-open.ant-menu-submenu-active
+    .ant-menu-submenu-title:active,
+  .ant-menu-submenu.ant-menu-submenu-inline.ant-menu-submenu-active
+    .ant-menu-submenu-title:active {
     background-color: var(--sec);
   }
 

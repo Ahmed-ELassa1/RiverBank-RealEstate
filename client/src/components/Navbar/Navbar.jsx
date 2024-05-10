@@ -69,6 +69,10 @@ const Navbar = () => {
       key: "#footer",
       icon: <PhoneFilled />,
     },
+    {
+      label: t("login"),
+      key: "login",
+    },
   ];
   const getCities = async () => {
     try {
