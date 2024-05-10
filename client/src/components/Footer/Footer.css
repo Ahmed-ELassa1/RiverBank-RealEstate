@@ -270,7 +270,11 @@
     }
 
     .footer-logo {
-      width: 47%;
+      width: 100%;
+
+      img {
+        width: 47%
+      }
     }
 
     .footer-content {
