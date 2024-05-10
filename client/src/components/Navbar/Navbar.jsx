@@ -1,11 +1,5 @@
-import {
-  AppstoreOutlined,
-  MailOutlined,
-  PhoneFilled,
-  PhoneOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
-import { Button, ConfigProvider, Menu } from "antd";
+import { PhoneFilled } from "@ant-design/icons";
+import { ConfigProvider, Menu } from "antd";
 import React, { useEffect, useState } from "react";
 import "./Navbar.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -23,8 +17,7 @@ const Navbar = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  // #0A383D
-  //#B07A12
+
   const items = [
     {
       label: t("home"),
@@ -68,10 +61,6 @@ const Navbar = () => {
       label: <a href="tel:+1234567890">{t("label.phoneNumber")}</a>,
       key: "#footer",
       icon: <PhoneFilled />,
-    },
-    {
-      label: t("login"),
-      key: "login",
     },
   ];
   const getCities = async () => {
@@ -187,27 +176,17 @@ const Navbar = () => {
           mode="inline"
           items={items}
         />
-        {/* <Link to="/" onClick={() => setIsOpen(false)}>
-          Home
-        </Link>
-        <Link to="/cities" onClick={() => setIsOpen(false)}>
-          Cities
-        </Link>
-        <Link to="/developers" onClick={() => setIsOpen(false)}>
-          Developers
-        </Link>
-        <Link to="/projects" onClick={() => setIsOpen(false)}>
-          Projects
-        </Link>
-        <Link to="/properties" onClick={() => setIsOpen(false)}>
-          Properties
-        </Link>
-        <Link to="/blogs" onClick={() => setIsOpen(false)}>
-          Blogs
-        </Link>
-        <Link to="/contactUs" onClick={() => setIsOpen(false)}>
-          Contact Us
-        </Link> */}
+        <div>
+          <button
+            className="subscribe-btn"
+            onClick={() => {
+              setIsOpen(false);
+              navigate("/login");
+            }}
+          >
+            {t("login")}
+          </button>
+        </div>
       </div>
     </>
   );

@@ -26,11 +26,13 @@ const DashLayout = () => {
 
         toast.dismiss();
         toast.success(`You are successfully logged out`);
+        setIsOpen(false);
 
         navigate("/");
       }
     } catch (err) {
       toast.dismiss();
+      toast.error(err);
     }
   };
   return (
@@ -115,18 +117,18 @@ const DashLayout = () => {
         >
           أنواع المشروعات
         </NavLink>
+
+        <div>
+          <button className="subscribe-btn" onClick={handleLogout}>
+            تسجيل خروج
+          </button>
+        </div>
       </div>
       {/* END TABLET MODE */}
 
       <div className="dash-container">
         <div className="sidebar">
           <ul className="side-list">
-            {/* <li>
-              <Link className="side-item" to={"properties"}>
-                العقارات
-              </Link>
-            </li> */}
-
             <li>
               <NavLink active className="side-item" to={"projects"}>
                 المشروعات
