@@ -27,9 +27,9 @@
   .residentialProjects-content {
     display: flex;
     align-items: flex-start;
-    justify-content: space-between;
+    justify-content: flex-start;
     margin-top: 40px;
-    gap: 10px;
+    gap: 25px;
     position: relative;
 
     .residentialProjects-card {
