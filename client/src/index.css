@@ -11,7 +11,8 @@
   --sections-header-bg: #cbc7c759;
 }
 
-:where(.css-dev-only-do-not-override-usln0u).ant-pagination .ant-pagination-item-active {
+:where(.css-dev-only-do-not-override-usln0u).ant-pagination
+  .ant-pagination-item-active {
   display: flex;
   justify-content: center;
 }
@@ -343,4 +344,7 @@ button {
 .quill .ql-editor li:not(.ql-direction-rtl)::before {
   margin-right: 0.5em;
   margin-left: 0.5em;
+}
+.App:has(.dashLayout .navMob.active) .dash-container {
+  display: none;
 }

@@ -107,10 +107,10 @@ export class HTTPBaseService {
           });
         } else if (error?.response?.status == 400) {
           toast.dismiss();
-          toast.error(error?.response?.data?.message);
-          // error?.response?.data?.validationError?.map((err) => {
-          //   return toast.error(`${err?.message}`);
-          // });
+          // toast.error(error?.response?.data?.message);
+          error?.response?.data?.validationError?.map((err) => {
+            return toast.error(`${err?.message}`);
+          });
         } else if (error?.response?.status == 415) {
           toast.dismiss();
           return toast.error(`${error?.response?.data?.message}`);

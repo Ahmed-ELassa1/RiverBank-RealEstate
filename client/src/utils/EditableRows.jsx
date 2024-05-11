@@ -1,5 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Button, Form, Input, Table } from "antd";
+import ReactQuill from "react-quill";
+import { formats, modules } from "../data/sharedData";
 
 const EditableContext = React.createContext(null);
 
@@ -68,7 +70,27 @@ const EditableCell = ({
           },
         ]}
       >
-        <Input ref={inputRef} onPressEnter={save} onBlur={save} />
+        {/* <Input ref={inputRef} onPressEnter={save} onBlur={save} /> */}
+        <ReactQuill
+          theme="snow"
+          ref={inputRef}
+          onPressEnter={save}
+          onBlur={save}
+          // value={data.description}
+          // name={dataIndex}
+          // onChange={(e) => {
+          //   setIsEdited(true);
+          //   setData({ ...data, description: e });
+          // }}
+          modules={modules}
+          formats={formats}
+          style={{
+            height: "150px",
+            width: "100%",
+            background: "#fff",
+            overflow: "auto",
+          }}
+        />
       </Form.Item>
     ) : (
       <div
