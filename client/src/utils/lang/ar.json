@@ -1,10 +1,10 @@
 {
   "home": "الرئيسية",
   "cities": "المدن",
-  "developers": "المطورون",
+  "developers": "المطورين",
   "projects": "المشاريع",
   "properties": "الوحدات",
-  "blogs": "المدونات",
+  "blogs": "مقالات",
   "contactUs": "للتواصل ",
   "login": "تسجيل الدخول",
   "input.findByProject": "ابحث عن مشروع",

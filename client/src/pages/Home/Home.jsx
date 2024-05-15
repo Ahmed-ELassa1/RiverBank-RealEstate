@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
-import "./Home.css";
 import HomeCities from "../../components/HomeCities/HomeCities";
 import ResidentialProjects from "../../components/ResidentialProjects/ResidentialProjects";
-import BlogsSection from "../../components/BlogsSection/BlogsSection";
-import Subscribe from "../../components/Subscribe/Subscribe";
 import { useTranslation } from "react-i18next";
 import CommercialProjects from "../../components/CommercialProjects/CommercialProjects";
 import CoastalProjects from "../../components/CoastalProjects/CoastalProjects";
@@ -15,6 +12,7 @@ import { ProjectTypesService } from "../../services/ProjectTypesService/ProjectT
 import { Card } from "antd";
 import Meta from "antd/es/card/Meta";
 import { toast } from "react-toastify";
+import "./Home.css";
 
 const Home = () => {
   const Navigate = useNavigate();
@@ -58,15 +56,15 @@ const Home = () => {
     e.preventDefault();
     setSearchLoading(true);
     let response;
-    if (formData.city != "" && formData.project == "") {
+    if (formData.city !== "" && formData.project == "") {
       response = await projectService.getProjects({
         cityId: formData.city,
       });
-    } else if (formData.city == "" && formData.project != "") {
+    } else if (formData.city === "" && formData.project !== "") {
       response = await projectService.getProjects({
         title: formData.project,
       });
-    } else if (formData.city == "" && formData.project == "") {
+    } else if (formData.city === "" && formData.project === "") {
       return;
     } else {
       response = await projectService.getProjects({
@@ -74,8 +72,8 @@ const Home = () => {
         cityId: formData.city,
       });
     }
-    if (response?.status == 200) {
-      if (response?.data?.data?.length == 0) {
+    if (response?.status === 200) {
+      if (response?.data?.data?.length === 0) {
         toast.error("لا يوجد مشاريع مماثلة");
       }
       setResultProjects(response?.data?.data);
@@ -93,17 +91,17 @@ const Home = () => {
     const response = await projectService.getProjects();
     const data = response?.data?.data;
     const resdintianlProjects = data?.filter((project) => {
-      return project?.projectType == "مشروعات-سكنية";
+      return project?.projectType === "مشروعات-سكنية";
     });
     const commercialProjects = data?.filter((project) => {
-      return project?.projectType == "مشروعات-تجارية";
+      return project?.projectType === "مشروعات-تجارية";
     });
     const coastalProjects = data?.filter((project) => {
-      return project?.projectType == "مشروعات-ساحلية";
+      return project?.projectType === "مشروعات-ساحلية";
     });
-    setResedinationalProjects(resdintianlProjects?.splice(0, 3));
-    setCommercialProjects(commercialProjects?.splice(0, 3));
-    setCostalProjects(coastalProjects?.splice(0, 3));
+    setResedinationalProjects(resdintianlProjects);
+    setCommercialProjects(commercialProjects);
+    setCostalProjects(coastalProjects);
     setProjectCards(data);
   }
   async function deleteSearchValues() {
@@ -219,27 +217,27 @@ const Home = () => {
       ) : (
         <>
           <HomeCities citiesData={citiesData} />
-          {resedinationalProjects?.length > 0 && (
-            <ResidentialProjects
-              resedinationalProjects={resedinationalProjects}
-              cities={citiesData}
-              projectTypesData={projectTypesData}
-            />
-          )}
-          {costalProjects?.length > 0 && (
-            <CoastalProjects
-              costalProjects={costalProjects}
-              cities={citiesData}
-              projectTypesData={projectTypesData}
-            />
-          )}
-          {commercialProjects?.length > 0 && (
-            <CommercialProjects
-              commercialProjects={commercialProjects}
-              cities={citiesData}
-              projectTypesData={projectTypesData}
-            />
-          )}
+          {/* {resedinationalProjects?.length > 0 && ( */}
+          <ResidentialProjects
+            resedinationalProjects={resedinationalProjects}
+            cities={citiesData}
+            projectTypesData={projectTypesData}
+          />
+          {/* )} */}
+          {/* {costalProjects?.length > 0 && ( */}
+          <CoastalProjects
+            costalProjects={costalProjects}
+            cities={citiesData}
+            projectTypesData={projectTypesData}
+          />
+          {/* )} */}
+          {/* {commercialProjects?.length > 0 && ( */}
+          <CommercialProjects
+            commercialProjects={commercialProjects}
+            cities={citiesData}
+            projectTypesData={projectTypesData}
+          />
+          {/* )} */}
         </>
       )}
     </div>

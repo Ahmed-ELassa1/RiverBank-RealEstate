@@ -32,7 +32,7 @@ const Blogs = () => {
     <>
       <div className="properties blogs">
         <div className="blog bg">
-          <h2>المدونة</h2>
+          <h2>مقالات</h2>
         </div>
 
         <div className="blogs-container">

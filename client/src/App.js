@@ -44,6 +44,7 @@ import CityDetails from "./pages/Dashboard/Cities/CityDetails";
 import ProjectTypeDetails from "./pages/Dashboard/ProjectTypes/ProjectTypeDetails";
 import CreateProjectType from "./pages/Dashboard/ProjectTypes/CreateProjectType";
 import ProjectTypesList from "./pages/Dashboard/ProjectTypes/ProjectTypesList";
+import ProjectType from "./pages/ProjectType/ProjectType";
 
 function App() {
   const [isSticky, setIsSticky] = useState(false);
@@ -87,6 +88,7 @@ function App() {
         { path: "/home", element: <Home /> },
         { path: "/search", element: <ProjectSearch /> },
         { path: "/cities/:cityId", element: <Cities /> },
+        { path: "/type/:projectType", element: <ProjectType /> },
         { path: "/developers", element: <Developers /> },
         { path: "/developers/:id", element: <ListDevelopersDetails /> },
         { path: "/properties", element: <Properties /> },
