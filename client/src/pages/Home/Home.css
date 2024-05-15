@@ -110,7 +110,7 @@
 
   @media screen and (min-width: 1300px) {
     .container {
-      margin: auto 70px;
+      margin: auto;
     }
 
     .home-search-cards-container {
