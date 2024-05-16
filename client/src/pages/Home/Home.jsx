@@ -30,6 +30,7 @@ const Home = () => {
   const [citiesData, setCitiesData] = useState([]);
   const [projectTypesData, setProjectTypesData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [gettingData, setGettingData] = useState(true);
   const [searchLoading, setSearchLoading] = useState(false);
   const [formData, setFormData] = useState({
     project: searchParams.get("project") || "",
@@ -99,6 +100,7 @@ const Home = () => {
     const coastalProjects = data?.filter((project) => {
       return project?.projectType === "مشروعات-ساحلية";
     });
+    setGettingData(false)
     setResedinationalProjects(resdintianlProjects);
     setCommercialProjects(commercialProjects);
     setCostalProjects(coastalProjects);
@@ -222,6 +224,7 @@ const Home = () => {
             resedinationalProjects={resedinationalProjects}
             cities={citiesData}
             projectTypesData={projectTypesData}
+            gettingData={gettingData}
           />
           {/* )} */}
           {/* {costalProjects?.length > 0 && ( */}
@@ -229,6 +232,7 @@ const Home = () => {
             costalProjects={costalProjects}
             cities={citiesData}
             projectTypesData={projectTypesData}
+            gettingData={gettingData}
           />
           {/* )} */}
           {/* {commercialProjects?.length > 0 && ( */}
@@ -236,6 +240,7 @@ const Home = () => {
             commercialProjects={commercialProjects}
             cities={citiesData}
             projectTypesData={projectTypesData}
+            gettingData={gettingData}
           />
           {/* )} */}
         </>

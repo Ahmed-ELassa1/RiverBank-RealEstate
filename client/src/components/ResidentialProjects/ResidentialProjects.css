@@ -50,6 +50,41 @@
       }
     }
 
+    .residentialProjects-skelton-content {
+      display: flex;
+      gap: 25px;
+      width: 100%;
+    }
+
+    .residentialProjects-skelton-card {
+      border: 1px solid #d8d8d8;
+      width: 24%;
+      gap: 25px;
+      height: 280px;
+      max-height: 280px;
+      border-radius: 12px;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 3px 6px 10px #d5d5d5;
+
+      :where(.css-dev-only-do-not-override-1okl62o).ant-skeleton {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .ant-skeleton-header {
+        padding: 0;
+      }
+
+      .ant-skeleton-avatar-square {
+        width: 100%;
+        border-radius: 8px;
+        height: 150px;
+      }
+    }
+
     .residentialProjects_property {
       background-color: #fff;
       border: 1px solid #ebebeb;

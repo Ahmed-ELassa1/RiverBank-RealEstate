@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import "./CommercialProjects.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { Skeleton } from "antd";
 
 const CommercialProjects = ({
   commercialProjects,
   cities,
-  projectTypesData,
+  gettingData,
 }) => {
   const { t } = useTranslation();
   const Navigate = useNavigate();
@@ -55,6 +56,74 @@ const CommercialProjects = ({
               </div>
             );
           })}
+          {gettingData && (
+            <div className="residentialProjects-skelton-content">
+              <div className="residentialProjects-skelton-card">
+                <Skeleton
+                  active={true}
+                  paragraph={{
+                    rows: 2,
+                    width: 100,
+                    style: { textAlign: "center" },
+                  }}
+                  round={true}
+                  title={false}
+                  avatar={{
+                    shape: "square",
+                    size: "large",
+                  }}
+                />
+              </div>
+              <div className="residentialProjects-skelton-card">
+                <Skeleton
+                  active={true}
+                  paragraph={{
+                    rows: 2,
+                    width: 100,
+                    style: { textAlign: "center" },
+                  }}
+                  round={true}
+                  title={false}
+                  avatar={{
+                    shape: "square",
+                    size: "large",
+                  }}
+                />
+              </div>
+              <div className="residentialProjects-skelton-card">
+                <Skeleton
+                  active={true}
+                  paragraph={{
+                    rows: 2,
+                    width: 100,
+                    style: { textAlign: "center" },
+                  }}
+                  round={true}
+                  title={false}
+                  avatar={{
+                    shape: "square",
+                    size: "large",
+                  }}
+                />
+              </div>
+              <div className="residentialProjects-skelton-card">
+                <Skeleton
+                  active={true}
+                  paragraph={{
+                    rows: 2,
+                    width: 100,
+                    style: { textAlign: "center" },
+                  }}
+                  round={true}
+                  title={false}
+                  avatar={{
+                    shape: "square",
+                    size: "large",
+                  }}
+                />
+              </div>
+            </div>
+          )}
           <Link to={`type/commercial`} className="button-seeAll-link">
             {t("button.seeAll")}
           </Link>

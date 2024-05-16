@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import "./ResidentialProjects.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
-
+import { Skeleton } from "antd";
+import "./ResidentialProjects.css";
 const ResidentialProjects = ({
   resedinationalProjects,
   cities,
-  projectTypesData,
+  gettingData,
 }) => {
   const { t } = useTranslation();
   const Navigate = useNavigate();
@@ -58,6 +58,74 @@ const ResidentialProjects = ({
               </div>
             );
           })}
+          {gettingData && (
+            <div className="residentialProjects-skelton-content">
+              <div className="residentialProjects-skelton-card">
+                <Skeleton
+                  active={true}
+                  paragraph={{
+                    rows: 2,
+                    width: 100,
+                    style: { textAlign: "center" },
+                  }}
+                  round={true}
+                  title={false}
+                  avatar={{
+                    shape: "square",
+                    size: "large",
+                  }}
+                />
+              </div>
+              <div className="residentialProjects-skelton-card">
+                <Skeleton
+                  active={true}
+                  paragraph={{
+                    rows: 2,
+                    width: 100,
+                    style: { textAlign: "center" },
+                  }}
+                  round={true}
+                  title={false}
+                  avatar={{
+                    shape: "square",
+                    size: "large",
+                  }}
+                />
+              </div>
+              <div className="residentialProjects-skelton-card">
+                <Skeleton
+                  active={true}
+                  paragraph={{
+                    rows: 2,
+                    width: 100,
+                    style: { textAlign: "center" },
+                  }}
+                  round={true}
+                  title={false}
+                  avatar={{
+                    shape: "square",
+                    size: "large",
+                  }}
+                />
+              </div>
+              <div className="residentialProjects-skelton-card">
+                <Skeleton
+                  active={true}
+                  paragraph={{
+                    rows: 2,
+                    width: 100,
+                    style: { textAlign: "center" },
+                  }}
+                  round={true}
+                  title={false}
+                  avatar={{
+                    shape: "square",
+                    size: "large",
+                  }}
+                />
+              </div>
+            </div>
+          )}
           <Link to={`type/residential`} className="button-seeAll-link">
             {t("button.seeAll")}
           </Link>
