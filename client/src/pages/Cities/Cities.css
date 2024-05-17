@@ -1,3 +1,7 @@
+.cities {
+  min-height: 100vh;
+}
+
 .cityLabel {
   margin: 60px 0;
   text-align: start;
@@ -43,6 +47,8 @@
     width: fit-content;
     transition: 0.3s all ease-in-out;
     /* width: fit-content; */
+    height: 350px;
+    max-height: 350px;
 
     .ant-card {
       width: 100% !important;
@@ -64,6 +70,8 @@
 
     .ant-card-cover img {
       filter: grayscale(1);
+      min-height: 180px;
+      height: 180px;
     }
   }
 
