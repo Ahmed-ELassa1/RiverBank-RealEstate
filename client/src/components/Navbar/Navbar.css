@@ -64,7 +64,7 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1120px) {
   .navbar {
     display: none;
   }
@@ -96,10 +96,11 @@
 
 /* Tablet */
 .navMob {
-  display: none;
+  /* display: none; */
+  transform: translateX(100%);
   position: absolute;
   top: 0;
-  left: -100%;
+  left: 0;
   width: 100%;
   height: 100vh;
   transition: 1s all ease;
@@ -107,8 +108,9 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  z-index: -1;
   color: white;
+  display: flex;
+  z-index: 999;
 
   a {
     color: white;
@@ -134,7 +136,7 @@
   padding: 20px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1120px) {
   .menu-bars {
     display: flex;
     z-index: 9999;
@@ -157,9 +159,7 @@
 }
 
 .navMob.active {
-  left: 0;
-  display: flex;
-  z-index: 999;
+  transform: translateX(0);
 }
 
 .App:has(.navMob.active) .menu-bars {

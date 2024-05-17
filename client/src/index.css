@@ -318,6 +318,10 @@ button {
   background-color: var(--sec);
   color: white;
 }
+.pagination button:disabled:hover {
+  background-color: #eee;
+  color: white;
+}
 
 .input-error-message {
   color: red;
