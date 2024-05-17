@@ -1,4 +1,5 @@
 .developer-page {
+  min-height: 100vh;
   .dev {
     background-image: url("/src/assets/developers.avif");
     background-position: center;
@@ -25,6 +26,8 @@
     width: fit-content;
     transition: 0.3s all ease-in-out;
     /* width: fit-content; */
+    height: 350px;
+    max-height: 350px;
 
     .ant-card {
       width: 100% !important;
