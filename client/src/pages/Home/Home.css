@@ -74,7 +74,6 @@
     z-index: 50;
     padding: 10px 15px;
     background-color: #fff;
-    min-width: 250px;
     border: 1px solid #5e5e5e;
     outline: none;
     appearance: none;
@@ -82,7 +81,6 @@
 
   .home-search-button {
     border-radius: 8px;
-    padding: 12px 25px;
     min-width: 150px;
     background-color: var(--sec);
     font-size: 18px;
@@ -95,7 +93,6 @@
 
   .home-clear-button {
     border-radius: 8px;
-    padding: 12px 10px;
     min-width: 150px;
     background-color: var(--sec);
     font-size: 18px;
@@ -113,13 +110,25 @@
 
   @media screen and (min-width: 1300px) {
     .container {
-      margin: auto 70px;
+      margin: auto;
     }
 
     .home-search-cards-container {
       .home-search-card {
         width: 23%;
       }
+    }
+
+    .home-search-button {
+      padding: 12px 25px;
+    }
+
+    .home-clear-button {
+      padding: 12px 10px;
+    }
+
+    .home-search-input {
+      min-width: 340px;
     }
 
     .head {
@@ -130,6 +139,20 @@
       span {
         font-size: 40px !important;
       }
+    }
+  }
+
+  @media (min-width: 800px) and (max-width: 1300px) {
+    .home-search-input {
+      min-width: 300px;
+    }
+
+    .home-clear-button {
+      padding: 12px 10px;
+    }
+
+    .home-search-button {
+      padding: 12px 25px;
     }
   }
 
@@ -160,10 +183,26 @@
       .home-search-card {
         width: 47%;
       }
+
+      .home-clear-button {
+        padding: 8px 10px;
+      }
+
+      .home-search-button {
+        padding: 8px 25px;
+      }
+
+      .home-search-input {
+        min-width: 340px;
+      }
     }
   }
 
   @media screen and (max-width: 600px) {
+    .home-search-input {
+      min-width: 320px;
+    }
+
     .home-search-cards-container {
       justify-content: center;
 
@@ -176,6 +215,17 @@
   @media screen and (max-width: 1120px) {
     .home {
       height: 100vh;
+    }
+    .home-clear-button {
+      padding: 4px 10px;
+    }
+
+    .home-search-button {
+      padding: 4px 25px;
+    }
+
+    .home-search-input {
+      min-width: 320px;
     }
 
     .container {

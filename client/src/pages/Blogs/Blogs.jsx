@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import BlogCard from "../../components/BlogCard/BlogCard";
 import "./blogs.css";
-import { Col, Divider, Drawer, Row } from "antd";
+import { Col, Divider, Drawer, Row, Skeleton } from "antd";
 import { BlogsServices } from "../../services/Blogs/BlogsServices";
 import { LoadingOutlined } from "@ant-design/icons";
 
@@ -32,14 +32,14 @@ const Blogs = () => {
     <>
       <div className="properties blogs">
         <div className="blog bg">
-          <h2>المدونة</h2>
+          <h2>مقالات</h2>
         </div>
 
         <div className="blogs-container">
           <div className="props-content">
             {/* Cards */}
             <div className="content-cards">
-              {loading && <LoadingOutlined className="loadingIndicator" />}
+              {/* {loading && <LoadingOutlined className="loadingIndicator" />} */}
 
               {!loading &&
                 data?.length > 0 &&
@@ -48,6 +48,74 @@ const Blogs = () => {
                     <BlogCard item={item} />
                   </div>
                 ))}
+                          {loading && (
+            <div className="skelton-content">
+              <div className="skelton-card">
+                <Skeleton
+                  active={true}
+                  paragraph={{
+                    rows: 2,
+                    width: 100,
+                    style: { textAlign: "center" },
+                  }}
+                  round={true}
+                  title={false}
+                  avatar={{
+                    shape: "square",
+                    size: "large",
+                  }}
+                />
+              </div>
+              <div className="skelton-card">
+                <Skeleton
+                  active={true}
+                  paragraph={{
+                    rows: 2,
+                    width: 100,
+                    style: { textAlign: "center" },
+                  }}
+                  round={true}
+                  title={false}
+                  avatar={{
+                    shape: "square",
+                    size: "large",
+                  }}
+                />
+              </div>
+              <div className="skelton-card">
+                <Skeleton
+                  active={true}
+                  paragraph={{
+                    rows: 2,
+                    width: 100,
+                    style: { textAlign: "center" },
+                  }}
+                  round={true}
+                  title={false}
+                  avatar={{
+                    shape: "square",
+                    size: "large",
+                  }}
+                />
+              </div>
+              <div className="skelton-card">
+                <Skeleton
+                  active={true}
+                  paragraph={{
+                    rows: 2,
+                    width: 100,
+                    style: { textAlign: "center" },
+                  }}
+                  round={true}
+                  title={false}
+                  avatar={{
+                    shape: "square",
+                    size: "large",
+                  }}
+                />
+              </div>
+            </div>
+          )}
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { Card } from "antd";
+import { Card, Skeleton } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import Meta from "antd/es/card/Meta";
 import React, { useEffect, useState } from "react";
@@ -27,7 +27,7 @@ const Cities = () => {
   }
   async function getCityName() {
     const response = await cityService.getCityById(cityId);
-    const data = response.data.data;
+    const data = response?.data?.data;
     setCurrentCity(data?.title);
   }
   useEffect(() => {
@@ -48,7 +48,7 @@ const Cities = () => {
       </div> */}
 
       <div className="main container city-container">
-        {loading && <LoadingOutlined className="loadingIndicator" />}
+        {/* {loading && <LoadingOutlined className="loadingIndicator" />} */}
 
         {!loading && projectCards?.length > 0
           ? projectCards?.map((project, i) => {
@@ -71,7 +71,74 @@ const Cities = () => {
               );
             })
           : ""}
-
+          {loading && (
+            <div className="skelton-content">
+              <div className="skelton-card">
+                <Skeleton
+                  active={true}
+                  paragraph={{
+                    rows: 2,
+                    width: 100,
+                    style: { textAlign: "center" },
+                  }}
+                  round={true}
+                  title={false}
+                  avatar={{
+                    shape: "square",
+                    size: "large",
+                  }}
+                />
+              </div>
+              <div className="skelton-card">
+                <Skeleton
+                  active={true}
+                  paragraph={{
+                    rows: 2,
+                    width: 100,
+                    style: { textAlign: "center" },
+                  }}
+                  round={true}
+                  title={false}
+                  avatar={{
+                    shape: "square",
+                    size: "large",
+                  }}
+                />
+              </div>
+              <div className="skelton-card">
+                <Skeleton
+                  active={true}
+                  paragraph={{
+                    rows: 2,
+                    width: 100,
+                    style: { textAlign: "center" },
+                  }}
+                  round={true}
+                  title={false}
+                  avatar={{
+                    shape: "square",
+                    size: "large",
+                  }}
+                />
+              </div>
+              <div className="skelton-card">
+                <Skeleton
+                  active={true}
+                  paragraph={{
+                    rows: 2,
+                    width: 100,
+                    style: { textAlign: "center" },
+                  }}
+                  round={true}
+                  title={false}
+                  avatar={{
+                    shape: "square",
+                    size: "large",
+                  }}
+                />
+              </div>
+            </div>
+          )}
         {/* <div className="cityCard">
           <Card
             onClick={() => Navigate("/projects/1")}
