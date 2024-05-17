@@ -53,12 +53,13 @@
     .residentialProjects-skelton-content {
       display: flex;
       gap: 25px;
+      flex-wrap: wrap;
       width: 100%;
     }
 
     .residentialProjects-skelton-card {
       border: 1px solid #d8d8d8;
-      width: 24%;
+      width: 23%;
       gap: 25px;
       height: 280px;
       max-height: 280px;
@@ -82,6 +83,24 @@
         width: 100%;
         border-radius: 8px;
         height: 150px;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .residentialProjects-skelton-content {
+        flex-direction: column;
+      }
+    }
+
+    @media (min-width: 768px) and (max-width: 1200px) {
+      .residentialProjects-skelton-card {
+        width: 47%;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .residentialProjects-skelton-card {
+        width: 100%;
       }
     }
 
@@ -126,7 +145,10 @@
       top: 10px;
     }
 
-    .residentialProjects_property .thumb .thmb_cntnt .residentialProjects-card-name {
+    .residentialProjects_property
+      .thumb
+      .thmb_cntnt
+      .residentialProjects-card-name {
       bottom: 8px;
       font-size: 15px;
       color: #fff;

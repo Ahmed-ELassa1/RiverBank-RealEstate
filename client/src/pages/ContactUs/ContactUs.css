@@ -164,7 +164,7 @@
 
 @media screen and (max-width: 600px) {
   .contactus-page {
-    width: 80%;
+    width: 100%;
     justify-content: center;
 
     .sub-form {
@@ -182,9 +182,9 @@
   }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 500px) {
   .contactus-page {
-    width: 80%;
+    width: 100%;
 
     justify-content: center;
 
