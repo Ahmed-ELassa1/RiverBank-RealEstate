@@ -55,6 +55,19 @@ const Developers = () => {
               </Card>
             </div>
           ))}
+        {!loading && data?.length === 0 && (
+          <div
+            style={{
+              width: "100%",
+              textAlign: "center",
+              fontSize: "18px",
+              fontWeight: "500",
+            }}
+          >
+            لا توجد مستثمرين في الوقت الحالي. لكن لا تقلق، نعمل بجدّ لإضافة
+            المزيد من المستثمرين في أقرب وقت ممكن!
+          </div>
+        )}
         {loading && (
           <div className="skelton-content">
             <div className="skelton-card">

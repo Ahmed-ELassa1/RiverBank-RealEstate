@@ -14,7 +14,6 @@ const DashLayout = () => {
   const loginInstance = new UsersService(token);
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-
   const handleLogout = async () => {
     toast.loading("Loading...");
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Footer.css";
 // import Logo from "../../assets/logoImg";
 import { Link } from "react-router-dom";
@@ -16,9 +16,33 @@ import {
   WhatsAppOutlined,
   YoutubeOutlined,
 } from "@ant-design/icons";
+import { ProjectsService } from "../../services/Projects/ProjectsService";
+import { Tooltip } from "antd";
 
 const Footer = () => {
   const { t } = useTranslation();
+  const projectService = new ProjectsService();
+  const [projectTitles, setProjectTitles] = useState([]);
+  const [gettingData, setGettingData] = useState(true);
+
+  async function getOneCityTitles() {
+    setProjectTitles([]);
+    const response = await projectService.getProjects();
+    const data = response?.data?.data;
+    const newCapitalProjects = data?.filter((project) => {
+      return project?.cityId === "العاصمة-الإدارية-الجديدة";
+    });
+    const newData = newCapitalProjects
+      ?.map((project) => {
+        return { title: project?.title, id: project?._id };
+      })
+      ?.slice(0, 5);
+    setGettingData(false);
+    setProjectTitles(newData);
+  }
+  useEffect(() => {
+    getOneCityTitles();
+  }, [gettingData]);
   return (
     <footer id="footer" className="footer">
       {/* <FooterSkewed /> */}
@@ -34,32 +58,33 @@ const Footer = () => {
         <div className="links">
           <h5>{t("label.footer.projectLinks.mainTitle")}</h5>
           <ul>
-            <li>
-              <Link>اويا تاورز العاصمة الادارية</Link>
-            </li>
-            <li>
-              <Link>ريفان العاصمة الإدارية الجديدة</Link>
-            </li>
-            <li>
-              <Link>الموندو العاصمة الإدارية الجديدة</Link>
-            </li>
-            <li>
-              <Link>المقصد ريزيدنس العاصمة الإدارية الجديدة</Link>
-            </li>
-            <li>
-              <Link>اتيكا العاصمة الإدارية الجديدة</Link>
-            </li>
-            <li>
-              <Link>كمبوند انترادا العاصمة الادارية الجديدة</Link>
-            </li>
+            {projectTitles?.length > 0
+              ? projectTitles?.map((project) => {
+                  return (
+                    <li>
+                      <Tooltip
+                        placement="bottom"
+                        title={project?.title}
+                        color="#a7a7a7"
+                        style={{ color: "#fff" }}
+                      >
+                        <Link to={`/projects/${project?.id}`}>{`${project?.title
+                          ?.split(" ")
+                          ?.slice(0, 4)
+                          ?.join(" ")} ...`}</Link>
+                      </Tooltip>
+                    </li>
+                  );
+                })
+              : "لا توجد مشاريع في الوقت الحالي. لكن لا تقلق، نعمل بجدّ لإضافة المزيد من المشاريع في أقرب وقت ممكن!"}
           </ul>
         </div>
         <div className="links">
           <h5>{t("بيانات التواصل")}</h5>
-          <ul>
+          <ul className="contact-details-list"> 
             <li>
               <PushpinOutlined />
-              14
+              
               <span>{t("label.locationDetails")}</span>
             </li>
             <li>
@@ -74,7 +99,7 @@ const Footer = () => {
               <MailFilled />
               <span>{t("label.contactEmail")}</span>
             </li>
-            <li className="footer-social-media-container">
+            {/* <li className="footer-social-media-container">
               <a
                 className="contact-social-Media-links"
                 target="_blank"
@@ -99,7 +124,7 @@ const Footer = () => {
               >
                 <FacebookFilled />
               </a>
-            </li>
+            </li> */}
           </ul>
         </div>
         <ContactUs />

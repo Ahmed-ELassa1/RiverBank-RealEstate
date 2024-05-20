@@ -42,6 +42,7 @@
   justify-content: flex-start;
   padding-top: 50px;
   flex-wrap: wrap;
+  min-height: 50vh;
 
   .cityCard {
     width: fit-content;

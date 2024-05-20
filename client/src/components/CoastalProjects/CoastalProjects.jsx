@@ -21,37 +21,46 @@ const CoastalProjects = ({ costalProjects, cities, gettingData }) => {
           {t("home.section.coastalProjects")}
         </h3>
         <div className="residentialProjects-content">
-          {projectsCards?.map((project, i) => {
-            return (
-              <div
-                key={i}
-                className="residentialProjects-card"
-                onClick={() => Navigate(`projects/${project?._id}`)}
-              >
-                <div className="residentialProjects_property">
-                  <div className="thumb">
-                    <img
-                      className="img-whp w-100 h-100 cover"
-                      src={project?.mainImage?.secure_url}
-                      alt={project?.seoData}
-                    />
-                    <div className="thmb_cntnt">
-                      <p className="residentialProjects-card-name">
-                        {cities?.find((e) => e.slug == project?.cityId)?.title}
-                      </p>
+          {projectsCards?.length > 0 ? (
+            projectsCards?.map((project, i) => {
+              return (
+                <div
+                  key={i}
+                  className="residentialProjects-card"
+                  onClick={() => Navigate(`projects/${project?._id}`)}
+                >
+                  <div className="residentialProjects_property">
+                    <div className="thumb">
+                      <img
+                        className="img-whp w-100 h-100 cover"
+                        src={project?.mainImage?.secure_url}
+                        alt={project?.seoData}
+                      />
+                      <div className="thmb_cntnt">
+                        <p className="residentialProjects-card-name">
+                          {
+                            cities?.find((e) => e.slug == project?.cityId)
+                              ?.title
+                          }
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="details">
-                    <div className="tc_content">
-                      <h4>
-                        <Link to="/listing-details-v1/1">{project?.title}</Link>
-                      </h4>
+                    <div className="details">
+                      <div className="tc_content">
+                        <h4>
+                          <Link to="/listing-details-v1/1">
+                            {project?.title}
+                          </Link>
+                        </h4>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })
+          ) : (
+            <div className="container">لا يوجد مشاريع ساحلية في الوقت الحالي</div>
+          )}
           {gettingData && (
             <div className="residentialProjects-skelton-content">
               <div className="residentialProjects-skelton-card">
@@ -120,9 +129,11 @@ const CoastalProjects = ({ costalProjects, cities, gettingData }) => {
               </div>
             </div>
           )}
-          <Link to={`type/coastal`} className="button-seeAll-link">
-            {t("button.seeAll")}
-          </Link>
+          {projectsCards?.length > 0 && (
+            <Link to={`type/coastal`} className="button-seeAll-link">
+              {t("button.seeAll")}
+            </Link>
+          )}
         </div>
       </div>
     </section>

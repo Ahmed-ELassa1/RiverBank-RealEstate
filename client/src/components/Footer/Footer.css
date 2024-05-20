@@ -7,6 +7,12 @@
   position: relative;
   margin-top: 40px;
 
+  .contact-details-list {
+    li {
+      font-size: 17px;
+    }
+  }
+
   .footer-logo-container {
     text-align: center;
     display: flex;
@@ -101,7 +107,7 @@
     }
 
     .footer-logo-container {
-      width: 23%;
+      width: 21%;
 
       img {
         width: 50%;
@@ -109,7 +115,7 @@
     }
 
     .footer-content {
-      gap: 60px;
+      gap: 46px;
 
       .links {
         width: 23%;

@@ -48,74 +48,87 @@ const Blogs = () => {
                     <BlogCard item={item} />
                   </div>
                 ))}
-                          {loading && (
-            <div className="skelton-content">
-              <div className="skelton-card">
-                <Skeleton
-                  active={true}
-                  paragraph={{
-                    rows: 2,
-                    width: 100,
-                    style: { textAlign: "center" },
+              {!loading && data?.length === 0 && (
+                <div
+                  style={{
+                    width: "100%",
+                    textAlign: "center",
+                    fontSize: "18px",
+                    fontWeight: "500",
                   }}
-                  round={true}
-                  title={false}
-                  avatar={{
-                    shape: "square",
-                    size: "large",
-                  }}
-                />
-              </div>
-              <div className="skelton-card">
-                <Skeleton
-                  active={true}
-                  paragraph={{
-                    rows: 2,
-                    width: 100,
-                    style: { textAlign: "center" },
-                  }}
-                  round={true}
-                  title={false}
-                  avatar={{
-                    shape: "square",
-                    size: "large",
-                  }}
-                />
-              </div>
-              <div className="skelton-card">
-                <Skeleton
-                  active={true}
-                  paragraph={{
-                    rows: 2,
-                    width: 100,
-                    style: { textAlign: "center" },
-                  }}
-                  round={true}
-                  title={false}
-                  avatar={{
-                    shape: "square",
-                    size: "large",
-                  }}
-                />
-              </div>
-              <div className="skelton-card">
-                <Skeleton
-                  active={true}
-                  paragraph={{
-                    rows: 2,
-                    width: 100,
-                    style: { textAlign: "center" },
-                  }}
-                  round={true}
-                  title={false}
-                  avatar={{
-                    shape: "square",
-                    size: "large",
-                  }}
-                />
-              </div>
-            </div>
-          )}
+                >
+                  لا توجد مقالات في الوقت الحالي. لكن لا تقلق، نعمل بجدّ لإضافة
+                  المزيد من المقالات في أقرب وقت ممكن!
+                </div>
+              )}
+              {loading && (
+                <div className="skelton-content">
+                  <div className="skelton-card">
+                    <Skeleton
+                      active={true}
+                      paragraph={{
+                        rows: 2,
+                        width: 100,
+                        style: { textAlign: "center" },
+                      }}
+                      round={true}
+                      title={false}
+                      avatar={{
+                        shape: "square",
+                        size: "large",
+                      }}
+                    />
+                  </div>
+                  <div className="skelton-card">
+                    <Skeleton
+                      active={true}
+                      paragraph={{
+                        rows: 2,
+                        width: 100,
+                        style: { textAlign: "center" },
+                      }}
+                      round={true}
+                      title={false}
+                      avatar={{
+                        shape: "square",
+                        size: "large",
+                      }}
+                    />
+                  </div>
+                  <div className="skelton-card">
+                    <Skeleton
+                      active={true}
+                      paragraph={{
+                        rows: 2,
+                        width: 100,
+                        style: { textAlign: "center" },
+                      }}
+                      round={true}
+                      title={false}
+                      avatar={{
+                        shape: "square",
+                        size: "large",
+                      }}
+                    />
+                  </div>
+                  <div className="skelton-card">
+                    <Skeleton
+                      active={true}
+                      paragraph={{
+                        rows: 2,
+                        width: 100,
+                        style: { textAlign: "center" },
+                      }}
+                      round={true}
+                      title={false}
+                      avatar={{
+                        shape: "square",
+                        size: "large",
+                      }}
+                    />
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

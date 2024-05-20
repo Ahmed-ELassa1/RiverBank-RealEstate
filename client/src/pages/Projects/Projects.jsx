@@ -39,27 +39,31 @@ const Projects = () => {
       <div className="main container dev-container proje-container">
         {loading && <LoadingOutlined className="loadingIndicator" />}
 
-        {!loading &&
-          data &&
-          data?.map((item) => (
-            <Link to={`${item._id}`} className="developer-card" key={item._id}>
-              <img
-                className="dev-img proj-img"
-                src={item.logo?.secure_url}
-                alt="developer"
-              />
-              <div className="projectLink">
-                <div className="project-card-title"> {item?.title}</div>
-                <p className="">
-                  Start from{" "}
-                  <span>
-                    {item?.price}&nbsp;
-                    {item?.currency}
-                  </span>
-                </p>
-              </div>
-            </Link>
-          ))}
+        {!loading && data?.length > 0
+          ? data?.map((item) => (
+              <Link
+                to={`${item._id}`}
+                className="developer-card"
+                key={item._id}
+              >
+                <img
+                  className="dev-img proj-img"
+                  src={item.logo?.secure_url}
+                  alt="developer"
+                />
+                <div className="projectLink">
+                  <div className="project-card-title"> {item?.title}</div>
+                  <p className="">
+                    Start from{" "}
+                    <span>
+                      {item?.price}&nbsp;
+                      {item?.currency}
+                    </span>
+                  </p>
+                </div>
+              </Link>
+            ))
+          : "لا توجد مشاريع في الوقت الحالي. لكن لا تقلق، نعمل بجدّ لإضافة المزيد من المشاريع في أقرب وقت ممكن"}
       </div>
 
       <Subscribe />

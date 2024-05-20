@@ -32,7 +32,7 @@
 
     ol {
       li {
-        padding: 5px 0;
+        padding: 0;
         cursor: pointer;
         text-decoration: underline;
         color: var(--main);
@@ -52,7 +52,7 @@
   }
 
   .details-question-about-project {
-    padding: 0 15px 30px;
+    padding: 0 15px 15px;
 
     .details-question-about-project-row {
       padding: 18px 10px 12px;

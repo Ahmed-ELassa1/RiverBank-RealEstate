@@ -34,7 +34,7 @@ const Cities = () => {
     getCityName();
   }, [currentCity]);
   useEffect(() => {
-    setCurrentCity("")
+    setCurrentCity("");
     getCityProjects();
   }, [cityId]);
 
@@ -50,95 +50,108 @@ const Cities = () => {
       <div className="main container city-container">
         {/* {loading && <LoadingOutlined className="loadingIndicator" />} */}
 
-        {!loading && projectCards?.length > 0
-          ? projectCards?.map((project, i) => {
-              return (
-                <div className="cityCard" key={i}>
-                  <Card
-                    onClick={() => Navigate(`/projects/${project?._id}`)}
-                    hoverable
-                    // style={{ width: 240 }}
-                    cover={
-                      <img
-                        alt={project?.seoData}
-                        src={project?.mainImage?.secure_url}
-                      />
-                    }
-                  >
-                    <Meta title={project?.title} />
-                  </Card>
-                </div>
-              );
-            })
-          : ""}
-          {loading && (
-            <div className="skelton-content">
-              <div className="skelton-card">
-                <Skeleton
-                  active={true}
-                  paragraph={{
-                    rows: 2,
-                    width: 100,
-                    style: { textAlign: "center" },
-                  }}
-                  round={true}
-                  title={false}
-                  avatar={{
-                    shape: "square",
-                    size: "large",
-                  }}
-                />
+        {!loading &&
+          projectCards?.length > 0 &&
+          projectCards?.map((project, i) => {
+            return (
+              <div className="cityCard" key={i}>
+                <Card
+                  onClick={() => Navigate(`/projects/${project?._id}`)}
+                  hoverable
+                  // style={{ width: 240 }}
+                  cover={
+                    <img
+                      alt={project?.seoData}
+                      src={project?.mainImage?.secure_url}
+                    />
+                  }
+                >
+                  <Meta title={project?.title} />
+                </Card>
               </div>
-              <div className="skelton-card">
-                <Skeleton
-                  active={true}
-                  paragraph={{
-                    rows: 2,
-                    width: 100,
-                    style: { textAlign: "center" },
-                  }}
-                  round={true}
-                  title={false}
-                  avatar={{
-                    shape: "square",
-                    size: "large",
-                  }}
-                />
-              </div>
-              <div className="skelton-card">
-                <Skeleton
-                  active={true}
-                  paragraph={{
-                    rows: 2,
-                    width: 100,
-                    style: { textAlign: "center" },
-                  }}
-                  round={true}
-                  title={false}
-                  avatar={{
-                    shape: "square",
-                    size: "large",
-                  }}
-                />
-              </div>
-              <div className="skelton-card">
-                <Skeleton
-                  active={true}
-                  paragraph={{
-                    rows: 2,
-                    width: 100,
-                    style: { textAlign: "center" },
-                  }}
-                  round={true}
-                  title={false}
-                  avatar={{
-                    shape: "square",
-                    size: "large",
-                  }}
-                />
-              </div>
+            );
+          })}
+        {!loading && projectCards?.length === 0 && (
+          <div
+            style={{
+              width: "100%",
+              textAlign: "center",
+              fontSize: "18px",
+              fontWeight: "500",
+            }}
+          >
+            لا توجد مشاريع في الوقت الحالي. لكن لا تقلق، نعمل بجدّ لإضافة المزيد
+            من المشاريع في أقرب وقت ممكن!
+          </div>
+        )}
+        {loading && (
+          <div className="skelton-content">
+            <div className="skelton-card">
+              <Skeleton
+                active={true}
+                paragraph={{
+                  rows: 2,
+                  width: 100,
+                  style: { textAlign: "center" },
+                }}
+                round={true}
+                title={false}
+                avatar={{
+                  shape: "square",
+                  size: "large",
+                }}
+              />
             </div>
-          )}
+            <div className="skelton-card">
+              <Skeleton
+                active={true}
+                paragraph={{
+                  rows: 2,
+                  width: 100,
+                  style: { textAlign: "center" },
+                }}
+                round={true}
+                title={false}
+                avatar={{
+                  shape: "square",
+                  size: "large",
+                }}
+              />
+            </div>
+            <div className="skelton-card">
+              <Skeleton
+                active={true}
+                paragraph={{
+                  rows: 2,
+                  width: 100,
+                  style: { textAlign: "center" },
+                }}
+                round={true}
+                title={false}
+                avatar={{
+                  shape: "square",
+                  size: "large",
+                }}
+              />
+            </div>
+            <div className="skelton-card">
+              <Skeleton
+                active={true}
+                paragraph={{
+                  rows: 2,
+                  width: 100,
+                  style: { textAlign: "center" },
+                }}
+                round={true}
+                title={false}
+                avatar={{
+                  shape: "square",
+                  size: "large",
+                }}
+              />
+            </div>
+          </div>
+        )}
         {/* <div className="cityCard">
           <Card
             onClick={() => Navigate("/projects/1")}
