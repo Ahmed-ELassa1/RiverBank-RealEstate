@@ -1,5 +1,5 @@
 {
-  "homepage": "http://Ahmed-ELassa1.github.io/RiverBank-RealEstate",
+  "homepage": "",
   "name": "river-bank",
   "version": "0.1.0",
   "dependencies": {
@@ -31,7 +31,7 @@
     "start": "react-scripts start",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "build": "react-scripts build",
+    "build": "PORT=3000 react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
