@@ -291,8 +291,8 @@ const DevelopersDetails = () => {
         if (mainImage) {
           formData.append("mainImage", mainImage);
         } else {
-          formData.append("mainImage[public_id]", mainImgObj?.public_id);
-          formData.append("mainImage[secure_url]", mainImgObj?.secure_url);
+          formData.append("mainImage[0][public_id]", mainImgObj?.public_id);
+          formData.append("mainImage[0][secure_url]", mainImgObj?.secure_url);
         }
 
         if (fileList.length > 0 && subImgsObj?.length > 0) {

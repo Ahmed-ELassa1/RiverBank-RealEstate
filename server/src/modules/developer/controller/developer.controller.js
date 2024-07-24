@@ -148,8 +148,19 @@ export const deleteDeveloper = async (req, res, next) => {
     return next(new Error("developer not found", { cause: 404 }));
   }
   const developerFolderPath = `${process.env.APP_NAME}/developers/${developer?.customId}`;
-  await cloudinary.uploader.destroy(developer.logo?.public_id);
-  await cloudinary?.api?.delete_folder(developerFolderPath);
+  const publicId = developer?.mainImage?.public_id;
+  // if (publicId) {
+  //   const destroyResponse = await cloudinary.uploader.destroy(publicId);
+  //   if (destroyResponse.result !== "ok") {
+  //     return next(new Error("Failed to delete the image from Cloudinary"));
+  //   }
+  // }
+  // const deleteFolderResponse = await cloudinary.api.delete_folder(
+  //   developerFolderPath
+  // );
+
+  // await cloudinary?.uploader?.destroy(developer?.mainImage?.public_id);
+  // await cloudinary?.api?.delete_folder(developerFolderPath);
 
   await developerModel.deleteOne({
     _id: req.params.id,

@@ -76,6 +76,10 @@ const Home = () => {
     if (response?.status === 200) {
       if (response?.data?.data?.length === 0) {
         toast.error("لا يوجد مشاريع مماثلة");
+        setFormData({
+          project: searchParams.get("project") || "",
+          city: searchParams.get("city") || "",
+        });
       }
       setResultProjects(response?.data?.data);
     }
@@ -100,7 +104,7 @@ const Home = () => {
     const coastalProjects = data?.filter((project) => {
       return project?.projectType === "مشروعات-ساحلية";
     });
-    setGettingData(false)
+    setGettingData(false);
     setResedinationalProjects(resdintianlProjects);
     setCommercialProjects(commercialProjects);
     setCostalProjects(coastalProjects);
@@ -122,21 +126,7 @@ const Home = () => {
   return (
     <div className="homepage">
       <div className="home home-bg">
-        <h1 className="head">
-          {/* <TypeAnimation
-            sequence={[
-              "Find Your Dream", // Types 'One'
-              1000, // Waits 1s
-              "Your Dream Our Passion", // Deletes 'One' and types 'Two'
-              2000,
-            ]}
-            wrapper="span"
-            cursor={true}
-            repeat={Infinity}
-            style={{ fontSize: "80px", display: "inline-block" }}
-          /> */}
-          {t("home.mainHeader")}
-        </h1>
+        <h1 className="head">{t("home.mainHeader")}</h1>
         <form
           onSubmit={searchInProjects}
           className="home-search-input-container"
@@ -195,9 +185,9 @@ const Home = () => {
       {searchLoading ? (
         <LoadingOutlined className="loadingIndicator" />
       ) : resultProjects?.length > 0 ? (
-        resultProjects?.map((project) => {
-          return (
-            <div className="home-search-cards-container">
+        <div className="home-search-cards-container">
+          {resultProjects?.map((project) => {
+            return (
               <div className="home-search-card" key={project._id}>
                 <Card
                   onClick={() => Navigate(`/projects/${project._id}`)}
@@ -213,9 +203,9 @@ const Home = () => {
                   <Meta title={project.title} />
                 </Card>
               </div>
-            </div>
-          );
-        })
+            );
+          })}
+        </div>
       ) : (
         <>
           <HomeCities citiesData={citiesData} />

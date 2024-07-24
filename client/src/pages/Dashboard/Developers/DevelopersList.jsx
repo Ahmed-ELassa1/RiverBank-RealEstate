@@ -15,7 +15,8 @@ import { toast } from "react-toastify";
 const DevelopersList = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const developerInstance = new DevelopersService();
+  const token = localStorage.getItem("token");
+  const developerInstance = new DevelopersService(token);
   const navigate = useNavigate();
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");

@@ -9,6 +9,7 @@ import {
 import { useTranslation } from "react-i18next";
 import ContactUs from "../ContactUs/ContactUs";
 import { DevelopersService } from "../../services/Developers/DevelopersService";
+import "./ListDevelopersDetails.css";
 const ListDevelopersDetails = ({ isSticky }) => {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -67,7 +68,12 @@ const ListDevelopersDetails = ({ isSticky }) => {
                           href={`/#/projects/${id}/#section-${i}`}
                           onClick={(e) => scrollToSection(e, `section-${i}`)}
                         >
-                          {developerContent}
+                          <div
+                            // style={{ padding: "0 30px" }}
+                            dangerouslySetInnerHTML={{
+                              __html: developerContent,
+                            }}
+                          />
                         </a>
                       </li>
                     );
@@ -77,7 +83,6 @@ const ListDevelopersDetails = ({ isSticky }) => {
             )}
             {/* main description */}
             <div className="project-details-main-desc-section">
-              {/* {data?.mainDescription} */}
               <div
                 style={{ padding: "0 30px" }}
                 dangerouslySetInnerHTML={{
@@ -90,11 +95,18 @@ const ListDevelopersDetails = ({ isSticky }) => {
               {data?.developerDescriptions?.length > 0 &&
                 data?.developerDescriptions?.map((developerDescriptions, i) => {
                   return (
-                    <div id={`section-${i}`} key={i}>
+                    <div
+                      id={`section-${i}`}
+                      key={i}
+                      className="details-sections"
+                    >
                       {data?.subImages?.length > i && (
-                        <img src={data?.subImages[i]?.secure_url} />
+                        <img
+                          src={data?.subImages[i]?.secure_url}
+                          alt={data?.title}
+                        />
                       )}
-                      {/* <p>{developerDescriptions}</p> */}
+                      {/* <p>{developerDescription  s}</p> */}
                       <div
                         style={{ padding: "0 30px" }}
                         dangerouslySetInnerHTML={{
