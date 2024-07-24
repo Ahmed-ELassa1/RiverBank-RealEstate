@@ -12,7 +12,7 @@ const HomeCities = ({ citiesData }) => {
     const selectedCity = citiesData?.find((city) => {
       return city?.slug == e?.target?.id;
     });
-    Navigate(`cities/${selectedCity?._id}`);
+    Navigate(`city/${selectedCity?._id}`);
   }
 
   return (

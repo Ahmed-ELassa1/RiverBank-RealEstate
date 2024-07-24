@@ -87,7 +87,7 @@ function App() {
         { path: "/", index: true, element: <Home /> },
         { path: "/home", element: <Home /> },
         { path: "/search", element: <ProjectSearch /> },
-        { path: "/cities/:cityId", element: <Cities /> },
+        { path: "/city/:cityId", element: <Cities /> },
         { path: "/type/:projectType", element: <ProjectType /> },
         { path: "/developers", element: <Developers /> },
         { path: "/developers/:id", element: <ListDevelopersDetails /> },

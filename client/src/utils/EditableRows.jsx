@@ -28,11 +28,25 @@ const EditableCell = ({
   const [editing, setEditing] = useState(false);
   const inputRef = useRef(null);
   const form = useContext(EditableContext);
+  const wrapperRef = useRef(null);
 
   useEffect(() => {
     if (editing) {
       inputRef.current?.focus();
     }
+  }, [editing]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        save();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, [editing]);
 
   const toggleEdit = () => {
@@ -58,40 +72,38 @@ const EditableCell = ({
   let childNode = children;
   if (editable) {
     childNode = editing ? (
-      <Form.Item
-        style={{
-          margin: 0,
-        }}
-        name={dataIndex}
-        rules={[
-          {
-            required: true,
-            message: `${title} مطلوب.`,
-          },
-        ]}
-      >
-        {/* <Input ref={inputRef} onPressEnter={save} onBlur={save} /> */}
-        <ReactQuill
-          theme="snow"
-          ref={inputRef}
-          onPressEnter={save}
-          onBlur={save}
-          // value={data.description}
-          // name={dataIndex}
-          // onChange={(e) => {
-          //   setIsEdited(true);
-          //   setData({ ...data, description: e });
-          // }}
-          modules={modules}
-          formats={formats}
+      <div ref={wrapperRef}>
+        <Form.Item
           style={{
-            height: "150px",
-            width: "100%",
-            background: "#fff",
-            overflow: "auto",
+            margin: 0,
           }}
-        />
-      </Form.Item>
+          name={dataIndex}
+          rules={[
+            {
+              required: true,
+              message: `${title} مطلوب.`,
+            },
+          ]}
+        >
+          <ReactQuill
+            theme="snow"
+            ref={inputRef}
+            value={form.getFieldValue(dataIndex)}
+            onChange={(value) => form.setFieldsValue({ [dataIndex]: value })}
+            modules={modules}
+            formats={formats}
+            style={{
+              height: "150px",
+              width: "100%",
+              background: "#fff",
+              overflow: "auto",
+            }}
+          />
+        </Form.Item>
+        <Button onClick={save} type="primary">
+          Save
+        </Button>
+      </div>
     ) : (
       <div
         className="editable-cell-value-wrap"
@@ -130,12 +142,14 @@ const EditableRows = ({ dataSource, setDataSource, defaultColumns }) => {
     });
     setDataSource(newData);
   };
+
   const components = {
     body: {
       row: EditableRow,
       cell: EditableCell,
     },
   };
+
   const columns = defaultColumns.map((col) => {
     if (!col.editable) {
       return col;
@@ -174,4 +188,5 @@ const EditableRows = ({ dataSource, setDataSource, defaultColumns }) => {
     </div>
   );
 };
+
 export default EditableRows;

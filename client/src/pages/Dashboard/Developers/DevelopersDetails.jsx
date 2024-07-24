@@ -250,7 +250,6 @@ const DevelopersDetails = () => {
       toast.error(err);
     }
   };
-
   const handleSave = async () => {
     if (isEdited) {
       const valid = validation();
@@ -294,7 +293,6 @@ const DevelopersDetails = () => {
           formData.append("mainImage[0][public_id]", mainImgObj?.public_id);
           formData.append("mainImage[0][secure_url]", mainImgObj?.secure_url);
         }
-
         if (fileList.length > 0 && subImgsObj?.length > 0) {
           fileList?.forEach((feat) => {
             formData.append("subImages", feat);
@@ -306,7 +304,7 @@ const DevelopersDetails = () => {
           });
         } else if (fileList.length > 0 && subImgsObj?.length === 0) {
           fileList?.forEach((feat) => {
-            formData.append("subImages", feat);
+            formData.append(`subImages`, feat);
           });
         } else {
           subImgsObj?.forEach((feat, i) => {

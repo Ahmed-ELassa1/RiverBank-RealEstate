@@ -81,7 +81,7 @@ const ProjectTypeDetails = () => {
         try {
           const response = await projectTypeInstance.EditProjectType(id, data);
 
-          if (response.status === 200) {
+          if (response.status === 200 || response.status === 201) {
             toast.dismiss();
             toast.success(`${data.title} updated Successfully`);
 

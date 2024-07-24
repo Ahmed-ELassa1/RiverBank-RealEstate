@@ -217,7 +217,7 @@ const BlogsDetails = () => {
       setData({
         title: data?.title,
         description: data?.mainDescription,
-        mainImage: data?.mainImage?.secure_url,
+        mainImage: data?.mainImage?.length > 0 ? data?.mainImage?.[0]?.secure_url : data?.mainImage?.secure_url,
         subImages: data?.subImages,
       });
       setMainImgObj(data?.mainImage);
@@ -264,7 +264,6 @@ const BlogsDetails = () => {
         toast.loading("Loading...");
 
         const formData = new FormData();
-
         if (fileList.length > 0 && subImgsObj?.length > 0) {
           fileList?.forEach((feat) => {
             formData.append("subImages", feat);
@@ -284,12 +283,13 @@ const BlogsDetails = () => {
             formData.append(`subImages[${[i]}][secure_url]`, feat.secure_url);
           });
         }
+        console.log(subImgsObj);
 
         if (mainImage) {
           formData.append("mainImage", mainImage);
         } else {
-          formData.append("mainImage[public_id]", mainImgObj.public_id);
-          formData.append("mainImage[secure_url]", mainImgObj.secure_url);
+          formData.append("mainImage[0][public_id]", mainImgObj.public_id);
+          formData.append("mainImage[0][secure_url]", mainImgObj.secure_url);
         }
 
         contentDataSource?.forEach((feat) => {
@@ -529,7 +529,6 @@ const BlogsDetails = () => {
                       }}
                       onClick={() => deleteSubImage(item)}
                     />
-
                     <img
                       key={item?.public_id}
                       name={i}
