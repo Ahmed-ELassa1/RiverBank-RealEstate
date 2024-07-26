@@ -1,5 +1,5 @@
 import { CloseCircleOutlined, UploadOutlined } from "@ant-design/icons";
-import { Button, Input, Popconfirm, Select, Tabs, Upload } from "antd";
+import { Button, Input, Popconfirm, Select, Upload } from "antd";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -33,7 +33,6 @@ const CreateProject = () => {
     {
       title: "المحتوي",
       dataIndex: "question",
-      // width: "30%",
       editable: true,
     },
 
@@ -56,13 +55,11 @@ const CreateProject = () => {
     {
       title: "الوصف",
       dataIndex: "question",
-      // width: "30%",
       editable: true,
     },
     {
       title: "الخاصية",
       dataIndex: "answer",
-      // width: "30%",
       editable: true,
     },
     {
@@ -84,7 +81,6 @@ const CreateProject = () => {
     {
       title: "الوصف",
       dataIndex: "question",
-      // width: "30%",
       editable: true,
     },
     {
@@ -106,13 +102,11 @@ const CreateProject = () => {
     {
       title: "السؤال",
       dataIndex: "question",
-      // width: "30%",
       editable: true,
     },
     {
       title: "الاجابة",
       dataIndex: "answer",
-      // width: "30%",
       editable: true,
     },
     {
@@ -470,12 +464,6 @@ const CreateProject = () => {
 
           <div className="form-input">
             <p> الوصف الرئيسي</p>
-            {/* <Input
-              name="description"
-              value={data.description}
-              onChange={handleChange}
-              size="large"
-            /> */}
             <ReactQuill
               theme="snow"
               value={data.description}
@@ -593,17 +581,6 @@ const CreateProject = () => {
               rows={4}
             />
           </div>
-
-          {/* <div className="form-input">
-            <p>الصورة البارزة للمقال</p>
-            <img
-              name="logo"
-              src={data.logo}
-              alt={data.logo}
-              width={250}
-              height={250}
-            />
-          </div> */}
 
           <div className="form-input">
             <p>اختر صورة</p>

@@ -72,8 +72,19 @@ export const updateDeveloper = async (req, res, next) => {
         folder: `${process.env.APP_NAME}/developers/${developerExist.customId}/mainImage`,
       }
     );
-    if (developerExist?.mainImage) {
-      await cloudinary.uploader.destroy(developerExist?.mainImage?.public_id,{invalidate:false});
+    if (
+      developerExist?.mainImage?.secure_url != "" &&
+      developerExist?.mainImage?.secure_url != "undefined" &&
+      developerExist?.mainImage?.[0]?.secure_url != "undefined"
+    ) {
+      await cloudinary.uploader.destroy(
+        Array?.isArray(developerExist?.mainImage)
+          ? developerExist?.mainImage?.[0]?.public_id
+          : developerExist?.mainImage?.public_id,
+        {
+          invalidate: false,
+        }
+      );
     }
     req.body.mainImage = { public_id, secure_url };
   }
@@ -157,9 +168,6 @@ export const deleteDeveloper = async (req, res, next) => {
   const deleteFolderResponse = await cloudinary.api.delete_folder(
     developerFolderPath
   );
-
-  // await cloudinary?.uploader?.destroy(developer?.mainImage?.public_id);
-  // await cloudinary?.api?.delete_folder(developerFolderPath);
 
   await developerModel.deleteOne({
     _id: req.params.id,

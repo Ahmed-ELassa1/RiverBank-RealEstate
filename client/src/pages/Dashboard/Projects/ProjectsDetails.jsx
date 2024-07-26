@@ -101,7 +101,6 @@ const ProjectsDetails = () => {
     {
       title: "المحتوي",
       dataIndex: "question",
-      // width: "30%",
       editable: true,
     },
 
@@ -124,13 +123,11 @@ const ProjectsDetails = () => {
     {
       title: "الوصف",
       dataIndex: "question",
-      // width: "30%",
       editable: true,
     },
     {
       title: "الخاصية",
       dataIndex: "answer",
-      // width: "30%",
       editable: true,
     },
     {
@@ -152,7 +149,6 @@ const ProjectsDetails = () => {
     {
       title: "الوصف",
       dataIndex: "question",
-      // width: "30%",
       editable: true,
     },
     {
@@ -174,13 +170,11 @@ const ProjectsDetails = () => {
     {
       title: "السؤال",
       dataIndex: "question",
-      // width: "40%",
       editable: true,
     },
     {
       title: "الاجابة",
       dataIndex: "answer",
-      // width: "40%",
       editable: true,
     },
     {
@@ -614,13 +608,6 @@ const ProjectsDetails = () => {
 
             <div className="form-input">
               <p>الوصف</p>
-              {/* <TextArea
-                name="mainDescription"
-                value={data.mainDescription}
-                onChange={handleChange}
-                size="large"
-                rows={4}
-              /> */}
               <ReactQuill
                 theme="snow"
                 value={data.mainDescription}

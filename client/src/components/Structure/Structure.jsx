@@ -1,5 +1,4 @@
 import React from "react";
-// import ".css";
 import Facade from "../../assets/facade.webp";
 import { Link } from "react-router-dom";
 import Arrow from "../../assets/arrow.png";

@@ -6,7 +6,6 @@ import { Button, Input, Popconfirm, Upload } from "antd";
 import { CloseCircleOutlined, UploadOutlined } from "@ant-design/icons";
 import joi from "joi";
 import EditableRows from "../../../utils/EditableRows";
-import TextArea from "antd/es/input/TextArea";
 import ReactQuill from "react-quill";
 import { formats, modules } from "../../../data/sharedData";
 
@@ -17,13 +16,11 @@ const CreateBlog = () => {
   const [contentDataSource, setContentDataSource] = useState([]);
   const [quesDataSource, setQuesDataSource] = useState([]);
   const [descDataSource, setDescDataSource] = useState([]);
-  const [value, setValue] = useState("");
 
   const defaultDetailsColumns = [
     {
       title: "المحتوي",
       dataIndex: "question",
-      // width: "30%",
       editable: true,
     },
 
@@ -46,7 +43,6 @@ const CreateBlog = () => {
     {
       title: "الوصف",
       dataIndex: "question",
-      // width: "30%",
       editable: true,
     },
 
@@ -69,13 +65,11 @@ const CreateBlog = () => {
     {
       title: "السؤال",
       dataIndex: "question",
-      // width: "30%",
       editable: true,
     },
     {
       title: "الاجابة",
       dataIndex: "answer",
-      // width: "30%",
       editable: true,
     },
     {
@@ -252,13 +246,6 @@ const CreateBlog = () => {
 
       <div className="form-input">
         <p>الوصف الرئيسي</p>
-        {/* <TextArea
-          name="description"
-          value={data.description}
-          onChange={handleChange}
-          size="large"
-          rows={6}
-        /> */}
         <ReactQuill
           theme="snow"
           value={data.description}

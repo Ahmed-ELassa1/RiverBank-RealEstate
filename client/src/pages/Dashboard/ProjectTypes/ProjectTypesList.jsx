@@ -3,13 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   DeleteOutlined,
   EditOutlined,
-  LoadingOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
 import { Button, Input, Space, Table } from "antd";
 import { toast } from "react-toastify";
 import Highlighter from "react-highlight-words";
-import { CityService } from "../../../services/City/CityService";
 import { ProjectTypesService } from "../../../services/ProjectTypesService/ProjectTypesService";
 
 const ProjectTypesList = () => {
@@ -159,7 +157,6 @@ const ProjectTypesList = () => {
       title: "العنوان",
       dataIndex: "title",
       key: "title",
-      // width: "30%",
       ...getColumnSearchProps("title"),
       sorter: (a, b) => a.title.length - b.title.length,
       sortDirections: ["descend", "ascend"],
@@ -168,7 +165,6 @@ const ProjectTypesList = () => {
       title: "تاريخ الانشاء",
       dataIndex: "createdAt",
       key: "createdAt",
-      // width: "30%",
       ...getColumnSearchProps("createdAt"),
       sorter: (a, b) => a.createdAt.length - b.createdAt.length,
       sortDirections: ["descend", "ascend"],
@@ -193,14 +189,17 @@ const ProjectTypesList = () => {
 
   const getProjectTypes = async () => {
     try {
+      toast.loading("Loading...");
       const response = await projectTypeInstance.getProjectTypes({
         page: pageNumber,
         size: 10,
       });
       const data = await response.data.data;
+      toast.dismiss();
       setData(data);
       setLoading(false);
     } catch (err) {
+      toast.dismiss();
       setLoading(false);
     }
   };

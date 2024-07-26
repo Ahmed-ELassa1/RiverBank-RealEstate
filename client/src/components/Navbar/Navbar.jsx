@@ -33,7 +33,6 @@ const Navbar = () => {
     },
     {
       label: t("label.navbar.costalProjects"),
-      //   icon: <AppstoreOutlined />,
       children: [
         {
           label: "الساحل الشمالي",

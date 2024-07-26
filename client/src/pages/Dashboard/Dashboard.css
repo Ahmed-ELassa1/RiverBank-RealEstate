@@ -2,7 +2,24 @@
     .ant-table-cell {
         width: 15%;
     }
+
     .ant-table-cell:first-child {
-        width: 85%;
+        width: 30%;
+    }
+
+}
+
+.dash-container {
+
+    .ant-table-tbody {
+        max-width: 88vw;
+    }
+
+    :where(.css-dev-only-do-not-override-1okl62o).ant-table-wrapper .ant-table-tbody>tr>td,
+    :where(.css-dev-only-do-not-override-1okl62o).ant-table-wrapper .ant-table-container table>thead>tr:first-child>*:first-child {
+        max-width: 22vw;
+    }
+    :where(.css-dev-only-do-not-override-1okl62o).ant-table-wrapper .ant-table-tbody>tr>td{
+        width: fit-content;
     }
 }

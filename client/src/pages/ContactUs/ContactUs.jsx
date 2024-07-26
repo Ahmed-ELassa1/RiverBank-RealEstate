@@ -3,7 +3,6 @@ import "./ContactUs.css";
 import { ClientRequestService } from "../../services/ClientRequest/ClientRequestService";
 import { toast } from "react-toastify";
 import joi from "joi";
-import img from "../../assets/contactUs.jpg";
 import { CloseCircleOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 
@@ -79,23 +78,6 @@ export default function ContactUs() {
     e.preventDefault();
     const valid = validation();
     if (valid?.error?.details) {
-      // setFormErros({
-      //   nameError: valid?.error?.details?.find(
-      //     (error) => error?.context?.label == "name"
-      //   )?.message,
-      //   phoneError: valid?.error?.details?.find(
-      //     (error) => error?.context?.label == "phone"
-      //   )?.message,
-      //   locationError: valid?.error?.details?.find(
-      //     (error) => error?.context?.label == "location"
-      //   )?.message,
-      //   messageError: valid?.error?.details?.find(
-      //     (error) => error?.context?.label == "message"
-      //   )?.message,
-      //   emailError: valid?.error?.details?.find(
-      //     (error) => error?.context?.label == "email"
-      //   )?.message,
-      // });
       valid?.error?.details?.map((error) => {
         return toast.error(`${error?.message}`);
       });
@@ -108,7 +90,6 @@ export default function ContactUs() {
         phoneError: undefined,
         messageError: undefined,
       });
-      //   try {
       const response = await clientInstance.createClientRequest({
         userName: data.name,
         email: "hhhh@mail.com",

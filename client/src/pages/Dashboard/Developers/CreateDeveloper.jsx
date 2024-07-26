@@ -25,7 +25,6 @@ const CreateDeveloper = () => {
     {
       title: "المحتوي",
       dataIndex: "question",
-      // width: "30%",
       editable: true,
     },
 
@@ -48,7 +47,6 @@ const CreateDeveloper = () => {
     {
       title: "الوصف",
       dataIndex: "question",
-      // width: "30%",
       editable: true,
     },
 
@@ -71,13 +69,11 @@ const CreateDeveloper = () => {
     {
       title: "السؤال",
       dataIndex: "question",
-      // width: "30%",
       editable: true,
     },
     {
       title: "الاجابة",
       dataIndex: "answer",
-      // width: "30%",
       editable: true,
     },
     {

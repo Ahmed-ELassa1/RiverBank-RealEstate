@@ -173,9 +173,7 @@ const CityDetails = () => {
         };
       });
       setProjectTypeOptions(data);
-      // setLoading(false);
     } catch (err) {
-      // setLoading(false);
     }
   };
 
@@ -190,7 +188,6 @@ const CityDetails = () => {
     {
       title: "السؤال",
       dataIndex: "question",
-      // width: "30%",
       editable: true,
     },
     {
@@ -259,13 +256,6 @@ const CityDetails = () => {
 
           <div className="form-input">
             <p>الوصف</p>
-            {/* <Input
-              name="description"
-              value={data.description}
-              onChange={handleChange}
-              size="large"
-            /> */}
-
             <ReactQuill
               theme="snow"
               value={data.description}

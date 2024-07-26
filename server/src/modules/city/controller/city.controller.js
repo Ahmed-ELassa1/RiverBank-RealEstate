@@ -1,11 +1,6 @@
-import { nanoid } from "nanoid";
-import cloudinary from "../../../utils/cloudinary.js";
 import ApiFeatures from "../../../utils/ApiFeatures.js";
-import CityModel from "../../../DB/models/City.model.js";
-import developerModel from "../../../DB/models/Developer.model.js";
-import projectModel from "../../../DB/models/Project.model.js";
-import cityModel from "../../../DB/models/City.model.js";
 import projectTypeModel from "../../../DB/models/ProjectTypes.model.js";
+import cityModel from "../../../DB/models/City.model.js";
 
 export const addCity = async (req, res, next) => {
   const cityExist = await cityModel.findOne({

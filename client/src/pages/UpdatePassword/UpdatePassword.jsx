@@ -132,7 +132,6 @@ const UpdatePassword = () => {
           <EmailIcon />
           <input
             placeholder="Enter your email"
-            // defaultValue={email && email}
             title="Inpit title"
             name="email"
             type="text"

@@ -1,4 +1,7 @@
 .details-sections {
+    width: 100%;
+    text-align: right;
+
     ul {
         text-align: start;
     }

@@ -18,17 +18,7 @@ class ApiFeatures {
   }
   // filtering
   filter() {
-    // let excludeQuery = { ...this.data };
-    // const includedQueries = ["page", "size", "sort", "fields", "search"];
-    // includedQueries.forEach((e) => {
-    //   delete excludeQuery[e];
-    // });
-    // const filter = JSON.stringify(excludeQuery).replaceAll(
-    //   /(gt|gte|lte|lt|eq|in|nin|ne)/g,
-    //   (match) => `$${match}`
-    // );
-    // this.mongooseQuery = this.mongooseQuery.find(JSON.parse(filter));
-    // return this;
+
     const { page, size, sort, fields, search, ...filters } = this.data;
 
     const filterObj = { ...filters };

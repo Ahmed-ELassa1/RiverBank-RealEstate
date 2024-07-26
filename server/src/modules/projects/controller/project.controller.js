@@ -207,10 +207,10 @@ export const getProjects = async (req, res, next) => {
           path: "developerId",
           select: "_id slug",
         })
-      .populate({
-        path: "projectType",
-        select: "_id slug",
-      }),
+        .populate({
+          path: "projectType",
+          select: "_id slug",
+        }),
       req.query
     );
 
@@ -219,13 +219,12 @@ export const getProjects = async (req, res, next) => {
 
     // Execute the query asynchronously
     const projects = await apiFeature.mongooseQuery.exec();
-
     // Modify the structure of the returned projects
     const modifiedProjects = projects.map((project) => ({
       ...project.toObject(),
-      cityId: project.cityId.slug, // Modify the cityId field to be cityId: "the city Id"
-      developerId: project.developerId.slug, // Modify the developerId field to be developerId: "the developer Id"
-      projectType: project.projectType.slug, // Modify the developerId field to be developerId: "the developer Id"
+      cityId: project.cityId?.slug, // Modify the cityId field to be cityId: "the city Id"
+      developerId: project.developerId?.slug, // Modify the developerId field to be developerId: "the developer Id"
+      projectType: project.projectType?.slug, // Modify the developerId field to be developerId: "the developer Id"
     }));
 
     // Send the modified projects in the response
@@ -235,29 +234,6 @@ export const getProjects = async (req, res, next) => {
     return next(new Error(err, { cause: 400 }));
   }
 };
-// export const getProjects = async (req, res, next) => {
-//   req.query.fields = `-isDeleted,-updatedAt,-__v,-createdBy,-customId`;
-//   const apiFeature = new ApiFeatures(
-//     projectModel
-//       .find({ isDeleted: false })
-//       .populate({
-//         path: "cityId",
-//         select: "-_id",
-//       })
-//       .populate({
-//         path: "developerId",
-//         select: "_id",
-//       }),
-//     req.query
-//   )
-//     .paginate()
-//     .filter()
-//     .sort()
-//     .fields()
-//     .search();
-//   const projects = await apiFeature.mongooseQuery;
-//   return res.status(200).json({ message: "done", data: projects });
-// };
 export const getProjectById = async (req, res, next) => {
   const project = await projectModel
     .findOne({ _id: req.params.id, isDeleted: false })
@@ -279,18 +255,14 @@ export const deleteProject = async (req, res, next) => {
   const projectFolderPath = `${process.env.APP_NAME}/projects/${project?.customId}`;
   if (project?.subImages) {
     for (const image of project?.subImages) {
-      await cloudinary?.uploader.destroy(image?.public_id);
+      const destroyImage = await cloudinary?.uploader.destroy(image?.public_id);
     }
   }
-  await cloudinary.uploader.destroy(project.mainImage?.public_id);
-  await cloudinary?.api?.delete_folder(
-    `${process.env.APP_NAME}/projects/${project?.customId}/mainImage`
-  );
-  await cloudinary?.api?.delete_folder(
-    `${process.env.APP_NAME}/projects/${project?.customId}/subImages`
-  );
-  await cloudinary?.api?.delete_folder(projectFolderPath);
 
+  const destroyImage = await cloudinary.uploader.destroy(
+    project.mainImage?.public_id
+  );
+  const deleteSubImageFolder = await cloudinary?.api?.delete_all_resources(projectFolderPath);
   await projectModel.deleteOne({
     _id: req.params.id,
   });

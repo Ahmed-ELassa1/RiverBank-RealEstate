@@ -158,7 +158,6 @@ const ProjectsList = () => {
       title: "العنوان",
       dataIndex: "title",
       key: "title",
-      // width: "30%",
       ...getColumnSearchProps("title"),
       sorter: (a, b) => a.title.length - b.title.length,
       sortDirections: ["descend", "ascend"],
@@ -167,7 +166,6 @@ const ProjectsList = () => {
       title: "المدن",
       dataIndex: "cityId",
       key: "cityId",
-      // width: "20%",
       ...getColumnSearchProps("cityId"),
       sorter: (a, b) => a.cityId.length - b.cityId.length,
       sortDirections: ["descend", "ascend"],
@@ -205,9 +203,12 @@ const ProjectsList = () => {
         size: 10,
       });
       const data = await response.data.data;
+      toast.loading("Loading...");
       setLoading(false);
+      toast.dismiss();
       setData(data);
     } catch (err) {
+      toast.dismiss();
       setLoading(false);
     }
   };
