@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   DeleteOutlined,
   EditOutlined,
-  LoadingOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
 import { Button, Input, Space, Table } from "antd";
@@ -158,7 +157,6 @@ const CitiesList = () => {
       title: "العنوان",
       dataIndex: "title",
       key: "title",
-      // width: "30%",
       ...getColumnSearchProps("title"),
       sorter: (a, b) => a.title.length - b.title.length,
       sortDirections: ["descend", "ascend"],
@@ -167,7 +165,6 @@ const CitiesList = () => {
       title: "الكلمة المميزة (slug)",
       dataIndex: "slug",
       key: "slug",
-      // width: "20%",
       ...getColumnSearchProps("slug"),
       sorter: (a, b) => a.slug.length - b.slug.length,
       sortDirections: ["descend", "ascend"],
@@ -200,14 +197,17 @@ const CitiesList = () => {
 
   const getAllCities = async () => {
     try {
+      toast.loading("Loading...");
       const response = await cityInstance.getCities({
         page: pageNumber,
         size: 10,
       });
       const data = await response.data.data;
+      toast.dismiss();
       setData(data);
       setLoading(false);
     } catch (err) {
+      toast.dismiss();
       setLoading(false);
     }
   };

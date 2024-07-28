@@ -48,7 +48,9 @@ const Developers = () => {
                 hoverable
                 className="dev-img"
                 cover={
-                  <img alt={item.title} src={item?.mainImage?.secure_url} />
+                  <img alt={item.title} src={Array.isArray(item?.mainImage)
+                    ? item?.mainImage[0]?.secure_url
+                    : item?.mainImage?.secure_url} />
                 }
               >
                 <Meta title={item.title} />

@@ -1,7 +1,6 @@
 import {
   DeleteOutlined,
   EditOutlined,
-  LoadingOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
 import React, { useEffect, useRef, useState } from "react";
@@ -155,7 +154,6 @@ const ClientInfoList = () => {
       title: "اسم المستخدم",
       dataIndex: "userName",
       key: "userName",
-      // width: "30%",
       ...getColumnSearchProps("userName"),
       sorter: (a, b) => a.userName.length - b.userName.length,
       sortDirections: ["descend", "ascend"],
@@ -164,7 +162,6 @@ const ClientInfoList = () => {
       title: "البريد الالكتروني",
       dataIndex: "email",
       key: "email",
-      // width: "20%",
       ...getColumnSearchProps("email"),
     },
     {
@@ -202,14 +199,17 @@ const ClientInfoList = () => {
 
   const getAllClientInfo = async () => {
     try {
+      toast.loading("Loading...");
       const response = await clientInstance.getClientRequest({
         page: pageNumber,
         size: 10,
       });
       const data = await response.data.data;
+      toast.dismiss();
       setLoading(false);
       setData(data);
     } catch (err) {
+      toast.dismiss();
       setLoading(false);
     }
   };

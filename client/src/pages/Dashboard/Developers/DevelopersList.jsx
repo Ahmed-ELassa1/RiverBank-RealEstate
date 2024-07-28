@@ -3,15 +3,13 @@ import { DevelopersService } from "../../../services/Developers/DevelopersServic
 import {
   DeleteOutlined,
   EditOutlined,
-  LoadingOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
-import { Button, Card, Input, Space, Table } from "antd";
-import Meta from "antd/es/card/Meta";
+import { Button, Input, Space, Table } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import Highlighter from "react-highlight-words";
 import { toast } from "react-toastify";
-
+import "../Dashboard.css";
 const DevelopersList = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -140,7 +138,6 @@ const DevelopersList = () => {
       title: "العنوان",
       dataIndex: "title",
       key: "title",
-      // width: "30%",
       ...getColumnSearchProps("title"),
       sorter: (a, b) => a.title.length - b.title.length,
       sortDirections: ["descend", "ascend"],
@@ -149,27 +146,14 @@ const DevelopersList = () => {
       title: "المحتوي",
       dataIndex: "developerContent",
       key: "developerContent",
-      // width: "30%",
       ...getColumnSearchProps("developerContent"),
       sorter: (a, b) => a.developerContent.length - b.developerContent.length,
       sortDirections: ["descend", "ascend"],
     },
-    // {
-    //   title: "وصف المقالة",
-    //   dataIndex: "blogDescriptions",
-    //   key: "blogDescriptions",
-    //   width: "30%",
-    //   ...getColumnSearchProps("blogDescriptions"),
-    //   sorter: (a, b) =>
-    //     a.blogDescriptions.length - b.blogDescriptions.developers,
-    //   sortDirections: ["descend", "ascend"],
-    // },
-
     {
       title: "تاريخ الانشاء",
       dataIndex: "createdAt",
       key: "createdAt",
-      // width: "30%",
       ...getColumnSearchProps("createdAt"),
       sorter: (a, b) => a.createdAt.length - b.createdAt.length,
       sortDirections: ["descend", "ascend"],
@@ -212,14 +196,17 @@ const DevelopersList = () => {
 
   const getAllDeveloeprs = async () => {
     try {
+      toast.loading("Loading...");
       const response = await developerInstance.getDevelopers({
         page: pageNumber,
         size: 10,
       });
       const data = await response.data.data;
+      toast.dismiss();
       setLoading(false);
       setData(data);
     } catch (err) {
+      toast.dismiss();
       setLoading(false);
     }
   };

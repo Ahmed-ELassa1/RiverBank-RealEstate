@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import "./ListBlogsDetails.css";
 import { useParams } from "react-router-dom";
 import {
   LoadingOutlined,
@@ -9,6 +8,7 @@ import {
 import { useTranslation } from "react-i18next";
 import ContactUs from "../ContactUs/ContactUs";
 import { BlogsServices } from "../../services/Blogs/BlogsServices";
+import { toast } from "react-toastify";
 const ListBlogsDetails = ({ isSticky }) => {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -18,11 +18,14 @@ const ListBlogsDetails = ({ isSticky }) => {
 
   const getBlogDetails = async () => {
     try {
+      toast.loading("Loading ....");
       const response = await blogService.getBlogById(id);
       const data = await response.data.data;
       setLoading(false);
+      toast.dismiss();
       setData(data);
     } catch (err) {
+      toast.dismiss();
       setLoading(false);
     }
   };
@@ -50,28 +53,15 @@ const ListBlogsDetails = ({ isSticky }) => {
           <div className="details-page-content-container">
             <div>
               <img
-                src={data?.mainImage?.secure_url}
+                src={
+                  Array.isArray(data?.mainImage)
+                    ? data?.mainImage[0]?.secure_url
+                    : data?.mainImage?.secure_url
+                }
                 alt={data?.title}
                 className="projectImg"
               />
             </div>
-            {/* questions */}
-            {/* <div className="project-details-questions-container">
-              <h3 className="questionLabel">
-                {t("label.projectDetails.header")}
-              </h3>
-              <div className="project-details-questions-content">
-                {data?.projectDetails?.length > 0 &&
-                  data?.projectDetails?.map((detail, i) => {
-                    return (
-                      <p className="project-questions-row" key={i}>
-                        <span>{detail?.question}</span>
-                        <span>{detail?.answer}</span>
-                      </p>
-                    );
-                  })}
-              </div>
-            </div> */}
             {/*project content summery*/}
             {data?.blogContent?.length > 0 && (
               <div className="project-details-content-headers">

@@ -50,8 +50,13 @@ const ListDevelopersDetails = ({ isSticky }) => {
         {!loading ? (
           <div className="details-page-content-container">
             <div>
+              {console.log(data?.mainImage)}
               <img
-                src={data?.mainImage?.secure_url}
+                src={
+                  Array?.isArray(data?.mainImage)
+                    ? data?.mainImage[0]?.secure_url
+                    : data?.mainImage?.secure_url
+                }
                 alt={data?.seoData}
                 className="projectImg"
               />
@@ -108,7 +113,7 @@ const ListDevelopersDetails = ({ isSticky }) => {
                       )}
                       {/* <p>{developerDescription  s}</p> */}
                       <div
-                        style={{ padding: "0 30px" }}
+                        style={{ padding: "0 30px", textAlign: "right" }}
                         dangerouslySetInnerHTML={{
                           __html: developerDescriptions,
                         }}
@@ -122,8 +127,24 @@ const ListDevelopersDetails = ({ isSticky }) => {
                 data?.developerQuestions?.map((developerQuestion, i) => {
                   return (
                     <div key={i} className="details-question-about-project-row">
-                      <h3>{developerQuestion?.question}</h3>
-                      <p>{developerQuestion?.answer}</p>
+                      <h3>
+                        {
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: developerQuestion?.question,
+                            }}
+                          />
+                        }
+                      </h3>
+                      <p>
+                        {
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: developerQuestion?.answer,
+                            }}
+                          />
+                        }
+                      </p>
                     </div>
                   );
                 })}

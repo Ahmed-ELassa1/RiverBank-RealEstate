@@ -55,7 +55,6 @@ const ProjectType = () => {
                 <Card
                   onClick={() => Navigate(`/projects/${project?._id}`)}
                   hoverable
-                  // style={{ width: 240 }}
                   cover={
                     <img
                       alt={project?.seoData}

@@ -42,7 +42,6 @@ router
     "/sessionRefreshToken",
     validation(tokenSchema, true),
     auth(userEndPointsRoles.signOut),
-    // validation(userValidation.refreshTokenSchema),
     asyncHandler(authController.sessionRefreshToken)
   )
   .patch(

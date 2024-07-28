@@ -121,7 +121,6 @@ const propertySchema = new Schema(
         "elGouna",
         "newHeliopolis",
       ],
-      //   default: "newCapitalCity",
     },
     price: {
       type: Number,

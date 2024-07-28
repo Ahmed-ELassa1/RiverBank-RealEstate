@@ -4,10 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   DeleteOutlined,
   EditOutlined,
-  LoadingOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
-import BlogCard from "../../../components/BlogCard/BlogCard";
 import { Button, Input, Space, Table } from "antd";
 import Highlighter from "react-highlight-words";
 import { toast } from "react-toastify";
@@ -140,7 +138,6 @@ const BlogsList = () => {
       title: "العنوان",
       dataIndex: "title",
       key: "title",
-      // width: "30%",
       ...getColumnSearchProps("title"),
       sorter: (a, b) => a.title.length - b.title.length,
       sortDirections: ["descend", "ascend"],
@@ -149,27 +146,14 @@ const BlogsList = () => {
       title: "المحتوي",
       dataIndex: "blogContent",
       key: "blogContent",
-      // width: "30%",
       ...getColumnSearchProps("blogContent"),
       sorter: (a, b) => a.blogContent.length - b.blogContent.length,
       sortDirections: ["descend", "ascend"],
     },
-    // {
-    //   title: "وصف المقالة",
-    //   dataIndex: "blogDescriptions",
-    //   key: "blogDescriptions",
-    //   width: "30%",
-    //   ...getColumnSearchProps("blogDescriptions"),
-    //   sorter: (a, b) =>
-    //     a.blogDescriptions.length - b.blogDescriptions.developers,
-    //   sortDirections: ["descend", "ascend"],
-    // },
-
     {
       title: "تاريخ الانشاء",
       dataIndex: "createdAt",
       key: "createdAt",
-      // width: "30%",
       ...getColumnSearchProps("createdAt"),
       sorter: (a, b) => a.createdAt.length - b.createdAt.length,
       sortDirections: ["descend", "ascend"],
@@ -212,14 +196,17 @@ const BlogsList = () => {
 
   const getAllBlogs = async () => {
     try {
+      toast.loading("Loading...");
       const response = await blogInstance.getBlogs({
         page: pageNumber,
         size: 10,
       });
       const data = await response.data.data;
+      toast.dismiss();
       setData(data);
       setLoading(false);
     } catch (err) {
+      toast.dismiss();
       setLoading(false);
     }
   };

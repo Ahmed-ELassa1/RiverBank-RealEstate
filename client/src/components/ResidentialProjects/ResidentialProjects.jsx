@@ -131,7 +131,9 @@ const ResidentialProjects = ({
               );
             })
           ) : (
-            <div className="container">لا يوجد مشاريع سكنية في الوقت الحالي</div>
+            <div className="container">
+              لا يوجد مشاريع سكنية في الوقت الحالي
+            </div>
           )}
           {projectsCards?.length > 0 && (
             <Link to={`type/residential`} className="button-seeAll-link">

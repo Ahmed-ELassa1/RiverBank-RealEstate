@@ -52,11 +52,6 @@ export const addProjectSchema = joi
     whatsAppNumber: joi.string().required(),
     callToAction: joi.string().required(),
     contactMessage: joi.string().required(),
-
-    // features: joi.array().items(joi.string()),
-    // title: joi.string().min(2),
-    // price: joi.number().min(1).positive(),
-    // currency: joi.string().valid("USD", "EGP", "SAR", "EUR", "AED"),
   })
   .required();
 export const updateProjectSchema = joi

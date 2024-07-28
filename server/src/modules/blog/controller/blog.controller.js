@@ -53,7 +53,6 @@ export const updateBlog = async (req, res, next) => {
   if (!blogExist) {
     return next(new Error("blog not found", { cause: 404 }));
   }
-  console.log(req.files);
   if (req.files?.mainImage?.length > 0) {
     const { public_id, secure_url } = await cloudinary.uploader.upload(
       req.files?.mainImage[0]?.path,
@@ -62,7 +61,15 @@ export const updateBlog = async (req, res, next) => {
       }
     );
     if (blogExist?.mainImage) {
-      const delteMainImage = await cloudinary.uploader.destroy(blogExist?.mainImage?.public_id);
+      if (blogExist?.mainImage?.length) {
+        const delteMainImage = await cloudinary.uploader.destroy(
+          blogExist?.mainImage?.[0]?.public_id
+        );
+      } else {
+        const delteMainImage = await cloudinary.uploader.destroy(
+          blogExist?.mainImage?.public_id
+        );
+      }
     }
     req.body.mainImage = { public_id, secure_url };
   }
@@ -78,14 +85,18 @@ export const updateBlog = async (req, res, next) => {
     );
     subImagesArray.push(...existImages);
     for (const deletedImage of deletedImagesArr) {
-      const delteSubImage =  await cloudinary?.uploader.destroy(deletedImage?.public_id);
+      const delteSubImage = await cloudinary?.uploader.destroy(
+        deletedImage?.public_id
+      );
     }
   }
   if (!req.body?.subImages && blogExist?.length) {
     for (const deletedImage of blogExist?.subImages) {
-      const delteSubImage =  await cloudinary?.uploader.destroy(deletedImage?.public_id);
+      const delteSubImage = await cloudinary?.uploader.destroy(
+        deletedImage?.public_id
+      );
     }
-}
+  }
   if (req.files?.subImages?.length) {
     // upload subImages one by one
     for (const image of req.files.subImages) {
@@ -119,7 +130,10 @@ export const getBlogs = async (req, res, next) => {
     .fields()
     .search();
   const blogs = await apiFeature.mongooseQuery;
-  return res.status(200).json({ message: "done", data: blogs });
+  return res.status(200).json({
+    message: "done",
+    data: blogs,
+  });
 };
 export const getBlogById = async (req, res, next) => {
   const blog = await blogModel
@@ -128,7 +142,13 @@ export const getBlogById = async (req, res, next) => {
   if (!blog) {
     return next(new Error("blog not found", { cause: 404 }));
   }
-  return res.status(200).json({ message: "done", data: blog });
+  return res.status(200).json({
+    message: "done",
+    data: {
+      ...blog?._doc,
+      mainImage: blog?.mainImage?.length ? blog?.mainImage[0] : blog?.mainImage,
+    },
+  });
 };
 
 export const deleteBlog = async (req, res, next) => {
@@ -141,18 +161,27 @@ export const deleteBlog = async (req, res, next) => {
   }
   const blogFolderPath = `${process.env.APP_NAME}/blogs/${blog?.customId}`;
   if (blog?.mainImage?.length > 0) {
-    const delteMainImage = await cloudinary.uploader.destroy(blog.mainImage?.[0]?.public_id);
-    const delelteAllResorces =  await cloudinary?.api?.delete_all_resources(blogFolderPath);
-    // const delelteFolder =  await cloudinary?.api?.delete_folder(blogFolderPath);
+    const delteMainImage = await cloudinary.uploader.destroy(
+      blog.mainImage?.[0]?.public_id
+    );
+    const delelteAllResorces = await cloudinary?.api?.delete_all_resources(
+      blogFolderPath
+    );
   }
   if (!Array.isArray(blog?.mainImage)) {
-    const delteMainImage =await cloudinary.uploader.destroy(blog.mainImage?.public_id);
-    const delelteAllResorces =   await cloudinary?.api?.delete_all_resources(blogFolderPath);
-    const delelteFolder =await cloudinary?.api?.delete_folder(blogFolderPath);
+    const delteMainImage = await cloudinary.uploader.destroy(
+      blog.mainImage?.public_id
+    );
+    const delelteAllResorces = await cloudinary?.api?.delete_all_resources(
+      blogFolderPath
+    );
+    const delelteFolder = await cloudinary?.api?.delete_folder(blogFolderPath);
   }
   if (blog?.subImages.length > 0 && !blog?.mainImage) {
-    const delelteAllResorces =   await cloudinary?.api?.delete_all_resources(blogFolderPath);
-    const delelteFolder =  await cloudinary?.api?.delete_folder(blogFolderPath);
+    const delelteAllResorces = await cloudinary?.api?.delete_all_resources(
+      blogFolderPath
+    );
+    const delelteFolder = await cloudinary?.api?.delete_folder(blogFolderPath);
   }
 
   const deletedBlog = await blogModel.findByIdAndUpdate(

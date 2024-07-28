@@ -3,6 +3,7 @@ import { PropertiesServices } from "../../../services/properties/PropertiesServi
 import { LoadingOutlined } from "@ant-design/icons";
 import PropsCard from "../../../components/PropsCard/PropsCard";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const PropertiesList = () => {
   const [data, setData] = useState([]);
@@ -12,12 +13,14 @@ const PropertiesList = () => {
 
   const getAllProperties = async () => {
     try {
+      toast.loading("Loading...");
       const response = await propertyInstance.getProperties();
       const data = await response.data.data;
       setLoading(false);
-
+      toast.dismiss();
       setData(data);
     } catch (err) {
+      toast.dismiss();
       setLoading(false);
     }
   };

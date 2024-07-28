@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { BlogsServices } from "../../../services/Blogs/BlogsServices";
 import { useNavigate } from "react-router-dom";
-import { Button, Input, Popconfirm, Select, Upload } from "antd";
-import { CloseCircleOutlined, UploadOutlined } from "@ant-design/icons";
+import { Input, Popconfirm, Select } from "antd";
+import { CloseCircleOutlined } from "@ant-design/icons";
 import joi from "joi";
 import { CityService } from "../../../services/City/CityService";
 import EditableRows from "../../../utils/EditableRows";
@@ -113,7 +112,6 @@ const CreateCity = () => {
         };
       });
       setProjectTypeOptions(data);
-      // setLoading(false);
     } catch (err) {
       // setLoading(false);
     }
@@ -128,7 +126,6 @@ const CreateCity = () => {
     {
       title: "السؤال",
       dataIndex: "question",
-      // width: "30%",
       editable: true,
     },
     {
@@ -185,13 +182,6 @@ const CreateCity = () => {
 
       <div className="form-input">
         <p>الوصف</p>
-        {/* <Input
-          name="description"
-          value={data.description}
-          onChange={handleChange}
-          size="large"
-        /> */}
-
         <ReactQuill
           theme="snow"
           value={data.description}

@@ -33,7 +33,6 @@ const BlogsDetails = () => {
     {
       title: "المحتوي",
       dataIndex: "question",
-      // width: "30%",
       editable: true,
     },
 
@@ -42,7 +41,7 @@ const BlogsDetails = () => {
       width: "10%",
       dataIndex: "operation",
       render: (_, record) =>
-        contentDataSource.length >= 1 ? (
+        contentDataSource?.length >= 1 ? (
           <Popconfirm
             title="هل انت متأكد من الحذف"
             onConfirm={() => handleDeleteRow(record.key)}
@@ -56,7 +55,6 @@ const BlogsDetails = () => {
     {
       title: "الوصف",
       dataIndex: "question",
-      // width: "30%",
       editable: true,
     },
 
@@ -65,7 +63,7 @@ const BlogsDetails = () => {
       width: "10%",
       dataIndex: "operation",
       render: (_, record) =>
-        contentDataSource.length >= 1 ? (
+        contentDataSource?.length >= 1 ? (
           <Popconfirm
             title="هل انت متأكد من الحذف"
             onConfirm={() => handleDeleteDescription(record.key)}
@@ -79,13 +77,11 @@ const BlogsDetails = () => {
     {
       title: "السؤال",
       dataIndex: "question",
-      // width: "30%",
       editable: true,
     },
     {
       title: "الاجابة",
       dataIndex: "answer",
-      // width: "30%",
       editable: true,
     },
     {
@@ -93,7 +89,7 @@ const BlogsDetails = () => {
       width: "10%",
       dataIndex: "operation",
       render: (_, record) =>
-        contentDataSource.length >= 1 ? (
+        contentDataSource?.length >= 1 ? (
           <Popconfirm
             title="هل انت متأكد من الحذف"
             onConfirm={() => handleDeleteQuestion(record.key)}
@@ -264,7 +260,7 @@ const BlogsDetails = () => {
         toast.loading("Loading...");
 
         const formData = new FormData();
-        if (fileList.length > 0 && subImgsObj?.length > 0) {
+        if (fileList?.length > 0 && subImgsObj?.length > 0) {
           fileList?.forEach((feat) => {
             formData.append("subImages", feat);
           });
@@ -273,7 +269,7 @@ const BlogsDetails = () => {
             formData.append(`subImages[${[i]}][public_id]`, feat.public_id);
             formData.append(`subImages[${[i]}][secure_url]`, feat.secure_url);
           });
-        } else if (fileList.length > 0 && subImgsObj?.length === 0) {
+        } else if (fileList?.length > 0 && subImgsObj?.length === 0) {
           fileList?.forEach((feat) => {
             formData.append("subImages", feat);
           });
@@ -283,8 +279,6 @@ const BlogsDetails = () => {
             formData.append(`subImages[${[i]}][secure_url]`, feat.secure_url);
           });
         }
-        console.log(subImgsObj);
-
         if (mainImage) {
           formData.append("mainImage", mainImage);
         } else {
@@ -440,7 +434,7 @@ const BlogsDetails = () => {
               defaultColumns={defaultDetailsColumns}
               setIsEdited={setIsEdited}
             />
-            {contentDataSource.length === 0 && (
+            {contentDataSource?.length === 0 && (
               <p className="input-error-message">
                 <span>
                   <CloseCircleOutlined className="input-error-icon" />
@@ -458,7 +452,7 @@ const BlogsDetails = () => {
               defaultColumns={defaultQuesColumns}
               setIsEdited={setIsEdited}
             />
-            {quesDataSource.length === 0 && (
+            {quesDataSource?.length === 0 && (
               <p className="input-error-message">
                 <span>
                   <CloseCircleOutlined className="input-error-icon" />
@@ -476,7 +470,7 @@ const BlogsDetails = () => {
               defaultColumns={defaultDescColumns}
               setIsEdited={setIsEdited}
             />
-            {descDataSource.length === 0 && (
+            {descDataSource?.length === 0 && (
               <p className="input-error-message">
                 <span>
                   <CloseCircleOutlined className="input-error-icon" />

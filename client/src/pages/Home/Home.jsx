@@ -209,30 +209,24 @@ const Home = () => {
       ) : (
         <>
           <HomeCities citiesData={citiesData} />
-          {/* {resedinationalProjects?.length > 0 && ( */}
           <ResidentialProjects
             resedinationalProjects={resedinationalProjects}
             cities={citiesData}
             projectTypesData={projectTypesData}
             gettingData={gettingData}
           />
-          {/* )} */}
-          {/* {costalProjects?.length > 0 && ( */}
           <CoastalProjects
             costalProjects={costalProjects}
             cities={citiesData}
             projectTypesData={projectTypesData}
             gettingData={gettingData}
           />
-          {/* )} */}
-          {/* {commercialProjects?.length > 0 && ( */}
           <CommercialProjects
             commercialProjects={commercialProjects}
             cities={citiesData}
             projectTypesData={projectTypesData}
             gettingData={gettingData}
           />
-          {/* )} */}
         </>
       )}
     </div>

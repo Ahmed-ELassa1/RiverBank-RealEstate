@@ -126,7 +126,9 @@ const CoastalProjects = ({ costalProjects, cities, gettingData }) => {
               );
             })
           ) : (
-            <div className="container">لا يوجد مشاريع ساحلية في الوقت الحالي</div>
+            <div className="container">
+              لا يوجد مشاريع ساحلية في الوقت الحالي
+            </div>
           )}
           {projectsCards?.length > 0 && (
             <Link to={`type/coastal`} className="button-seeAll-link">

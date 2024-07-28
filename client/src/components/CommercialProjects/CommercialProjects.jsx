@@ -126,7 +126,9 @@ const CommercialProjects = ({ commercialProjects, cities, gettingData }) => {
               );
             })
           ) : (
-            <div className="container">لا يوجد مشاريع تجارية في الوقت الحالي</div>
+            <div className="container">
+              لا يوجد مشاريع تجارية في الوقت الحالي
+            </div>
           )}
           {projectsCards?.length > 0 && (
             <Link to={`type/commercial`} className="button-seeAll-link">

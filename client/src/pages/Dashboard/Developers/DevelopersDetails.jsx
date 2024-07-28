@@ -48,7 +48,6 @@ const DevelopersDetails = () => {
     {
       title: "المحتوي",
       dataIndex: "question",
-      // width: "30%",
       editable: true,
     },
 
@@ -57,7 +56,7 @@ const DevelopersDetails = () => {
       width: "10%",
       dataIndex: "operation",
       render: (_, record) =>
-        contentDataSource.length >= 1 ? (
+        contentDataSource?.length >= 1 ? (
           <Popconfirm
             title="هل انت متأكد من الحذف"
             onConfirm={() => handleDeleteRow(record.key)}
@@ -71,7 +70,6 @@ const DevelopersDetails = () => {
     {
       title: "الوصف",
       dataIndex: "question",
-      // width: "30%",
       editable: true,
     },
 
@@ -80,7 +78,7 @@ const DevelopersDetails = () => {
       width: "10%",
       dataIndex: "operation",
       render: (_, record) =>
-        contentDataSource.length >= 1 ? (
+        contentDataSource?.length >= 1 ? (
           <Popconfirm
             title="هل انت متأكد من الحذف"
             onConfirm={() => handleDeleteDescription(record.key)}
@@ -94,13 +92,11 @@ const DevelopersDetails = () => {
     {
       title: "السؤال",
       dataIndex: "question",
-      // width: "30%",
       editable: true,
     },
     {
       title: "الاجابة",
       dataIndex: "answer",
-      // width: "30%",
       editable: true,
     },
     {
@@ -108,7 +104,7 @@ const DevelopersDetails = () => {
       width: "10%",
       dataIndex: "operation",
       render: (_, record) =>
-        contentDataSource.length >= 1 ? (
+        contentDataSource?.length >= 1 ? (
           <Popconfirm
             title="هل انت متأكد من الحذف"
             onConfirm={() => handleDeleteQuestion(record.key)}
@@ -219,11 +215,15 @@ const DevelopersDetails = () => {
       setData({
         title: data?.title,
         description: data?.mainDescription,
-        logo: data?.mainImage?.secure_url,
+        logo: Array?.isArray(data?.mainImage)
+          ? data?.mainImage[0]?.secure_url
+          : data?.mainImage?.secure_url,
         subImages: data?.subImages,
       });
 
-      setMainImgObj(data.logo);
+      setMainImgObj(
+        Array?.isArray(data?.mainImage) ? data?.mainImage[0] : data?.mainImage
+      );
       setSubImgsObj(data.subImages);
 
       setContentDataSource(
@@ -286,14 +286,13 @@ const DevelopersDetails = () => {
           );
           formData.append(`developerQuestions[${[i]}][answer]`, feat.answer);
         });
-
         if (mainImage) {
           formData.append("mainImage", mainImage);
         } else {
           formData.append("mainImage[0][public_id]", mainImgObj?.public_id);
           formData.append("mainImage[0][secure_url]", mainImgObj?.secure_url);
         }
-        if (fileList.length > 0 && subImgsObj?.length > 0) {
+        if (fileList?.length > 0 && subImgsObj?.length > 0) {
           fileList?.forEach((feat) => {
             formData.append("subImages", feat);
           });
@@ -302,7 +301,7 @@ const DevelopersDetails = () => {
             formData.append(`subImages[${[i]}][public_id]`, feat.public_id);
             formData.append(`subImages[${[i]}][secure_url]`, feat.secure_url);
           });
-        } else if (fileList.length > 0 && subImgsObj?.length === 0) {
+        } else if (fileList?.length > 0 && subImgsObj?.length === 0) {
           fileList?.forEach((feat) => {
             formData.append(`subImages`, feat);
           });
@@ -330,6 +329,7 @@ const DevelopersDetails = () => {
           setLoading(false);
           toast.error(err);
         }
+        toast.dismiss();
       }
     } else {
       navigate("/dashboard/developers");
@@ -412,12 +412,6 @@ const DevelopersDetails = () => {
 
           <div className="form-input">
             <p>الوصف الرئيسي</p>
-            {/* <Input
-              name="description"
-              value={data.description}
-              onChange={handleChange}
-              size="large"
-            /> */}
             <ReactQuill
               theme="snow"
               value={data.description}
@@ -447,7 +441,7 @@ const DevelopersDetails = () => {
               defaultColumns={defaultDetailsColumns}
               setIsEdited={setIsEdited}
             />
-            {contentDataSource.length === 0 && (
+            {contentDataSource?.length === 0 && (
               <p className="input-error-message">
                 <span>
                   <CloseCircleOutlined className="input-error-icon" />
@@ -465,7 +459,7 @@ const DevelopersDetails = () => {
               defaultColumns={defaultQuesColumns}
               setIsEdited={setIsEdited}
             />
-            {quesDataSource.length === 0 && (
+            {quesDataSource?.length === 0 && (
               <p className="input-error-message">
                 <span>
                   <CloseCircleOutlined className="input-error-icon" />
@@ -483,7 +477,7 @@ const DevelopersDetails = () => {
               defaultColumns={defaultDescColumns}
               setIsEdited={setIsEdited}
             />
-            {descDataSource.length === 0 && (
+            {descDataSource?.length === 0 && (
               <p className="input-error-message">
                 <span>
                   <CloseCircleOutlined className="input-error-icon" />
@@ -517,7 +511,7 @@ const DevelopersDetails = () => {
           <div className="form-input">
             <p>الصورة الفرعية </p>
             <div style={{ display: "flex", gap: "10px" }}>
-              {data.subImages.length > 0 &&
+              {data.subImages?.length > 0 &&
                 data.subImages?.map((item, i) => (
                   <div
                     key={item.secure_url}
