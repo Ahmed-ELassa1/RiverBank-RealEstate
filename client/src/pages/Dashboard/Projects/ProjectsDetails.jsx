@@ -428,6 +428,7 @@ const ProjectsDetails = () => {
           formData.append(`projectDetails[${[i]}][answer]`, feat.answer);
         });
 
+        console.log(descDataSource);
         descDataSource?.forEach((feat, i) => {
           formData.append(`projectDescriptions[${[i]}]`, feat.question);
         });
@@ -652,6 +653,7 @@ const ProjectsDetails = () => {
                 dataSource={quesDataSource}
                 setDataSource={setQuesDataSource}
                 defaultColumns={defaultQuesColumns}
+                setIsEdited={setIsEdited}
               />
               {quesDataSource.length === 0 && (
                 <p className="input-error-message">
@@ -669,6 +671,7 @@ const ProjectsDetails = () => {
                 dataSource={contentDataSource}
                 setDataSource={setContentDataSource}
                 defaultColumns={defaultContentColumns}
+                setIsEdited={setIsEdited}
               />
               {contentDataSource.length === 0 && (
                 <p className="input-error-message">
@@ -686,6 +689,7 @@ const ProjectsDetails = () => {
                 dataSource={detailsDataSource}
                 setDataSource={setDetailsDataSource}
                 defaultColumns={defaultDetailsColumns}
+                setIsEdited={setIsEdited}
               />
               {detailsDataSource.length === 0 && (
                 <p className="input-error-message">
@@ -703,6 +707,7 @@ const ProjectsDetails = () => {
                 dataSource={descDataSource}
                 setDataSource={setDescDataSource}
                 defaultColumns={defaultDescColumns}
+                setIsEdited={setIsEdited}
               />
 
               {descDataSource.length === 0 && (

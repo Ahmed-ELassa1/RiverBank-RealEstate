@@ -69,10 +69,17 @@ const ProjectDetails = ({ isSticky }) => {
                     return (
                       <p className="project-questions-row" key={i}>
                         <span>
-                          {detail?.question}
-                          {/* <strong>:</strong> */}
+                          {<div
+                            className="project-questions-content"
+                            style={{ padding: "0 30px" }}
+                            dangerouslySetInnerHTML={{ __html: detail?.question }}
+                          />}
                         </span>
-                        <span>{detail?.answer}</span>
+                        <span>{<div
+                          className="project-questions-content"
+                          style={{ padding: "0 30px" }}
+                          dangerouslySetInnerHTML={{ __html: detail?.answer }}
+                        />}</span>
                       </p>
                     );
                   })}
@@ -90,7 +97,9 @@ const ProjectDetails = ({ isSticky }) => {
                           href={`/#/projects/${id}/#section-${i}`}
                           onClick={(e) => scrollToSection(e, `section-${i}`)}
                         >
-                          {projectContent}
+                          {<div
+                            dangerouslySetInnerHTML={{ __html: projectContent }}
+                          />}
                         </a>
                       </li>
                     );
@@ -107,45 +116,21 @@ const ProjectDetails = ({ isSticky }) => {
             </div>
             {/* details sections */}
             <div className="details-descriptions-section-container">
-              {/* <h3>موقع كمبوند ريد المستقبل سيتي Compound RED Mostakbal City</h3>
-            <img src={img1} />
-            <p>
-              اقتنصت شركه كونر ستون أهم موقع استراتيجي بقلب مدينه المستقبل، كما
-              حرصت علي أختيار أفضل قطعه أرض لأن الموقع هو العامل الأساسي لنجاح
-              أي مشروع، كذلك يعد الموقع هو المؤشر لنجاح تشغيل المشروع علي المدي
-              البعيد أو فشل تشغيل المشروع رغم كافه المقاومات، كما انطلقت الشركه
-              المطوره بأختيار الموقع لأنه الأساس في أختيار العميل أو المستثمر
-              للمشروع بناء علي موقعه الحيوي، كذلك اهتمت أيضا الشركه المطوره بقرب
-              المشروع من أهم المدن النابضه الحيويه، أيضا يسهل الوصول الي
-              الكمبوند عن طريق أهم الطرق الرئيسيه، كما يقترب الكمبوند من العديد
-              من المدارس والمستشفيات، كذلك المناطق الخدميه والترفيهيه، كذلك
-              وصولا الي الأماكن التعليميه العاليه. الأماكن القريبه من كمبوند ريد
-              مستقبل سيتي: يقترب الكمبوند من أهم المحاور والطرق الرئيسيه مثل
-              المحور الأقليمي والدائري الأوسطي. كما يقترب الكمبوند من طريق
-              السويس لذلك يسهل الوصول الي مشروع كونر ستون بسهوله. كذلك يبعد
-              الكمبوند عن العاصمه الاداريه بحوالي 15 دقيقه فقط. أيضا يقترب
-              الكمبوند من التجمع الخامس بحوالي 10 دقائق فقط. كما يبعد الكمبوند
-              من مول كايرو فيستيفال سيتي CFC MALL حوالي 5 دقائق فقط. كذلك يقترب
-              الكمبوند من مدينتي والرحاب وكذلك مدينه الشروق وبدر. أيضا يبعد
-              الكمبوند عن الجامعه الأمريكيه AUC بحوالي 5 دقائق فقط. كما يقترب
-              الكمبوند من مطار القاهره الدولي. كذلك يبعد الكمبوند عن حي المال
-              والأعمال بمسافه قليله جدا. أيضا يمكنك الوصول الي الكمبوند بسهوله
-              من طريق العين السخنه. كما يجاور الكمبوند محطه القطار السريع
-              المونوريل. كذلك يبعد الكمبوند عن مول 5A بأقل من 10 دقائق. أيضا
-              يقترب الكمبوند من الحي الحكومي بالعاصمه الاداريه. كما يبعد
-              الكمبوند عن مصر الجديده ومدينه نصر بدقائق معدوده. كذلك يجاور
-              الكمبوند العديد من أهم المشروعات السكنيه والخدميه كمبوند اليفا
-              مونتن فيو مستقبل سيتي، كذلك كمبوند البوسكو سيتي.
-            </p> */}
               {data?.projectDescriptions?.length > 0 &&
                 data?.projectDescriptions?.map((projectDescription, i) => {
                   return (
                     <div id={`section-${i}`} key={i}>
+                      <div
+                        style={{ padding: "0 22px" }}
+                        className="project-details-titles"
+                        dangerouslySetInnerHTML={{ __html: data?.projectContent[i] }
+                        }
+                      />
                       {data?.subImages?.length > i && (
                         <img src={data?.subImages[i]?.secure_url} />
                       )}
-                      {/* <p>{projectDescription}</p> */}
                       <div
+                        className="project-details-sections"
                         style={{ padding: "0 30px" }}
                         dangerouslySetInnerHTML={{ __html: projectDescription }}
                       />
@@ -158,8 +143,14 @@ const ProjectDetails = ({ isSticky }) => {
                 data?.projectQuestions?.map((projectQuestion, i) => {
                   return (
                     <div key={i} className="details-question-about-project-row">
-                      <h3>{projectQuestion?.question}</h3>
-                      <p>{projectQuestion?.answer}</p>
+                      <h3>{<div
+                        style={{ paddingRight: "18px", marginTop: "0" }}
+                        dangerouslySetInnerHTML={{ __html: projectQuestion?.question }}
+                      />}</h3>
+                      <p>{<div
+                        style={{ paddingRight: "18px" }}
+                        dangerouslySetInnerHTML={{ __html: projectQuestion?.answer }}
+                      />}</p>
                     </div>
                   );
                 })}
