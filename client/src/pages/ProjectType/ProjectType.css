@@ -90,7 +90,6 @@
   h2 {
     background: #00000047;
     width: 100%;
-    font-size: 60px;
   }
 
   @media screen and (max-width: 425px) {
@@ -106,6 +105,10 @@
       width: 23%;
     }
   }
+
+  h2 {
+    font-size: 60px;
+  }
 }
 
 @media (min-width: 800px) and (max-width: 1100px) {
@@ -113,6 +116,10 @@
     .cityCard {
       width: 30%;
     }
+  }
+
+  h2 {
+    font-size: 60px;
   }
 }
 
@@ -122,9 +129,17 @@
       width: 47%;
     }
   }
+
+  h2 {
+    font-size: 50px;
+  }
 }
 
 @media screen and (max-width: 600px) {
+  h2 {
+    font-size: 40px;
+  }
+
   .city-container {
     justify-content: center;
 

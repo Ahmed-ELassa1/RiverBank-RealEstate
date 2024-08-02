@@ -12,6 +12,8 @@ const HomeCities = ({ citiesData }) => {
     const selectedCity = citiesData?.find((city) => {
       return city?.slug == e?.target?.id;
     });
+    console.log(e?.target.id);
+    if (!selectedCity) return;
     Navigate(`city/${selectedCity?._id}`);
   }
 

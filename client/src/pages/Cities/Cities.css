@@ -99,7 +99,6 @@
   h2 {
     background: #00000047;
     width: 100%;
-    font-size: 60px;
   }
 
   @media screen and (max-width: 425px) {
@@ -131,6 +130,10 @@
       width: 47%;
     }
   }
+
+  h2 {
+    font-size: 50px;
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -139,6 +142,11 @@
 
     .cityCard {
       width: 97%;
+      height: 250px;
     }
+  }
+
+  h2 {
+    font-size: 40px;
   }
 }
