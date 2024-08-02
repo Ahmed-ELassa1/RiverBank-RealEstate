@@ -119,7 +119,7 @@ const EditableCell = ({
   return <td {...restProps}>{childNode}</td>;
 };
 
-const EditableRows = ({ dataSource, setDataSource, defaultColumns }) => {
+const EditableRows = ({ dataSource, setDataSource, defaultColumns, setIsEdited }) => {
   const [count, setCount] = useState(2);
 
   const handleAdd = () => {
@@ -130,6 +130,7 @@ const EditableRows = ({ dataSource, setDataSource, defaultColumns }) => {
     };
     setDataSource([...dataSource, newData]);
     setCount(count + 1);
+    setIsEdited(true)
   };
 
   const handleSave = (row) => {
@@ -142,6 +143,7 @@ const EditableRows = ({ dataSource, setDataSource, defaultColumns }) => {
     });
     setDataSource(newData);
   };
+  setIsEdited(true)
 
   const components = {
     body: {
@@ -184,6 +186,7 @@ const EditableRows = ({ dataSource, setDataSource, defaultColumns }) => {
         bordered
         dataSource={dataSource}
         columns={columns}
+        onChange={() => setIsEdited(true)}
       />
     </div>
   );

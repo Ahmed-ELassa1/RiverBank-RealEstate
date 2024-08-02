@@ -1,4 +1,23 @@
 .details-page {
+  .details-descriptions-section-container {
+    text-align: right;
+  }
+  .project-details-titles {
+    font-size: 30px;
+    font-weight: 700;
+    margin: 24px 0;
+  }
+  .project-details-sections {
+    text-align: right;
+    /* :first-child {
+      margin: 24px 0;
+    } */
+  }
+  .project-questions-content {
+    p {
+      margin: 0;
+    }
+  }
   .bg {
     height: 250px;
     filter: grayscale(1);
@@ -8,7 +27,9 @@
       padding: 15px 0;
     }
   }
-
+  img {
+    margin: auto;
+  }
   .sub-form {
     .email-input {
       border: 1px solid #5c5c5c;
@@ -40,7 +61,6 @@
         font-size: 17px;
       }
     }
-
   }
 
   .project-details-main-desc-section {
@@ -61,8 +81,8 @@
       border-radius: 8px;
 
       p {
-        font-size: 16px;
-        margin: 12px 0 4px;
+        font-size: 18px;
+        margin: 0px 0 4px;
       }
     }
   }
@@ -83,6 +103,7 @@
       display: flex;
       justify-content: flex-start;
       gap: 40px;
+      margin: 0;
       padding: 8px 10px;
 
       span {
@@ -91,7 +112,7 @@
     }
 
     .questionLabel {
-      text-align: center;
+      /* text-align: center; */
       margin: 30px 0 0;
       background-color: var(--main);
       color: #fff;
@@ -103,7 +124,7 @@
   }
 
   .details-descriptions-section-container {
-    text-align: center;
+    /* text-align: center; */
     display: flex;
     flex-direction: column;
     gap: 25px;
@@ -111,25 +132,25 @@
     align-items: center;
     margin-bottom: 40px;
 
-    h3 {
+    /* h3 {
       text-align: center;
       font-size: 28px;
       font-weight: 600;
       padding: 8px 0;
-    }
+    } */
 
     img {
       text-align: center;
       width: 90%;
     }
 
-    p {
+    /* p {
       text-align: start;
       padding: 0 25px;
       font-size: 18px;
       letter-spacing: 1px;
       line-height: 25px;
-    }
+    } */
   }
 
   .details-page-container {
@@ -146,7 +167,6 @@
       border-radius: 12px;
     }
 
-
     .details-page-sidebar {
       display: flex;
       flex-direction: column;
@@ -158,11 +178,9 @@
         color: #fff;
         border-radius: 12px;
         padding: 10px;
-
       }
 
       .details-sidebar-contact-details-row {
-
         border-bottom: 1px solid #c5c5c559;
 
         p {
@@ -171,7 +189,6 @@
 
         span {
           padding: 0px 2px;
-
         }
 
         .details-row-text {
@@ -179,8 +196,6 @@
           font-weight: 600;
         }
       }
-
-
 
       .details-sidebar-form-container {
         width: 100%;
@@ -204,7 +219,6 @@
             color: #78530a;
           }
         }
-
       }
     }
   }
@@ -324,5 +338,4 @@
       width: 100%;
     }
   }
-
 }

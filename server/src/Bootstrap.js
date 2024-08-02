@@ -12,20 +12,20 @@ import projectTypeRouter from "./modules/projectType/projectType.router.js";
 function Bootstrap(app, express) {
   var whitelist = ["http://example1.com", "http://example2.com"];
   connection();
-  if (process.env.MODE == "DEV") {
-    app.use(cors());
-  } else {
-    app.use(async (req, res, next) => {
-      if (!whitelist.includes(req.header("origin"))) {
-        return next(new Error("not allowed by cores", { cause: 502 }));
-      }
-      await res.header("Access-Control-Allow-Origin", "*");
-      await res.header("Access-Control-Allow-Header", "*");
-      await res.header("Access-Control-Allow-Private-network", "true");
-      await res.header("Access-Control-Allow-Method", "*");
-      next();
-    });
-  }
+  // if (process.env.MODE == "DEV") {
+  //   app.use(cors());
+  // } else {
+  //   app.use(async (req, res, next) => {
+  //     if (!whitelist.includes(req.header("origin"))) {
+  //       return next(new Error("not allowed by cores", { cause: 502 }));
+  //     }
+  //     await res.header("Access-Control-Allow-Origin", "*");
+  //     await res.header("Access-Control-Allow-Header", "*");
+  //     await res.header("Access-Control-Allow-Private-network", "true");
+  //     await res.header("Access-Control-Allow-Method", "*");
+  //     next();
+  //   });
+  // }
   app.use(express.json());
   app.use("/user", userRouter);
   app.use("/blog", blogRouter);

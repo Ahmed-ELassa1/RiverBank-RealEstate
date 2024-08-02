@@ -31,7 +31,8 @@
     "start": "react-scripts start",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "build": "react-scripts build",
+    "build:development": "dotenv -e .env react-scripts build",
+    "build:production": "dotenv -e env.production.local react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -54,6 +55,7 @@
     ]
   },
   "devDependencies": {
+    "dotenv-cli": "^7.4.2",
     "gh-pages": "^6.1.1"
   }
 }

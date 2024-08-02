@@ -432,6 +432,7 @@ const BlogsDetails = () => {
               dataSource={contentDataSource}
               setDataSource={setContentDataSource}
               defaultColumns={defaultDetailsColumns}
+              setIsEdited={setIsEdited}
             />
             {contentDataSource?.length === 0 && (
               <p className="input-error-message">
@@ -449,6 +450,7 @@ const BlogsDetails = () => {
               dataSource={quesDataSource}
               setDataSource={setQuesDataSource}
               defaultColumns={defaultQuesColumns}
+              setIsEdited={setIsEdited}
             />
             {quesDataSource?.length === 0 && (
               <p className="input-error-message">
@@ -466,6 +468,7 @@ const BlogsDetails = () => {
               dataSource={descDataSource}
               setDataSource={setDescDataSource}
               defaultColumns={defaultDescColumns}
+              setIsEdited={setIsEdited}
             />
             {descDataSource?.length === 0 && (
               <p className="input-error-message">

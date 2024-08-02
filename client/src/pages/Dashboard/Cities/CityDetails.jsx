@@ -303,6 +303,7 @@ const CityDetails = () => {
               dataSource={dataSource}
               setDataSource={setDataSource}
               defaultColumns={defaultDetailsColumns}
+              setIsEdited={setIsEdited}
             />
             {dataSource.length === 0 && (
               <p className="input-error-message">
