@@ -47,6 +47,7 @@ const Home = () => {
       setLoading(false);
       setCitiesOptions([{ label: "كل المدن", value: "" }, ...options]);
     }
+    setLoading(false);
   }
   function handleFormInputs(e) {
     const clonedForm = { ...formData };
