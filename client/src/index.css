@@ -90,10 +90,10 @@ code {
   display: flex;
   gap: 25px;
   width: 100%;
+  flex-wrap: wrap;
 
   .skelton-card {
     border: 1px solid #d8d8d8;
-    width: 24%;
     gap: 25px;
     height: 280px;
     max-height: 280px;
@@ -104,7 +104,6 @@ code {
 
     :where(.css-dev-only-do-not-override-1okl62o).ant-skeleton {
       display: flex;
-      width: 100%;
       flex-direction: column;
       gap: 12px;
     }
@@ -133,8 +132,10 @@ code {
 
 @media (min-width: 800px) and (max-width: 1100px) {
   .skelton-content {
+    flex-wrap: wrap;
+
     .skelton-card {
-      width: 30%;
+      width: 29%;
       height: 280px;
       max-height: 280px;
 
@@ -154,7 +155,7 @@ code {
 
 }
 
-@media screen and(max-width: 600px) {
+@media screen and (max-width: 600px) {
   .skelton-content {
     flex-direction: column;
 
@@ -172,17 +173,6 @@ code {
   .container {
     margin: auto;
     padding: 0 6%;
-  }
-
-  .skelton-content {
-    flex-direction: column;
-
-    .skelton-card {
-      width: 100%;
-      height: 280px;
-      max-height: 280px;
-
-    }
   }
 }
 
@@ -394,6 +384,7 @@ button {
   background-color: var(--sec);
   color: white;
 }
+
 .pagination button:disabled:hover {
   background-color: #eee;
   color: white;
@@ -438,7 +429,7 @@ button {
 @media (min-width: 1100px) {
   .skelton-content {
     .skelton-card {
-      width: 24%;
+      width: 23%;
       height: 280px;
       max-height: 280px;
 

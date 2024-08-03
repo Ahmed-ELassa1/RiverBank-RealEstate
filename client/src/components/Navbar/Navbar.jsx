@@ -9,11 +9,12 @@ import Bars from "../../assets/menu.png";
 import { useTranslation } from "react-i18next";
 import { CityService } from "../../services/City/CityService";
 
-const Navbar = () => {
+const Navbar = (props) => {
+  const { isOpen, setIsOpen } = props;
   const { t } = useTranslation();
   const [current, setCurrent] = useState("/");
   const cityService = new CityService();
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();

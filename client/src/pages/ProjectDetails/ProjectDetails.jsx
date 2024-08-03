@@ -69,17 +69,25 @@ const ProjectDetails = ({ isSticky }) => {
                     return (
                       <p className="project-questions-row" key={i}>
                         <span>
-                          {<div
-                            className="project-questions-content"
-                            style={{ padding: "0 30px" }}
-                            dangerouslySetInnerHTML={{ __html: detail?.question }}
-                          />}
+                          {
+                            <div
+                              className="project-questions-content project-questions-header"
+                              dangerouslySetInnerHTML={{
+                                __html: detail?.question,
+                              }}
+                            />
+                          }
                         </span>
-                        <span>{<div
-                          className="project-questions-content"
-                          style={{ padding: "0 30px" }}
-                          dangerouslySetInnerHTML={{ __html: detail?.answer }}
-                        />}</span>
+                        <span>
+                          {
+                            <div
+                              className="project-questions-content project-answer-header"
+                              dangerouslySetInnerHTML={{
+                                __html: detail?.answer,
+                              }}
+                            />
+                          }
+                        </span>
                       </p>
                     );
                   })}
@@ -88,7 +96,9 @@ const ProjectDetails = ({ isSticky }) => {
             {/*project content summery*/}
             {data?.projectContent?.length > 0 && (
               <div className="project-details-content-headers">
-                <p>{t("label.projectDetails.pageContent")}</p>
+                <p className="project-details-content-headers-mainText">
+                  {t("label.projectDetails.pageContent")}
+                </p>
                 <ol>
                   {data?.projectContent?.map((projectContent, i) => {
                     return (
@@ -97,9 +107,14 @@ const ProjectDetails = ({ isSticky }) => {
                           href={`/#/projects/${id}/#section-${i}`}
                           onClick={(e) => scrollToSection(e, `section-${i}`)}
                         >
-                          {<div
-                            dangerouslySetInnerHTML={{ __html: projectContent }}
-                          />}
+                          {
+                            <div
+                              className="project-details-content-summery"
+                              dangerouslySetInnerHTML={{
+                                __html: projectContent,
+                              }}
+                            />
+                          }
                         </a>
                       </li>
                     );
@@ -120,11 +135,13 @@ const ProjectDetails = ({ isSticky }) => {
                 data?.projectDescriptions?.map((projectDescription, i) => {
                   return (
                     <div id={`section-${i}`} key={i}>
+                      {console.log(projectDescription)}
                       <div
                         style={{ padding: "0 22px" }}
                         className="project-details-titles"
-                        dangerouslySetInnerHTML={{ __html: data?.projectContent[i] }
-                        }
+                        dangerouslySetInnerHTML={{
+                          __html: data?.projectContent[i],
+                        }}
                       />
                       {data?.subImages?.length > i && (
                         <img src={data?.subImages[i]?.secure_url} />
@@ -132,7 +149,9 @@ const ProjectDetails = ({ isSticky }) => {
                       <div
                         className="project-details-sections"
                         style={{ padding: "0 30px" }}
-                        dangerouslySetInnerHTML={{ __html: projectDescription }}
+                        dangerouslySetInnerHTML={{
+                          __html: projectDescription,
+                        }}
                       />
                     </div>
                   );
@@ -143,14 +162,26 @@ const ProjectDetails = ({ isSticky }) => {
                 data?.projectQuestions?.map((projectQuestion, i) => {
                   return (
                     <div key={i} className="details-question-about-project-row">
-                      <h3>{<div
-                        style={{ paddingRight: "18px", marginTop: "0" }}
-                        dangerouslySetInnerHTML={{ __html: projectQuestion?.question }}
-                      />}</h3>
-                      <p>{<div
-                        style={{ paddingRight: "18px" }}
-                        dangerouslySetInnerHTML={{ __html: projectQuestion?.answer }}
-                      />}</p>
+                      <h3>
+                        {
+                          <div
+                            style={{ paddingRight: "18px", marginTop: "0" }}
+                            dangerouslySetInnerHTML={{
+                              __html: projectQuestion?.question,
+                            }}
+                          />
+                        }
+                      </h3>
+                      <p>
+                        {
+                          <div
+                            style={{ paddingRight: "18px" }}
+                            dangerouslySetInnerHTML={{
+                              __html: projectQuestion?.answer,
+                            }}
+                          />
+                        }
+                      </p>
                     </div>
                   );
                 })}
