@@ -8,8 +8,8 @@ const __dirname = path.dirname(__filename); // get the name of the directory
 
 dotenv.config({ path: path.resolve("./config/.env") });
 const app = express();
-Bootstrap(app, express);
 app.use(express.static('build'));
+Bootstrap(app, express);
 
 
 app.get('*', (req, res) => {
